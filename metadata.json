@@ -1,0 +1,6 @@
+{
+  "name": "Demopocrisy Forensic Repository",
+  "description": "A forensic investigative archive and legal systems mapping repository for procedural justice, constitutional audits, case records, and timeline analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
