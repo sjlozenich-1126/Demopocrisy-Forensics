@@ -48,7 +48,12 @@ export const AdminView: React.FC = () => {
     updateSettings,
     exportAllData,
     importAllData,
-    resetToDefaults
+    resetToDefaults,
+    syncStatus,
+    cloudEnabled,
+    lastSyncedAt,
+    publishToCloud,
+    refreshFromCloud
   } = useData();
 
   const [activeTab, setActiveTab] = useState<'cases' | 'timeline' | 'articles' | 'evidence' | 'submissions' | 'settings' | 'backup'>('cases');
@@ -231,12 +236,47 @@ export const AdminView: React.FC = () => {
           </h2>
         </div>
 
-        <button
-          onClick={logoutAdmin}
-          className="bg-neutral-800 hover:bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase tracking-wider transition cursor-pointer"
-        >
-          Exit Admin Mode
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Cloud sync badge */}
+          <div
+            className={`px-2.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider border ${
+              syncStatus === 'synced'
+                ? 'bg-emerald-50 border-emerald-600 text-emerald-800'
+                : syncStatus === 'saving' || syncStatus === 'loading'
+                ? 'bg-amber-50 border-amber-500 text-amber-900'
+                : syncStatus === 'error'
+                ? 'bg-red-50 border-red-600 text-red-800'
+                : 'bg-neutral-100 border-neutral-400 text-neutral-600'
+            }`}
+            title={lastSyncedAt ? `Last synced: ${lastSyncedAt}` : undefined}
+          >
+            {syncStatus === 'synced' && '☁ Cloud synced'}
+            {syncStatus === 'saving' && '☁ Saving…'}
+            {syncStatus === 'loading' && '☁ Loading…'}
+            {syncStatus === 'error' && '☁ Sync error'}
+            {syncStatus === 'idle' && '☁ Ready to publish'}
+            {syncStatus === 'local-only' && 'Local only'}
+          </div>
+
+          {cloudEnabled && (
+            <button
+              onClick={async () => {
+                const ok = await publishToCloud();
+                triggerSuccess(ok ? 'Published to cloud — all devices will see this.' : 'Cloud publish failed. Check setup.');
+              }}
+              className="bg-[#FF3B00] hover:bg-black text-white px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider transition cursor-pointer"
+            >
+              Publish to Cloud
+            </button>
+          )}
+
+          <button
+            onClick={logoutAdmin}
+            className="bg-neutral-800 hover:bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase tracking-wider transition cursor-pointer"
+          >
+            Exit Admin Mode
+          </button>
+        </div>
       </div>
 
       {saveSuccessMessage && (
@@ -1130,10 +1170,57 @@ export const AdminView: React.FC = () => {
       {activeTab === 'backup' && (
         <div className="bg-white border-2 border-black p-6 space-y-6 shadow-md max-w-3xl">
           <h3 className="font-serif font-bold text-xl text-neutral-900 border-b border-black/10 pb-3">
-            Database Backup & Portability
+            Cloud Sync & Backup
           </h3>
 
           <div className="space-y-4">
+            {/* Cloud status panel */}
+            <div className={`p-4 border-2 space-y-3 ${cloudEnabled ? 'bg-emerald-50 border-emerald-700' : 'bg-amber-50 border-amber-600'}`}>
+              <h4 className="font-mono text-xs font-bold uppercase text-neutral-900 flex items-center gap-1.5">
+                <Database className="w-4 h-4 text-[#FF3B00]" /> Cloud Backend
+              </h4>
+              {cloudEnabled ? (
+                <>
+                  <p className="text-xs text-neutral-700 font-sans leading-relaxed">
+                    Supabase is connected. Edits auto-sync about 1 second after you save.
+                    Phone, laptop, and other browsers all load the same live data.
+                  </p>
+                  <p className="text-[11px] font-mono text-neutral-600">
+                    Status: <strong>{syncStatus}</strong>
+                    {lastSyncedAt ? ` · Last sync: ${new Date(lastSyncedAt).toLocaleString()}` : ''}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={async () => {
+                        const ok = await publishToCloud();
+                        triggerSuccess(ok ? 'Force-published to cloud.' : 'Publish failed.');
+                      }}
+                      className="bg-[#FF3B00] text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-black cursor-pointer"
+                    >
+                      Force Publish Now
+                    </button>
+                    <button
+                      onClick={async () => {
+                        const ok = await refreshFromCloud();
+                        triggerSuccess(ok ? 'Pulled latest from cloud.' : 'Could not load from cloud.');
+                      }}
+                      className="bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-neutral-800 cursor-pointer flex items-center gap-1.5"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" /> Pull from Cloud
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p className="text-xs text-neutral-800 font-sans leading-relaxed">
+                  Cloud is <strong>not configured</strong> yet. Data only stays in this browser.
+                  Add <code className="bg-white px-1 border">VITE_SUPABASE_URL</code> and{' '}
+                  <code className="bg-white px-1 border">VITE_SUPABASE_ANON_KEY</code> in Vercel
+                  (or a local <code className="bg-white px-1 border">.env</code>), then redeploy.
+                  See <strong>BACKEND-SETUP.md</strong> in the repo for the 5-minute setup.
+                </p>
+              )}
+            </div>
+
             <div className="p-4 bg-[#faf9f6] border border-black/15 space-y-2">
               <h4 className="font-mono text-xs font-bold uppercase text-neutral-900 flex items-center gap-1.5">
                 <Download className="w-4 h-4 text-red-700" /> Export Database Bundle
