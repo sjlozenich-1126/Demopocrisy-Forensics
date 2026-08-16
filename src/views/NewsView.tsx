@@ -127,26 +127,12 @@ export const NewsView: React.FC<NewsViewProps> = ({
 
         {/* Meta + Headline */}
         <header className="space-y-5 mb-10">
-          <div className="flex items-center gap-3">
-            <div className="flex -space-x-2 overflow-hidden">
-              <img
-                className="inline-block h-9 w-9 rounded-full ring-2 ring-white filter grayscale"
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                alt=""
-              />
-              <img
-                className="inline-block h-9 w-9 rounded-full ring-2 ring-white filter grayscale"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
-                alt=""
-              />
+          <div>
+            <div className="text-sm font-serif font-bold text-[#FF3B00]">
+              {activeArticle.author}
             </div>
-            <div>
-              <div className="text-sm font-serif font-bold text-[#FF3B00]">
-                {activeArticle.author}
-              </div>
-              <div className="text-xs font-serif text-neutral-500">
-                {activeArticle.date}
-              </div>
+            <div className="text-xs font-serif text-neutral-500">
+              {activeArticle.date}
             </div>
           </div>
 
@@ -154,7 +140,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
             {activeArticle.title}
           </h1>
 
-          <p className="text-lg sm:text-xl leading-relaxed text-neutral-700 font-serif">
+          <p className="text-lg sm:text-xl leading-relaxed text-neutral-700 font-serif font-normal">
             {activeArticle.subtitle}
           </p>
 
@@ -221,7 +207,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               return (
                 <div key={pIdx} className="clearfix">
                   <div className="w-10 h-1.5 bg-black mb-1.5"></div>
-                  <p className="text-lg leading-relaxed font-serif">
+                  <p className="text-lg leading-relaxed font-serif font-normal">
                     <span className="font-black text-4xl float-left mr-2 leading-none font-serif text-black">{firstChar}</span>
                     {remainingParagraph}
                   </p>
@@ -244,12 +230,12 @@ export const NewsView: React.FC<NewsViewProps> = ({
             }
             if (paragraph.startsWith('> ')) {
               return (
-                <blockquote key={pIdx} className="border-l-4 border-[#FF3B00] pl-4 italic font-serif text-xl text-black my-6">
+                <blockquote key={pIdx} className="border-l-4 border-[#FF3B00] pl-4 italic font-serif font-normal text-xl text-black my-6">
                   {paragraph.replace('> ', '')}
                 </blockquote>
               );
             }
-            return <p key={pIdx} className="leading-relaxed font-serif text-lg text-neutral-800">{paragraph}</p>;
+            return <p key={pIdx} className="leading-relaxed font-serif font-normal text-lg text-neutral-800">{paragraph}</p>;
           })}
         </div>
 
