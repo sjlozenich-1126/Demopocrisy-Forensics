@@ -1,16 +1,9 @@
 import React from 'react';
 import { useData } from '../context/DataContext';
 import { 
-  UserCheck, 
-  ShieldCheck, 
   MapPin, 
   Mail, 
   Globe, 
-  Award, 
-  BookOpen, 
-  Scale, 
-  Activity, 
-  FileText,
   ArrowUpRight
 } from 'lucide-react';
 
@@ -25,9 +18,9 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-10">
       {/* Editorial Header */}
-      <div className="border-b-2 border-neutral-900 pb-4">
+      <div className="border-b-2 border-black pb-4">
         <div className="flex items-center space-x-2 mb-1">
-          <span className="bg-red-700 text-white text-[9px] px-2 py-0.5 font-bold uppercase tracking-wider">
+          <span className="bg-[#FF3B00] text-white text-[9px] px-2 py-0.5 font-bold uppercase tracking-wider font-mono">
             Subject Profile & Lineage
           </span>
           <span className="text-[10px] font-mono text-black/60 uppercase tracking-[0.15em]">
@@ -47,38 +40,38 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
         
         {/* Left Bio Card & Contact (4 Cols) */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-white border border-black/15 p-6 shadow-xs space-y-4">
-            <div className="aspect-square bg-neutral-900 text-white flex flex-col items-center justify-center p-6 text-center border border-black/20">
-              <div className="w-20 h-20 rounded-full border-2 border-red-700 flex items-center justify-center text-3xl font-serif font-black text-white bg-black mb-3">
+          <div className="bg-white border-2 border-black p-6 shadow-xs space-y-4">
+            <div className="aspect-square bg-neutral-900 text-white flex flex-col items-center justify-center p-6 text-center border-2 border-black">
+              <div className="w-20 h-20 rounded-full border-2 border-[#FF3B00] flex items-center justify-center text-3xl font-serif font-black text-white bg-black mb-3">
                 SJL
               </div>
               <h3 className="font-serif font-bold text-xl text-white">Shane J. Lozenich</h3>
-              <p className="text-xs font-mono text-amber-400 mt-0.5">Forensic Author & Subject</p>
+              <p className="text-xs font-mono text-[#FF3B00] mt-0.5">Forensic Author & Subject</p>
               <p className="text-[11px] font-mono text-neutral-400 mt-1">Techhumano / Jonathan Shane Concepts</p>
             </div>
 
             <div className="space-y-3 pt-2 text-xs font-mono border-t border-black/10">
               <div className="flex items-center gap-2 text-neutral-700">
-                <Mail className="w-3.5 h-3.5 text-red-700" />
+                <Mail className="w-3.5 h-3.5 text-[#FF3B00]" />
                 <a href={`mailto:${settings.authorEmail}`} className="hover:underline text-black font-semibold">
                   {settings.authorEmail}
                 </a>
               </div>
               <div className="flex items-center gap-2 text-neutral-700">
-                <Globe className="w-3.5 h-3.5 text-red-700" />
+                <Globe className="w-3.5 h-3.5 text-[#FF3B00]" />
                 <a href="https://techhumano.com" target="_blank" rel="noreferrer" className="hover:underline text-black font-semibold flex items-center gap-1">
                   techhumano.com <ArrowUpRight className="w-2.5 h-2.5" />
                 </a>
               </div>
               <div className="flex items-center gap-2 text-neutral-700">
-                <MapPin className="w-3.5 h-3.5 text-red-700" />
+                <MapPin className="w-3.5 h-3.5 text-[#FF3B00]" />
                 <span>Seattle & Kitsap County, WA</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-black text-white p-6 space-y-3 border border-black">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400">
+          <div className="bg-black text-white p-6 space-y-3 border-2 border-black">
+            <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF3B00]">
               Corridor Designation
             </h4>
             <p className="text-xs text-neutral-300 font-sans leading-relaxed">
@@ -92,16 +85,16 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
 
         {/* Right Detailed Narrative & Case Matrix (8 Cols) */}
         <div className="lg:col-span-8 space-y-6">
-          <div className="bg-white border border-black/15 p-6 sm:p-8 space-y-6 shadow-xs">
-            <h3 className="font-serif font-bold text-2xl text-neutral-900 border-b border-black/10 pb-3">
+          <div className="bg-white border-2 border-black p-6 sm:p-8 space-y-6 shadow-xs">
+            <h3 className="font-serif font-bold text-2xl text-neutral-900 border-b-2 border-black pb-3">
               Forensic Background & Scope of Audit
             </h3>
 
-            <p className="text-base leading-relaxed text-black/80 font-serif italic border-l-4 border-red-700 pl-4">
+            <p className="text-base leading-relaxed text-black/80 font-serif italic border-l-4 border-[#FF3B00] pl-4">
               “This archive was not assembled out of abstract interest; it represents a forensic self-audit documenting five years of state custody, unfiled criminal charges, and institutional delays across eight legal proceedings.”
             </p>
 
-            <div className="space-y-4 text-xs sm:text-sm text-neutral-800 font-sans leading-relaxed">
+            <div className="space-y-4 text-xs sm:text-sm text-neutral-800 font-serif leading-relaxed">
               <p>
                 Shane Jonathan Lozenich experienced a continuous chain of legal and medical interactions between 2021 and 2026. Following the catastrophic 1.6-million-record Washington State Auditor Accellion data breach, Lozenich reported active digital stalking and spoofed communication channels that were dismissed by local authorities without investigation.
               </p>
@@ -114,7 +107,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
             </div>
 
             {/* Matrix of Case Engagements */}
-            <div className="pt-4 border-t border-black/10 space-y-3">
+            <div className="pt-4 border-t-2 border-black space-y-3">
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900">
                 Direct Case Engagements & Dockets
               </h4>
@@ -123,17 +116,19 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
                   <div 
                     key={c.id}
                     onClick={() => onSelectCase(c.id)}
-                    className="p-3 bg-[#faf9f6] border border-neutral-300 hover:border-black cursor-pointer transition flex flex-col justify-between"
+                    className="p-3.5 bg-white border-2 border-black hover:bg-neutral-50 cursor-pointer transition flex flex-col justify-between group"
                   >
                     <div>
-                      <div className="flex justify-between items-center text-[10px] font-mono mb-1">
+                      <div className="flex justify-between items-center text-[10px] font-mono mb-1.5">
                         <span className="font-bold text-black">#{c.caseNumber}</span>
-                        <span className="text-red-700 font-semibold">{c.year}</span>
+                        <span className="text-[#FF3B00] font-bold">{c.year}</span>
                       </div>
-                      <h5 className="font-serif font-bold text-xs text-neutral-900 truncate">{c.title}</h5>
-                      <p className="text-[11px] text-neutral-600 font-sans truncate mt-0.5">{c.cause}</p>
+                      <h5 className="font-serif font-bold text-sm text-neutral-900 leading-snug group-hover:text-[#FF3B00] transition-colors">
+                        {c.title}
+                      </h5>
+                      <p className="text-[11px] text-neutral-600 font-serif mt-1 line-clamp-2">{c.cause}</p>
                     </div>
-                    <span className="text-[10px] font-mono text-neutral-500 pt-2 text-right">
+                    <span className="text-[10px] font-mono text-neutral-500 pt-2.5 mt-2 border-t border-neutral-200 text-right">
                       {c.disposition}
                     </span>
                   </div>
@@ -141,16 +136,16 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
               </div>
             </div>
 
-            <div className="pt-4 border-t border-black/10 flex justify-between items-center text-xs font-mono">
+            <div className="pt-4 border-t-2 border-black flex flex-wrap justify-between items-center gap-3 text-xs font-mono">
               <button
                 onClick={() => setCurrentTab('timeline')}
-                className="bg-black text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-red-700 transition-colors"
+                className="bg-black text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-[#FF3B00] transition-colors"
               >
                 View 5-Year Chronology →
               </button>
               <button
                 onClick={() => setCurrentTab('cases')}
-                className="text-red-700 font-bold hover:underline"
+                className="text-[#FF3B00] font-bold hover:underline"
               >
                 Explore All Case Studies
               </button>
