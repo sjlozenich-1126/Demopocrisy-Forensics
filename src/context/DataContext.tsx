@@ -65,6 +65,7 @@ interface DataContextType {
   exportAllData: () => string;
   importAllData: (jsonStr: string) => boolean;
   resetToDefaults: () => void;
+  syncToCodebase: () => Promise<{ success: boolean; message: string }>;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -308,6 +309,39 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const syncToCodebase = async () => {
+    try {
+      const payload = {
+        cases,
+        timelineEvents,
+        evidence,
+        articles,
+        submissions,
+        comments,
+        settings
+      };
+      const res = await fetch('/api/sync-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        return { success: true, message: 'App data and photos synced to codebase successfully!' };
+      }
+      return { success: false, message: 'Server returned error while syncing data.' };
+    } catch (e) {
+      return { success: false, message: String(e) };
+    }
+  };
+
+  // Automatically flush changes to codebase so git commits capture user modifications
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      syncToCodebase().catch(() => {});
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [cases, articles, settings, evidence, timelineEvents]);
+
   const resetToDefaults = () => {
     setCases(initialCases);
     setTimelineEvents(initialTimelineEvents);
@@ -354,7 +388,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateSettings,
         exportAllData,
         importAllData,
-        resetToDefaults
+        resetToDefaults,
+        syncToCodebase
       }}
     >
       {children}

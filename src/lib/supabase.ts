@@ -1,7 +1,7 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const url = (import.meta as any).env?.VITE_SUPABASE_URL as string | undefined;
+const anonKey = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY as string | undefined;
 
 /** True when both env vars are set — cloud backend is active */
 export const isCloudConfigured = Boolean(url && anonKey && url.startsWith('http'));

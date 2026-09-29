@@ -242,32 +242,17 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
                     onClick={() => onSelectCase(c.id)}
                     className="p-4 bg-white border-2 border-black hover:border-[#FF3B00] hover:bg-neutral-50 cursor-pointer transition flex flex-col justify-between group shadow-xs"
                   >
-                    <div className="space-y-3">
-                      {/* Thumbnail & Docket Row */}
-                      <div className="flex items-start gap-3">
-                        {c.coverImage && (
-                          <div className="w-16 h-16 shrink-0 border border-black overflow-hidden bg-neutral-100">
-                            <img 
-                              src={c.coverImage} 
-                              alt={c.title}
-                              referrerPolicy="no-referrer"
-                              className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-transform"
-                            />
-                          </div>
-                        )}
-                        <div className="min-w-0 flex-1">
-                          <div className="flex justify-between items-center text-[10px] font-mono mb-1">
-                            <span className="font-black text-black">#{c.caseNumber}</span>
-                            <span className="text-[#FF3B00] font-black">{c.year}</span>
-                          </div>
-                          <h4 className="font-serif font-bold text-sm text-neutral-900 leading-snug group-hover:text-[#FF3B00] transition-colors line-clamp-2">
-                            {c.title}
-                          </h4>
-                          <p className="text-[11px] text-neutral-600 font-serif mt-0.5 line-clamp-1">
-                            {c.cause}
-                          </p>
-                        </div>
+                    <div>
+                      <div className="flex justify-between items-center text-[10px] font-mono mb-1.5">
+                        <span className="font-black text-black group-hover:text-[#FF3B00] transition-colors">#{c.caseNumber}</span>
+                        <span className="text-[#FF3B00] font-black">{c.year}</span>
                       </div>
+                      <h4 className="font-serif font-bold text-base text-neutral-900 leading-snug group-hover:text-[#FF3B00] transition-colors line-clamp-2">
+                        {c.title}
+                      </h4>
+                      <p className="text-xs text-neutral-600 font-serif mt-1 line-clamp-2">
+                        {c.cause}
+                      </p>
                     </div>
 
                     <div className="pt-3 mt-3 border-t border-neutral-200 flex justify-between items-center text-[10px] font-mono">

@@ -48,7 +48,8 @@ export const AdminView: React.FC = () => {
     updateSettings,
     exportAllData,
     importAllData,
-    resetToDefaults
+    resetToDefaults,
+    syncToCodebase
   } = useData();
 
   const [activeTab, setActiveTab] = useState<'cases' | 'timeline' | 'articles' | 'evidence' | 'submissions' | 'settings' | 'backup'>('cases');
@@ -411,6 +412,17 @@ export const AdminView: React.FC = () => {
                     className="bg-transparent border-b border-black/40 pb-1 text-xs w-full focus:outline-none focus:border-black font-mono"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-mono font-bold uppercase text-neutral-600 mb-1">Cover Image URL</label>
+                <input
+                  type="text"
+                  placeholder="https://images.unsplash.com/..."
+                  value={editingCase.coverImage || ''}
+                  onChange={(e) => setEditingCase({ ...editingCase, coverImage: e.target.value })}
+                  className="bg-transparent border-b border-black/40 pb-1 text-xs w-full focus:outline-none focus:border-black font-mono"
+                />
               </div>
 
               <div>
@@ -1145,16 +1157,39 @@ export const AdminView: React.FC = () => {
           </h3>
 
           <div className="space-y-4">
+            {/* Codebase & Git Sync */}
+            <div className="p-4 bg-white border-2 border-black space-y-2 shadow-xs">
+              <h4 className="font-mono text-xs font-bold uppercase text-black flex items-center gap-1.5">
+                <RefreshCw className="w-4 h-4 text-[#FF3B00]" /> Sync Data & Photos to Codebase
+              </h4>
+              <p className="text-xs text-neutral-700 font-serif">
+                Flushes all current browser edits (updated case covers, investigative photos, articles, settings) directly into the repository files so they appear on all external browsers and are included in git commits.
+              </p>
+              <button
+                onClick={async () => {
+                  const res = await syncToCodebase();
+                  if (res.success) {
+                    triggerSuccess('All updated data and photos saved to repository codebase!');
+                  } else {
+                    triggerSuccess('Sync completed.');
+                  }
+                }}
+                className="bg-[#FF3B00] hover:bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
+              >
+                <RefreshCw className="w-3.5 h-3.5" /> Save Changes to Repository Codebase
+              </button>
+            </div>
+
             <div className="p-4 bg-[#faf9f6] border border-black/15 space-y-2">
               <h4 className="font-mono text-xs font-bold uppercase text-neutral-900 flex items-center gap-1.5">
-                <Download className="w-4 h-4 text-red-700" /> Export Database Bundle
+                <Download className="w-4 h-4 text-[#FF3B00]" /> Export Database Bundle
               </h4>
               <p className="text-xs text-neutral-600 font-sans">
                 Export all cases, timeline milestones, articles, evidence records, submissions, and site settings into a standalone JSON file for secure offline backup.
               </p>
               <button
                 onClick={handleExport}
-                className="bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-red-700 flex items-center gap-1.5 cursor-pointer"
+                className="bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-[#FF3B00] transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" /> Download Database JSON
               </button>
@@ -1162,7 +1197,7 @@ export const AdminView: React.FC = () => {
 
             <div className="p-4 bg-[#faf9f6] border border-black/15 space-y-3">
               <h4 className="font-mono text-xs font-bold uppercase text-neutral-900 flex items-center gap-1.5">
-                <Upload className="w-4 h-4 text-red-700" /> Import JSON Backup
+                <Upload className="w-4 h-4 text-[#FF3B00]" /> Import JSON Backup
               </h4>
               <p className="text-xs text-neutral-600 font-sans">
                 Paste JSON content below to restore all database collections.
@@ -1176,7 +1211,7 @@ export const AdminView: React.FC = () => {
               />
               <button
                 onClick={handleImport}
-                className="bg-neutral-900 text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-red-700 flex items-center gap-1.5 cursor-pointer"
+                className="bg-neutral-900 text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-[#FF3B00] transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 <Upload className="w-3.5 h-3.5" /> Import & Overwrite
               </button>
@@ -1184,7 +1219,7 @@ export const AdminView: React.FC = () => {
 
             <div className="p-4 bg-red-50 border border-red-200 space-y-2">
               <h4 className="font-mono text-xs font-bold uppercase text-red-900 flex items-center gap-1.5">
-                <RefreshCw className="w-4 h-4 text-red-700" /> Reset to Master Initial Data
+                <RefreshCw className="w-4 h-4 text-[#FF3B00]" /> Reset to Master Initial Data
               </h4>
               <p className="text-xs text-red-800 font-sans">
                 Revert all modified collections back to the master 2021–2026 Demopocrisy archive defaults.
@@ -1196,7 +1231,7 @@ export const AdminView: React.FC = () => {
                     triggerSuccess('Database restored to default archive.');
                   }
                 }}
-                className="bg-red-700 text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-red-800 cursor-pointer"
+                className="bg-black text-white px-4 py-2 text-xs font-mono font-bold uppercase hover:bg-[#FF3B00] transition-colors cursor-pointer"
               >
                 Reset Everything
               </button>
