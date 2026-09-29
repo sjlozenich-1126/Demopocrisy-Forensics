@@ -71,22 +71,40 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  CASES: 'demopocrisy_cases_v1',
+  CASES: 'demopocrisy_cases_v2',
   TIMELINE: 'demopocrisy_timeline_v1',
   NODES: 'demopocrisy_nodes_v1',
   EDGES: 'demopocrisy_edges_v1',
   EVIDENCE: 'demopocrisy_evidence_v1',
-  ARTICLES: 'demopocrisy_articles_v1',
+  ARTICLES: 'demopocrisy_articles_v2',
   SUBMISSIONS: 'demopocrisy_submissions_v1',
   COMMENTS: 'demopocrisy_comments_v1',
-  SETTINGS: 'demopocrisy_settings_v1',
+  SETTINGS: 'demopocrisy_settings_v2',
   AUTH: 'demopocrisy_is_admin_v1'
 };
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cases, setCases] = useState<CaseStudy[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS.CASES);
-    return saved ? JSON.parse(saved) : initialCases;
+    const saved = localStorage.getItem(STORAGE_KEYS.CASES) || localStorage.getItem('demopocrisy_cases_v1');
+    if (saved) {
+      try {
+        const parsed: CaseStudy[] = JSON.parse(saved);
+        return parsed.map((c) => {
+          const match = initialCases.find((ic) => ic.id === c.id);
+          if (match && c.coverImage && (
+            c.coverImage.includes('photo-1589829545856') ||
+            c.coverImage.includes('photo-1575517111478') ||
+            c.coverImage.includes('photo-1486406146926')
+          )) {
+            return { ...c, coverImage: match.coverImage };
+          }
+          return c;
+        });
+      } catch (e) {
+        console.error('Error parsing saved cases:', e);
+      }
+    }
+    return initialCases;
   });
 
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(() => {
@@ -110,8 +128,31 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   const [articles, setArticles] = useState<Article[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS.ARTICLES);
-    return saved ? JSON.parse(saved) : initialArticles;
+    const saved = localStorage.getItem(STORAGE_KEYS.ARTICLES) || localStorage.getItem('demopocrisy_articles_v1');
+    if (saved) {
+      try {
+        const parsed: Article[] = JSON.parse(saved);
+        // Ensure initial 5 articles use the latest updated images
+        return parsed.map((art) => {
+          const match = initialArticles.find((ia) => ia.id === art.id);
+          if (match) {
+            const hasOldDefaultImage = !art.featuredImage ||
+              art.featuredImage.includes('photo-1589829545856') ||
+              art.featuredImage.includes('photo-1575517111478') ||
+              art.featuredImage.includes('photo-1512917774080') ||
+              art.featuredImage.includes('photo-1507413245164') ||
+              art.featuredImage.includes('photo-1506146332389');
+            if (hasOldDefaultImage) {
+              return { ...art, featuredImage: match.featuredImage };
+            }
+          }
+          return art;
+        });
+      } catch (e) {
+        console.error('Error parsing saved articles:', e);
+      }
+    }
+    return initialArticles;
   });
 
   const [submissions, setSubmissions] = useState<UserSubmission[]>(() => {
@@ -125,8 +166,19 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   const [settings, setSettings] = useState<SiteSettings>(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-    return saved ? JSON.parse(saved) : initialSiteSettings;
+    const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS) || localStorage.getItem('demopocrisy_settings_v1');
+    if (saved) {
+      try {
+        const parsed: SiteSettings = JSON.parse(saved);
+        if (!parsed.authorPhoto && initialSiteSettings.authorPhoto) {
+          parsed.authorPhoto = initialSiteSettings.authorPhoto;
+        }
+        return parsed;
+      } catch (e) {
+        console.error('Error parsing saved settings:', e);
+      }
+    }
+    return initialSiteSettings;
   });
 
   const [isAdmin, setIsAdmin] = useState<boolean>(() => {
