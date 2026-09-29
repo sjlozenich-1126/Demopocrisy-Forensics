@@ -71,8 +71,8 @@ export const CasesView: React.FC<CasesViewProps> = ({
       <div className="border-b-4 border-black pb-6 space-y-2">
         <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-widest">
-            Legal Archive · King County Procedural Audit
+          <span className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+            // LEGAL ARCHIVE • KING COUNTY PROCEDURAL AUDIT
           </span>
         </div>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-black leading-[1.08] tracking-tight">
@@ -98,7 +98,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
           </div>
 
           <div className="flex items-center gap-2 text-xs font-mono overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-            <span className="text-black font-bold text-[11px] uppercase whitespace-nowrap">Status:</span>
+            <span className="text-black font-black text-[11px] uppercase whitespace-nowrap">// STATUS:</span>
             {['all', 'Dismissed', 'Dismissed w/o Prejudice', 'Case Pending', 'Judgement Satisfied'].map((st) => (
               <button
                 key={st}

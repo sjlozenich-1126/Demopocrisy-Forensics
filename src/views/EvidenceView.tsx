@@ -67,8 +67,8 @@ export const EvidenceView: React.FC<EvidenceViewProps> = ({
       {/* Editorial Header */}
       <div className="border-b-4 border-black pb-6 space-y-2">
         <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
-        <div className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-widest">
-          Archival Repository · Primary Sources
+        <div className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+          // ARCHIVAL REPOSITORY • PRIMARY SOURCES
         </div>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-black tracking-tight leading-[1.08]">
           Evidence Locker & Legal Archive

@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
               aria-label="Open Navigation Menu"
             >
               <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] group-hover:scale-105 transition-transform" />
-              <span className="hidden md:inline font-serif font-black text-xs uppercase tracking-wider">Menu</span>
+              <span className="hidden sm:inline font-serif font-black text-xs uppercase tracking-wider">Menu</span>
             </button>
 
             <button 

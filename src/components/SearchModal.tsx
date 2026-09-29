@@ -114,7 +114,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
         {/* Filter Pills */}
         <div className="px-4 py-2.5 bg-neutral-100 border-b-2 border-black flex items-center gap-2 overflow-x-auto text-xs font-mono">
-          <span className="text-black font-bold uppercase text-[10px] tracking-wider">Filter:</span>
+          <span className="text-black font-black uppercase text-[10px] tracking-wider">// FILTER:</span>
           {(['all', 'cases', 'articles', 'evidence', 'timeline'] as const).map((type) => (
             <button
               key={type}

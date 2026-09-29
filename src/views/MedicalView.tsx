@@ -27,8 +27,8 @@ export const MedicalView: React.FC<MedicalViewProps> = ({ onSelectEvidence, onSe
       {/* Editorial Header */}
       <div className="border-b-4 border-black pb-6 space-y-2">
         <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
-        <div className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-widest">
-          Forensic Clinical Audit · Harborview Medical Center
+        <div className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+          // FORENSIC CLINICAL AUDIT • HARBORVIEW MEDICAL CENTER RECORDS
         </div>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-black tracking-tight leading-[1.08]">
           Harborview CSF Spinal Tap & Medicalization Audit
@@ -83,7 +83,7 @@ export const MedicalView: React.FC<MedicalViewProps> = ({ onSelectEvidence, onSe
 
       {/* Navigation Tabs */}
       <div className="flex items-center gap-1.5 border-b border-neutral-300 pb-2 overflow-x-auto text-xs font-mono">
-        <span className="text-black font-bold uppercase text-[11px] tracking-wider whitespace-nowrap">Sections:</span>
+        <span className="text-black font-black uppercase text-[11px] tracking-wider whitespace-nowrap">// AUDIT SECTIONS:</span>
         {[
           { id: 'csf', label: '1. CSF Analysis' },
           { id: 'chronology', label: '2. Hospitalization Chronology' },

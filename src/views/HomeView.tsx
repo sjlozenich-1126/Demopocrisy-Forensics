@@ -224,7 +224,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-800 pb-4 mb-6">
             <div>
               <div className="text-[#FF3B00] font-serif font-bold text-xs uppercase tracking-widest">
-                Quantitative Systemic Audit
+                // QUANTITATIVE SYSTEMIC AUDIT
               </div>
               <h3 className="font-serif text-2xl sm:text-3xl font-black text-white mt-1">
                 Five-Year Forensic Audit Data (2021–2026)
@@ -283,7 +283,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 border-b-2 border-black pb-4 mb-8">
           <div>
             <div className="text-xs font-serif font-bold text-[#FF3B00] uppercase tracking-widest">
-              Legal Repository
+              // LEGAL REPOSITORY
             </div>
             <h3 className="text-3xl sm:text-4xl font-black text-black font-serif mt-1">
               Audited Case Studies (2021–2026)

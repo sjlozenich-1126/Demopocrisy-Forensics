@@ -8,7 +8,8 @@ export const initialSiteSettings: SiteSettings = {
   authorName: 'Shane Jonathan Lozenich',
   authorOrg: 'Jonathan Shane Concepts / Techhumano',
   authorEmail: 'shane@jonathanshaneconcepts.com',
-  majoratCorridorName: 'Seattle-Bremerton Sovereign Security Corridor'
+  majoratCorridorName: 'Seattle-Bremerton Sovereign Security Corridor',
+  authorPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'
 };
 
 export const initialCases: CaseStudy[] = [

@@ -166,4 +166,5 @@ export interface SiteSettings {
   authorOrg: string;
   authorEmail: string;
   majoratCorridorName: string;
+  authorPhoto?: string;
 }

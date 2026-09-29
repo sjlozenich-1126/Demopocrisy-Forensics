@@ -73,19 +73,21 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-10">
       {/* Editorial Header */}
-      <div className="border-b-2 border-neutral-900 pb-4">
-        <div className="flex items-center space-x-2 mb-1">
-          <span className="bg-red-700 text-white text-[9px] px-2 py-0.5 font-bold uppercase tracking-wider">
-            Safe Drop & Public Database
+      <div className="border-b-4 border-black pb-6 space-y-3">
+        <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
+        <div className="flex items-center space-x-2">
+          <span className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+            // SAFE DROP • CITIZEN & WHISTLEBLOWER REPOSITORY
           </span>
-          <span className="text-[10px] font-mono text-black/60 uppercase tracking-[0.15em]">
-            AES-256 Encrypted Portal • Citizen & Whistleblower Repository
+          <span className="text-neutral-400 font-mono text-xs hidden sm:inline">•</span>
+          <span className="text-xs font-mono text-neutral-600 uppercase tracking-wider hidden sm:inline">
+            AES-256 ENCRYPTED PORTAL
           </span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 font-serif leading-tight">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-black leading-[1.08] tracking-tight">
           Public Submissions & Whistleblower Safe-Drop
-        </h2>
-        <p className="text-sm text-neutral-600 font-serif italic mt-1 max-w-3xl">
+        </h1>
+        <p className="text-base sm:text-lg text-neutral-700 font-serif italic max-w-3xl leading-relaxed">
           Submit documentation, municipal dockets, dispatch logs, or corroborating research regarding procedural irregularities in King County and Washington State.
         </p>
       </div>
@@ -96,9 +98,9 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
         <div className="lg:col-span-7 space-y-6">
           
           {/* Encrypted Vault Banner */}
-          <div className="bg-black text-white p-6 sm:p-8 space-y-4 border border-black">
+          <div className="bg-black text-white p-6 sm:p-8 space-y-4 border-2 border-black">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-red-400">
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[#FF3B00]">
                 Secure Data Upload Portal
               </span>
               <div className="flex items-center space-x-2">
@@ -220,7 +222,7 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
                     id="anon"
                     checked={isAnonymous}
                     onChange={(e) => setIsAnonymous(e.target.checked)}
-                    className="rounded border-black text-red-700 focus:ring-red-700"
+                    className="rounded border-black text-[#FF3B00] focus:ring-[#FF3B00]"
                   />
                   <label htmlFor="anon" className="text-xs font-mono font-bold text-neutral-800 cursor-pointer">
                     Submit Anonymously (Hide Submitter Identity)
@@ -261,7 +263,7 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-red-700 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+              className="w-full bg-[#FF3B00] hover:bg-black text-white py-3 text-xs font-serif font-black uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
               <Send className="w-4 h-4" /> Submit to Investigative Repository
             </button>
@@ -271,10 +273,10 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
 
         {/* Right Side: Public Submissions & User Database (5 Cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="border border-black/15 bg-white p-5 shadow-xs space-y-4">
-            <div className="flex items-center justify-between border-b border-black pb-2">
+          <div className="border-2 border-black bg-white p-5 shadow-xs space-y-4">
+            <div className="flex items-center justify-between border-b-2 border-black pb-2">
               <h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-neutral-900 flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-red-700 rounded-full"></span>
+                <span className="w-2 h-2 bg-[#FF3B00] rounded-full"></span>
                 Public Submissions Database ({publicSubmissions.length})
               </h3>
             </div>
@@ -293,9 +295,9 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
             {/* Submission Cards Scrollbox */}
             <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
               {filteredSubmissions.map((sub) => (
-                <div key={sub.id} className="p-4 bg-[#faf9f6] border border-neutral-300 space-y-2 hover:border-black transition-colors">
+                <div key={sub.id} className="p-4 bg-white border-2 border-black space-y-2 hover:border-[#FF3B00] transition-colors">
                   <div className="flex items-center justify-between text-[10px] font-mono">
-                    <span className="bg-red-700 text-white px-1.5 py-0.5 font-bold uppercase tracking-wider">
+                    <span className="bg-[#FF3B00] text-white px-1.5 py-0.5 font-bold uppercase tracking-wider">
                       {sub.status}
                     </span>
                     <span className="text-neutral-500">{sub.date}</span>
@@ -305,16 +307,16 @@ export const SubmissionsView: React.FC<SubmissionsViewProps> = ({ onSelectCase }
                     {sub.title}
                   </h4>
 
-                  <p className="text-xs text-neutral-700 font-sans leading-relaxed">
+                  <p className="text-xs text-neutral-700 font-serif leading-relaxed">
                     {sub.description}
                   </p>
 
-                  <div className="pt-2 border-t border-black/10 flex items-center justify-between text-[11px] font-mono text-neutral-600">
+                  <div className="pt-2 border-t border-neutral-200 flex items-center justify-between text-[11px] font-mono text-neutral-600">
                     <span>By: <strong>{sub.submitterName}</strong></span>
                     {sub.caseRef && (
                       <button
                         onClick={() => onSelectCase(sub.caseRef!)}
-                        className="text-red-700 hover:underline font-bold"
+                        className="text-[#FF3B00] hover:underline font-bold"
                       >
                         Case #{sub.caseRef} →
                       </button>

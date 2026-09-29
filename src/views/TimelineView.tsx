@@ -90,7 +90,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
 
       {/* Chapters Quick Jump */}
       <div className="bg-neutral-50 border-2 border-black p-3 sm:p-4 flex items-center overflow-x-auto text-xs font-serif gap-3">
-        <span className="text-[#FF3B00] font-mono font-bold uppercase text-[11px] tracking-wider shrink-0">Chapters:</span>
+        <span className="text-[#FF3B00] font-mono font-black uppercase text-[11px] tracking-wider shrink-0">// CHAPTERS:</span>
         <div className="flex items-center gap-2 sm:gap-3 shrink-0 text-neutral-800 font-bold text-xs">
           <span>Ch. 1: Origins (2020)</span>
           <span className="text-neutral-400">•</span>

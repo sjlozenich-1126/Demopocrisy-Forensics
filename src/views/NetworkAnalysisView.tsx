@@ -44,55 +44,61 @@ export const NetworkAnalysisView: React.FC = () => {
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-10 sm:space-y-14 bg-white overflow-x-hidden">
       
       {/* Editorial Page Masthead */}
-      <div className="border-b-4 border-black pb-6 space-y-3">
-        <div className="w-12 h-1.5 bg-[#FF3B00]"></div>
-        <div className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-widest">
-          Social Network Analysis · 57-Node Topology
+      <div className="border-b-4 border-black pb-6 space-y-2">
+        <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
+        <div className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+          // SOCIAL NETWORK ANALYSIS (SNA) • 57-NODE TOPOLOGY AUDIT
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-black tracking-tight leading-[1.1]">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-black tracking-tight leading-[1.08]">
           Procedural Justice & Systems Failure Network Model
         </h1>
-        <p className="text-base sm:text-lg text-neutral-600 font-serif italic max-w-3xl leading-relaxed">
-          A quantitative audit mapping 57 institutional nodes and 80 connections across court dockets, agencies, failure modes, and reform prescriptions.
+        <p className="text-base sm:text-lg text-neutral-700 font-serif italic max-w-3xl leading-relaxed">
+          A quantitative topological audit mapping 57 institutional nodes and 80 directional connections across 7 court dockets, 18 public agencies, 19 systemic failure modes, and 10 legislative reform prescriptions.
         </p>
       </div>
 
-      {/* Key Stats - Cleaner responsive grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      {/* Network Overview Key Stats - 100% Mobile Responsive */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
         <div className="bg-white p-4 sm:p-5 border-2 border-black">
-          <span className="text-[11px] font-mono font-bold text-neutral-500 uppercase tracking-wider block">Nodes</span>
-          <div className="text-3xl sm:text-4xl font-black text-black font-serif mt-1">57</div>
-          <span className="text-[11px] text-neutral-500 font-serif mt-1 block">4 core types</span>
+          <span className="text-[11px] font-mono font-bold text-neutral-500 uppercase tracking-wider block">Total Nodes</span>
+          <div className="text-2xl sm:text-4xl font-black text-black font-serif mt-1">57</div>
+          <span className="text-[11px] text-neutral-600 font-serif mt-1 block">4 Core Types</span>
         </div>
 
         <div className="bg-white p-4 sm:p-5 border-2 border-black">
           <span className="text-[11px] font-mono font-bold text-neutral-500 uppercase tracking-wider block">Connections</span>
-          <div className="text-3xl sm:text-4xl font-black text-black font-serif mt-1">80</div>
-          <span className="text-[11px] text-neutral-500 font-serif mt-1 block">6 relation types</span>
+          <div className="text-2xl sm:text-4xl font-black text-black font-serif mt-1">80</div>
+          <span className="text-[11px] text-neutral-600 font-serif mt-1 block">6 Relational Types</span>
         </div>
 
         <div className="bg-white p-4 sm:p-5 border-2 border-black">
-          <span className="text-[11px] font-mono font-bold text-[#FF3B00] uppercase tracking-wider block">Structural Bridge</span>
-          <div className="text-base sm:text-lg font-black text-black font-serif mt-1 truncate">Seattle PD</div>
-          <span className="text-[11px] text-neutral-500 font-mono mt-1 block">Betweenness 0.0040</span>
+          <span className="text-[11px] font-mono font-bold text-[#FF3B00] uppercase tracking-wider block">#1 Structural Bridge</span>
+          <div className="text-base sm:text-lg font-black text-black font-serif mt-1 truncate">Seattle Police Dept</div>
+          <span className="text-[11px] text-neutral-600 font-mono mt-1 block">Betweenness: 0.0040</span>
         </div>
 
-        <div className="bg-[#FF3B00] text-white p-4 sm:p-5 border-2 border-black">
-          <span className="text-[11px] font-mono font-black text-white/90 uppercase tracking-wider block">Top Reform</span>
+        <div className="bg-white p-4 sm:p-5 border-2 border-black">
+          <span className="text-[11px] font-mono font-bold text-black uppercase tracking-wider block">#1 Central Case</span>
+          <div className="text-base sm:text-lg font-black text-black font-serif mt-1 truncate">21-1-04347-2 SEA</div>
+          <span className="text-[11px] text-neutral-600 font-mono mt-1 block">Degree: 15 (35% Reach)</span>
+        </div>
+
+        <div className="bg-[#FF3B00] text-white p-4 sm:p-5 border-2 border-black col-span-2 sm:col-span-1">
+          <span className="text-[11px] font-mono font-black text-white uppercase tracking-wider block">#1 Reform Demand</span>
           <div className="text-base sm:text-lg font-black text-white font-serif mt-1 truncate">Competency Oversight</div>
-          <span className="text-[11px] text-white/80 font-mono mt-1 block">In-degree: 3 tracks</span>
+          <span className="text-[11px] text-white/90 font-mono mt-1 block">In-Degree: 3 Tracks</span>
         </div>
       </div>
 
-      {/* Four Key Findings */}
-      <div className="bg-black text-white p-5 sm:p-8 md:p-10 space-y-6">
+      {/* The Four Key Structural Findings Callout */}
+      <div className="bg-black text-white p-5 sm:p-8 md:p-10 border-4 border-black space-y-6">
         <div className="border-b border-neutral-800 pb-4">
           <div className="w-10 h-1 bg-[#FF3B00] mb-2"></div>
-          <span className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-widest">
-            Executive Findings
+          <span className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+            // EXECUTIVE TOPOLOGICAL AUDIT
           </span>
-          <h2 className="text-2xl sm:text-3xl font-serif font-black text-white mt-1">
-            Four Core Structural Conclusions
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-black text-white mt-1">
+            Four Core Structural Conclusions from Network Topology
           </h2>
         </div>
 
@@ -139,15 +145,15 @@ export const NetworkAnalysisView: React.FC = () => {
         </div>
       </div>
 
-      {/* Interactive Node Explorer */}
+      {/* Interactive Network Topological Explorer & Cluster Map */}
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b-2 border-black pb-3">
           <div>
             <h3 className="text-2xl sm:text-3xl font-serif font-black text-black">
-              Node Explorer
+              Interactive Systemic Node Explorer
             </h3>
-            <p className="text-sm text-neutral-600 font-serif">
-              Select a node to inspect centrality scores and connected edges.
+            <p className="text-xs sm:text-sm text-neutral-600 font-serif">
+              Click any node in the interactive clusters or index below to inspect centrality scores and connected edges.
             </p>
           </div>
 
@@ -337,18 +343,18 @@ export const NetworkAnalysisView: React.FC = () => {
         </div>
       </div>
 
-      {/* Priority Reform Matrix */}
+      {/* Priority Reform Matrix - Responsive Card/Table Layout */}
       <div className="bg-white border-2 border-black p-5 sm:p-8 space-y-6">
         <div>
           <div className="w-10 h-1 bg-[#FF3B00] mb-2"></div>
-          <span className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-widest">
-            Legislative & Court Remedies
+          <span className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
+            // ACTIONABLE LEGISLATIVE & COURT REMEDIES
           </span>
           <h3 className="text-2xl sm:text-3xl font-serif font-black text-black mt-1">
-            Priority Reform Matrix
+            Priority Reform Allocation Matrix
           </h3>
-          <p className="text-sm text-neutral-600 font-serif mt-1">
-            Prioritized by in-degree demand, reach efficiency, and failure mode severity.
+          <p className="text-xs sm:text-sm text-neutral-700 font-serif mt-1">
+            Prioritized by in-degree demand, reach efficiency, and failure mode severity across all analyzed judicial tracks.
           </p>
         </div>
 

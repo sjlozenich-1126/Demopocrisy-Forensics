@@ -12,26 +12,12 @@
     background-color: #FFFFFF;
     color: #111111;
     font-size: 1.0625rem;
-    font-weight: 400;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
-  @media (max-width: 640px) {
-    input, select, textarea {
-      font-size: 16px; /* prevent iOS zoom */
-    }
-  }
-
-  /* Serif utility — normal weight by default so body copy is not bold */
-  .font-serif {
-    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-    font-feature-settings: "liga" 1, "kern" 1;
-  }
-
-  /* Headings stay bold (Fraunces display face) */
-  h1, h2, h3, h4, h5, h6, .font-serif-headline {
+  /* The Intercept bold editorial serif headlines */
+  h1, h2, h3, h4, h5, h6, .font-serif, .font-serif-headline {
     font-family: 'Fraunces', 'Newsreader', Georgia, 'Times New Roman', serif;
     font-feature-settings: "liga" 1, "kern" 1;
     font-weight: 800;
@@ -91,12 +77,11 @@
   border-bottom: 3px solid #111111;
 }
 
-/* Editorial prose — regular weight body text */
+/* Editorial prose */
 .prose-editorial p {
   margin-bottom: 1.5rem;
   line-height: 1.75;
   font-size: 1.125rem;
-  font-weight: 400;
   color: #1a1a1a;
   font-family: 'Newsreader', Georgia, serif;
 }
@@ -104,7 +89,6 @@
 .prose-editorial blockquote {
   font-family: 'Newsreader', Georgia, serif;
   font-style: italic;
-  font-weight: 400;
   font-size: 1.35rem;
   line-height: 1.5;
   border-left: 4px solid #FF3B00;
