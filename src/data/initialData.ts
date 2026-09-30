@@ -1227,7 +1227,7 @@ At the exact same time, across the Puget Sound corridor, a starkly opposite stan
 
 In Case No. 21-1-04347-2 SEA, Shane Jonathan Lozenich was arrested on July 23, 2021 on Columbia Street in downtown Seattle. The arresting personnel emerged from unmarked vehicles, wore no uniform insignia, displayed no visible badges, and failed to administer Miranda warnings. When arresting officers seized Lozenich's mobile phone without a warrant and produced photocopies of a passport he had never possessed, the state listed the Seattle Mayor's Office and Detective Ryan Ellis as "protected parties."
 
-This juxtaposition forms what the Demopocrisy archive terms the **Nexus of Secrecy and Prosecution**:
+This juxtaposition forms what the Demopocrisy archive terms the Nexus of Secrecy and Prosecution:
 
 > *"Anonymity is a high-level privilege reserved for the enforcers of the state, while transparency is weaponized to criminalize the citizen. By labeling documentation of systemic vulnerabilities as 'Cyberstalking' and 'Felony Harassment', administrative bodies successfully substitute a narrative of personal threat to conceal institutional failure."*
 
@@ -1295,9 +1295,9 @@ While mass physical trespass onto executive grounds resulted in immediate de-esc
 When Shane Lozenich reported the disappearance of his next-door neighbor Toby and her children in early 2021 after hearing muffled screams and encountering unfamiliar occupants claiming to be the homeowners, police dismissed the concerns. 
 
 Subsequent investigation uncovered key technical patterns:
-- **Sewer Line Infrastructure**: Properties connected to shared secondary sewer conduits were systematically consolidated for multi-unit developer permits, while direct main-line parcels remained excluded.
-- **Deed Alteration Initiatives**: County-wide initiatives positioned publicly as "scrubbing racist covenant language" from historic deeds created administrative cover for altering deed ledgers and property transfer records.
-- **Competency Weaponization**: When Lozenich presented these real estate forensics during 2022 court hearings, evaluators cited his missing-neighbor documentation as primary evidence of "delusional themes" to justify incompetency findings.`,
+- Sewer Line Infrastructure: Properties connected to shared secondary sewer conduits were systematically consolidated for multi-unit developer permits, while direct main-line parcels remained excluded.
+- Deed Alteration Initiatives: County-wide initiatives positioned publicly as "scrubbing racist covenant language" from historic deeds created administrative cover for altering deed ledgers and property transfer records.
+- Competency Weaponization: When Lozenich presented these real estate forensics during 2022 court hearings, evaluators cited his missing-neighbor documentation as primary evidence of "delusional themes" to justify incompetency findings.`,
     mediaType: 'gallery',
     relatedCases: ['658931', '25-2-17456-5'],
     tags: ['Real Estate Forensics', 'Midvale Ave N', '911 Logs', 'Deed Alteration', 'Urban Renewal']
@@ -1313,13 +1313,13 @@ Subsequent investigation uncovered key technical patterns:
     featuredImage: 'https://images.unsplash.com/photo-1573511860302-28c524319d2a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1pbmR8ZW58MHx8MHx8fDA%3D',
     imageCaption: 'Spectral analysis of anomalous electromagnetic and radio frequency fields recorded in urban residential environments.',
     summary: 'Examining the scientific basis of the microwave auditory effect (Frey effect), network device node exploitation, and why the legal system requires a "Z-Axis" Digital Bill of Rights for cognitive liberty.',
-    content: `For decades, the legal frameworks governing civil liberties have operated along two physical dimensions: the protection of tangible real property (X-axis) and digital data privacy (Y-axis). However, the emergence of advanced signal technologies and neuro-invasive methods creates an urgent demand for a **Z-axis of Cognitive Liberty**—protecting the human mind and biological perception from non-consensual electromagnetic ingress.
+    content: `For decades, the legal frameworks governing civil liberties have operated along two physical dimensions: the protection of tangible real property (X-axis) and digital data privacy (Y-axis). However, the emergence of advanced signal technologies and neuro-invasive methods creates an urgent demand for a Z-axis of Cognitive Liberty—protecting the human mind and biological perception from non-consensual electromagnetic ingress.
 
 ### The Microwave Auditory Effect (Frey Effect)
 
 Documented by the Department of Defense since the 1970s and recognized in declassified military literature, pulsed microwave radiation can induce thermoelastic expansion in brain tissue, creating audible perception without acoustic sound waves in the room.
 
-When targeted individuals report continuous auditory harassment, sleep disruption, and sharp cranial pain, law enforcement agencies lacking technical radio-frequency meters or forensic protocols reflexively dismiss these reports as psychiatric symptoms. This creates an **Administrative Impunity Loop**:
+When targeted individuals report continuous auditory harassment, sleep disruption, and sharp cranial pain, law enforcement agencies lacking technical radio-frequency meters or forensic protocols reflexively dismiss these reports as psychiatric symptoms. This creates an Administrative Impunity Loop:
 1. Citizen reports signal-based intrusion or hardware misuse (e.g., E-meters, frequency switchboards).
 2. Responding officers lack technical mandates and categorize the report as a mental health crisis.
 3. The clinical classification is used in court to justify competency referrals.

@@ -135,6 +135,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Ensure initial 5 articles use the latest updated images
         return parsed.map((art) => {
           const match = initialArticles.find((ia) => ia.id === art.id);
+          const cleanContent = art.content ? art.content.replace(/\*\*(.*?)\*\*/g, '$1') : art.content;
           if (match) {
             const hasOldDefaultImage = !art.featuredImage ||
               art.featuredImage.includes('photo-1589829545856') ||
@@ -142,11 +143,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               art.featuredImage.includes('photo-1512917774080') ||
               art.featuredImage.includes('photo-1507413245164') ||
               art.featuredImage.includes('photo-1506146332389');
-            if (hasOldDefaultImage) {
-              return { ...art, featuredImage: match.featuredImage };
-            }
+            return {
+              ...art,
+              content: cleanContent,
+              featuredImage: hasOldDefaultImage ? match.featuredImage : art.featuredImage
+            };
           }
-          return art;
+          return { ...art, content: cleanContent };
         });
       } catch (e) {
         console.error('Error parsing saved articles:', e);

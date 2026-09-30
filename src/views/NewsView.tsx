@@ -177,7 +177,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
 
             {/* Col 3: Excerpt */}
             <div className="md:col-span-4">
-              <p className="text-sm text-neutral-700 font-serif leading-relaxed line-clamp-4">
+              <p className="text-sm text-neutral-700 font-serif font-normal leading-relaxed line-clamp-4">
                 {art.summary}
               </p>
             </div>
@@ -217,18 +217,6 @@ export const NewsView: React.FC<NewsViewProps> = ({
               {/* Author Row & Meta - Matching Screenshot 2 & 7 */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex -space-x-2 overflow-hidden">
-                    <img
-                      className="inline-block h-10 w-10 rounded-full ring-2 ring-white filter grayscale"
-                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                      alt="Author avatar"
-                    />
-                    <img
-                      className="inline-block h-10 w-10 rounded-full ring-2 ring-white filter grayscale"
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
-                      alt="Auditor avatar"
-                    />
-                  </div>
                   <div>
                     <div className="text-sm font-serif font-bold text-[#FF3B00]">
                       {activeArticleModal.author}
@@ -310,17 +298,18 @@ export const NewsView: React.FC<NewsViewProps> = ({
               )}
 
               {/* Article Body with Intercept Signature Drop Cap - Matching Screenshot 3 & 7 */}
-              <div className="prose-editorial text-base leading-relaxed text-neutral-900 font-serif space-y-6 pt-2">
+              <div className="prose-editorial text-base leading-relaxed text-neutral-800 font-serif font-normal space-y-6 pt-2">
                 {activeArticleModal.content.split('\n\n').map((paragraph, pIdx) => {
+                  const cleanParagraph = paragraph.replace(/\*\*(.*?)\*\*/g, '$1');
                   if (pIdx === 0) {
-                    /* First paragraph with signature drop cap & bold uppercase intro kicker */
-                    const firstChar = paragraph.charAt(0);
-                    const remainingParagraph = paragraph.slice(1);
+                    /* First paragraph with signature drop cap & normal body text */
+                    const firstChar = cleanParagraph.charAt(0);
+                    const remainingParagraph = cleanParagraph.slice(1);
                     return (
                       <div key={pIdx} className="clearfix">
                         {/* Horizontal black bar over giant drop cap */}
                         <div className="w-10 h-1.5 bg-black mb-1.5"></div>
-                        <p className="text-lg leading-relaxed font-serif">
+                        <p className="text-lg leading-relaxed font-serif font-normal text-neutral-800">
                           <span className="font-black text-4xl float-left mr-2 leading-none font-serif text-black">{firstChar}</span>
                           {remainingParagraph}
                         </p>
@@ -343,12 +332,12 @@ export const NewsView: React.FC<NewsViewProps> = ({
                   }
                   if (paragraph.startsWith('> ')) {
                     return (
-                      <blockquote key={pIdx} className="border-l-4 border-[#FF3B00] pl-4 italic font-serif text-xl text-black my-6">
-                        {paragraph.replace('> ', '')}
+                      <blockquote key={pIdx} className="border-l-4 border-[#FF3B00] pl-4 italic font-serif font-normal text-xl text-neutral-800 my-6">
+                        {cleanParagraph.replace('> ', '')}
                       </blockquote>
                     );
                   }
-                  return <p key={pIdx} className="leading-relaxed font-serif text-lg text-neutral-800">{paragraph}</p>;
+                  return <p key={pIdx} className="leading-relaxed font-serif font-normal text-lg text-neutral-800">{cleanParagraph}</p>;
                 })}
               </div>
 

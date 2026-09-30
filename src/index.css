@@ -17,10 +17,15 @@
   }
 
   /* The Intercept bold editorial serif headlines */
-  h1, h2, h3, h4, h5, h6, .font-serif, .font-serif-headline {
+  h1, h2, h3, h4, h5, h6, .font-serif-headline {
     font-family: 'Fraunces', 'Newsreader', Georgia, 'Times New Roman', serif;
     font-feature-settings: "liga" 1, "kern" 1;
     font-weight: 800;
+  }
+
+  .font-serif {
+    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+    font-weight: 400;
   }
 
   .font-mono, .font-mono-code {
@@ -84,6 +89,7 @@
   font-size: 1.125rem;
   color: #1a1a1a;
   font-family: 'Newsreader', Georgia, serif;
+  font-weight: 400;
 }
 
 .prose-editorial blockquote {
@@ -95,6 +101,7 @@
   padding-left: 1.25rem;
   margin: 2rem 0;
   color: #111111;
+  font-weight: 400;
 }
 
 /* Custom scrollbars */

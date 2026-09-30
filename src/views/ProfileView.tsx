@@ -68,45 +68,27 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
         {/* Left Column: Bio Card, Contact & Corridor (4 Cols) */}
         <div className="lg:col-span-4 space-y-6">
           
-          {/* Subject Portrait Card */}
+          {/* Subject Dossier Card */}
           <div className="bg-white border-2 border-black p-5 sm:p-6 shadow-xs space-y-5">
             
-            {/* Subject Image Frame */}
-            <div className="relative border-2 border-black bg-neutral-950 overflow-hidden group">
-              {settings.authorPhoto ? (
-                <div className="relative aspect-4/5 sm:aspect-square w-full overflow-hidden bg-neutral-900">
-                  <img
-                    src={settings.authorPhoto}
-                    alt={settings.authorName}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-103 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-[#FF3B00]/10 mix-blend-multiply pointer-events-none" />
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-[#FF3B00] text-white text-[10px] font-mono font-black uppercase px-2 py-0.5 tracking-widest shadow-xs">
-                      SUBJECT 01
-                    </span>
-                  </div>
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 pt-10">
-                    <h3 className="font-serif font-black text-xl text-white tracking-tight">{settings.authorName}</h3>
-                    <p className="text-xs font-mono text-[#FF3B00] font-bold mt-0.5">Forensic Author & Subject</p>
-                    <p className="text-[11px] font-mono text-neutral-400 mt-0.5">{settings.authorOrg}</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="aspect-square bg-neutral-950 text-white flex flex-col items-center justify-center p-6 text-center">
-                  <div className="w-20 h-20 rounded-full border-2 border-[#FF3B00] flex items-center justify-center text-3xl font-serif font-black text-white bg-black mb-3">
-                    SJL
-                  </div>
-                  <h3 className="font-serif font-black text-xl text-white">{settings.authorName}</h3>
-                  <p className="text-xs font-mono text-[#FF3B00] font-bold mt-0.5">Forensic Author & Subject</p>
-                  <p className="text-[11px] font-mono text-neutral-400 mt-1">{settings.authorOrg}</p>
-                </div>
-              )}
+            {/* Subject Identity Header */}
+            <div className="border-b-2 border-black pb-4 space-y-1.5">
+              <span className="bg-[#FF3B00] text-white text-[10px] font-mono font-black uppercase px-2 py-0.5 tracking-widest inline-block mb-1">
+                SUBJECT 01
+              </span>
+              <h3 className="font-serif font-black text-2xl text-black tracking-tight leading-tight">
+                {settings.authorName || 'Shane Jonathan Lozenich'}
+              </h3>
+              <p className="text-xs font-mono text-[#FF3B00] font-bold">
+                Forensic Author & Subject
+              </p>
+              <p className="text-xs font-mono text-neutral-600">
+                {settings.authorOrg}
+              </p>
             </div>
 
             {/* Channels & Meta */}
-            <div className="space-y-3 pt-2 text-xs font-mono border-t-2 border-black">
+            <div className="space-y-3 pt-1 text-xs font-mono">
               <div className="flex items-center gap-2.5 text-neutral-800">
                 <Mail className="w-4 h-4 text-[#FF3B00] shrink-0" />
                 <a href={`mailto:${settings.authorEmail}`} className="hover:text-[#FF3B00] text-black font-bold truncate transition-colors">

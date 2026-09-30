@@ -87,11 +87,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     {featuredArticle.title}
                   </h3>
 
-                  <p className="text-base text-neutral-700 font-serif leading-relaxed mt-3">
+                  <p className="text-base text-neutral-700 font-serif font-normal leading-relaxed mt-3">
                     {featuredArticle.subtitle}
                   </p>
 
-                  <p className="text-sm text-neutral-600 font-serif leading-relaxed mt-2 line-clamp-3">
+                  <p className="text-sm text-neutral-600 font-serif font-normal leading-relaxed mt-2 line-clamp-3">
                     {featuredArticle.summary}
                   </p>
                 </div>
@@ -140,7 +140,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <h4 className="font-serif font-black text-lg text-black leading-snug group-hover:text-[#FF3B00] transition-colors">
                       {art.title}
                     </h4>
-                    <p className="text-xs text-neutral-600 font-serif line-clamp-2">
+                    <p className="text-xs text-neutral-600 font-serif font-normal line-clamp-2">
                       {art.summary}
                     </p>
                     <div className="text-xs font-serif text-[#FF3B00] font-semibold pt-1">
@@ -209,7 +209,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Col 3: Excerpt in Refined Serif */}
               <div className="md:col-span-4">
-                <p className="text-sm text-neutral-700 font-serif leading-relaxed line-clamp-4">
+                <p className="text-sm text-neutral-700 font-serif font-normal leading-relaxed line-clamp-4">
                   {art.summary}
                 </p>
               </div>
