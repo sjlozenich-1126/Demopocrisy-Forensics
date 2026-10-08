@@ -76,7 +76,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f7f4] text-[#111111] flex flex-col font-sans selection:bg-[#ff3b00] selection:text-white">
+    <div className="min-h-screen bg-[#FDFDFB] text-[#1A1A1A] flex flex-col font-sans selection:bg-red-700 selection:text-white">
       {/* Editorial Header */}
       <Header
         currentTab={currentTab}

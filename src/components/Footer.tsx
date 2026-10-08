@@ -1,6 +1,6 @@
 import React from 'react';
 import { useData } from '../context/DataContext';
-import { Lock, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Mail, Globe, Lock, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 interface FooterProps {
   setCurrentTab: (tab: string) => void;
@@ -11,79 +11,103 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, onOpenAdminLogin 
   const { settings, isAdmin } = useData();
 
   return (
-    <footer className="border-t-2 border-[#111111] bg-[#f8f7f4] mt-16 sm:mt-24 transition-colors">
-      {/* Top Editorial Row */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <footer className="bg-black text-white border-t-4 border-[#FF3B00] mt-16 sm:mt-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
         
-        {/* Left: Forensic Archive Copyright & Scope */}
-        <div className="space-y-1">
-          <div className="mono text-[0.68rem] text-[#111111] opacity-90 font-bold">
-            © 2026 Forensic Investigative Archive // KING COUNTY WA
+        {/* Main Footer Row */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-neutral-800">
+          
+          {/* Brand & Mandate (7 cols) */}
+          <div className="md:col-span-7 space-y-3">
+            <div className="flex items-center gap-3">
+              <span className="font-serif font-black text-2xl tracking-tight text-white flex items-baseline">
+                <span>DEMOPOCRISY</span>
+                <span className="font-sans font-black text-[#FF3B00] ml-0.5">_</span>
+              </span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-black bg-[#FF3B00] px-2 py-0.5 font-bold">
+                FORENSIC ARCHIVE
+              </span>
+            </div>
+            
+            <p className="text-xs sm:text-sm leading-relaxed text-neutral-400 font-serif max-w-lg">
+              An unredacted public interest investigative repository auditing systemic due process, CrR 3.3 violations, and medicalized custody in Washington State.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-serif text-neutral-400">
+              <a 
+                href={`mailto:${settings.authorEmail}`} 
+                className="hover:text-[#FF3B00] flex items-center gap-1.5 transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5 text-[#FF3B00]" /> {settings.authorEmail}
+              </a>
+              <a 
+                href="https://techhumano.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-white flex items-center gap-1 text-xs underline underline-offset-4"
+              >
+                <Globe className="w-3.5 h-3.5" /> Techhumano.com <ArrowUpRight className="w-3 h-3 text-[#FF3B00]" />
+              </a>
+            </div>
           </div>
-          <div className="mono text-[0.6rem] text-neutral-500">
-            Procedural Justice, CrR 3.3 Speed-Trial Audits & Institutional Due Process
-          </div>
-        </div>
 
-        {/* Right: Contact & Primary Action Button matching Variation 3 */}
-        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-          <a 
-            href={`mailto:${settings.authorEmail || 'shane@jonathanshaneconcepts.com'}`}
-            className="mono text-[0.68rem] text-[#111111] opacity-75 hover:opacity-100 hover:text-[#ff3b00] transition-colors"
-          >
-            {settings.authorEmail || 'shane@jonathanshaneconcepts.com'}
-          </a>
-
-          <a 
-            href="https://techhumano.com" 
-            target="_blank" 
-            rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-1 mono text-[0.65rem] text-neutral-600 hover:text-[#111111] transition-colors"
-          >
-            Techhumano.com <ArrowUpRight className="w-3 h-3 text-[#ff3b00]" />
-          </a>
-
-          <button
-            onClick={() => {
-              setCurrentTab('submissions');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="cta-btn text-[0.65rem] sm:text-[0.7rem] px-5 py-2.5"
-          >
-            Submit Evidence Drop
-          </button>
-        </div>
-
-      </div>
-
-      {/* Subtle Bottom Strip */}
-      <div className="border-t border-[#111111]/10 bg-[#f1efe9]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs">
-          <span className="mono text-[0.6rem] text-neutral-500">
-            RCW 10.77 Involuntary Holds & Forensic Acoustic Record Audit
-          </span>
-          <div className="flex items-center gap-4">
-            {isAdmin ? (
-              <button 
+          {/* Quick Whistleblower Action & CMS (5 cols) */}
+          <div className="md:col-span-5 space-y-3 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="text-xs font-mono uppercase tracking-widest text-[#FF3B00] font-bold">
+                // WHISTLEBLOWER DROP
+              </div>
+              <p className="text-xs text-neutral-400 font-serif leading-relaxed">
+                Submit primary court dockets, medical records, or dispatch audio securely.
+              </p>
+              <button
                 onClick={() => {
-                  setCurrentTab('admin');
+                  setCurrentTab('submissions');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
-                }} 
-                className="mono text-[0.6rem] text-[#ff3b00] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                }}
+                className="w-full sm:w-auto px-6 py-2.5 bg-[#FF3B00] hover:bg-white hover:text-black text-white text-xs font-serif font-black uppercase tracking-wider text-center transition cursor-pointer"
               >
-                <ShieldCheck className="w-3 h-3" /> Editorial CMS Active
+                Submit Evidence Now →
               </button>
-            ) : (
-              <button 
-                onClick={onOpenAdminLogin} 
-                className="mono text-[0.6rem] text-neutral-500 hover:text-[#111111] flex items-center gap-1 cursor-pointer transition"
-              >
-                <Lock className="w-2.5 h-2.5 text-[#ff3b00]" /> Editorial Login
-              </button>
-            )}
+            </div>
+
+            {/* Admin Login Link */}
+            <div className="pt-2 flex items-center justify-between text-xs font-serif">
+              {isAdmin ? (
+                <button 
+                  onClick={() => {
+                    setCurrentTab('admin');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }} 
+                  className="text-[#FF3B00] font-bold hover:underline flex items-center gap-1.5 cursor-pointer"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5" /> CMS Active
+                </button>
+              ) : (
+                <button 
+                  onClick={onOpenAdminLogin} 
+                  className="text-neutral-400 hover:text-white flex items-center gap-1.5 cursor-pointer transition font-bold"
+                >
+                  <Lock className="w-3.5 h-3.5 text-[#FF3B00]" /> Editorial Login
+                </button>
+              )}
+              <span className="text-neutral-500 font-mono text-[10px]">RCW 10.77 & CrR 3.3 Review</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Bottom Notice */}
+        <div className="pt-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs font-serif text-neutral-500">
+          <div>
+            © {new Date().getFullYear()} Demopocrisy Repository. Open Investigative Archive.
+          </div>
+          <div className="text-neutral-400">
+            King County Judicial Systemic Audit
           </div>
         </div>
       </div>
     </footer>
   );
 };
+

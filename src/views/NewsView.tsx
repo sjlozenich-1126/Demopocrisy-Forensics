@@ -92,7 +92,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
     : [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12 bg-transparent">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12 bg-white">
       
       {/* Editorial Header Section - The Intercept Style */}
       <div className="border-b-2 border-black pb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">

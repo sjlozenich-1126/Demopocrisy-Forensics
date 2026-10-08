@@ -82,19 +82,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-12 sm:pt-20 px-4 bg-black/80 backdrop-blur-xs animate-in fade-in">
       <div 
-        className="w-full max-w-3xl bg-[#f8f7f4] border-2 border-[#111111] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
+        className="w-full max-w-3xl bg-white border-4 border-black shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Header Bar */}
-        <div className="p-4 border-b-2 border-[#111111] bg-[#111111] text-[#f8f7f4] flex items-center gap-3">
-          <Search className="w-5 h-5 text-[#ff3b00] shrink-0" />
+        <div className="p-4 border-b-2 border-black bg-black text-white flex items-center gap-3">
+          <Search className="w-5 h-5 text-[#FF3B00] shrink-0" />
           <input
             type="text"
             placeholder="Search cases, dockets, evidence, judges, or medical records..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
-            className="w-full text-sm sm:text-base bg-transparent text-[#f8f7f4] placeholder:text-neutral-400 focus:outline-none mono"
+            className="w-full text-base bg-transparent text-white placeholder:text-neutral-400 focus:outline-none font-mono font-bold"
           />
           {query && (
             <button
@@ -106,30 +106,30 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           )}
           <button
             onClick={onClose}
-            className="px-2.5 py-1 text-[10px] mono font-bold uppercase bg-[#ff3b00] text-white cursor-pointer"
+            className="px-2.5 py-1 text-[10px] font-mono font-black uppercase bg-[#FF3B00] text-white cursor-pointer"
           >
             ESC
           </button>
         </div>
 
-        {/* Filter Bar */}
-        <div className="px-4 py-2.5 bg-[#f1efe9] border-b border-[#111111]/20 flex items-center gap-2 overflow-x-auto text-xs mono">
-          <span className="text-[#111111] font-bold uppercase text-[10px] tracking-wider">// FILTER:</span>
+        {/* Filter Pills */}
+        <div className="px-4 py-2.5 bg-neutral-100 border-b-2 border-black flex items-center gap-2 overflow-x-auto text-xs font-mono">
+          <span className="text-black font-black uppercase text-[10px] tracking-wider">// FILTER:</span>
           {(['all', 'cases', 'articles', 'evidence', 'timeline'] as const).map((type) => (
             <button
               key={type}
               onClick={() => setFilterType(type)}
-              className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider transition cursor-pointer border ${
+              className={`px-3 py-1 text-[10px] font-black uppercase tracking-wider transition cursor-pointer border ${
                 filterType === type
-                  ? 'bg-[#111111] text-[#f8f7f4] border-[#111111]'
-                  : 'bg-[#f8f7f4] text-[#111111] hover:bg-black/5 border-[#111111]/20'
+                  ? 'bg-black text-white border-black'
+                  : 'bg-white text-black hover:bg-neutral-200 border-neutral-300'
               }`}
             >
               {type}
             </button>
           ))}
           {query && (
-            <span className="ml-auto text-[#111111] mono font-bold text-[11px]">
+            <span className="ml-auto text-black font-mono font-bold text-[11px]">
               {totalResultsCount} results
             </span>
           )}
