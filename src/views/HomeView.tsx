@@ -56,7 +56,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-3 overflow-x-auto text-[11px] font-sans text-neutral-500 whitespace-nowrap">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-sans text-neutral-500">
             <span className="font-semibold text-neutral-800">Inquiries:</span>
             <button 
               onClick={() => onSelectArticle('art-001')} 
