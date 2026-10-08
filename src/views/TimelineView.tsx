@@ -42,7 +42,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12 bg-white overflow-x-hidden">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12 bg-transparent overflow-x-hidden">
       
       {/* Page Header */}
       <div className="border-b-4 border-black pb-6 space-y-2">

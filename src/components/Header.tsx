@@ -7,14 +7,14 @@ import {
   Unlock, 
   Menu, 
   X, 
-  FileText, 
-  Layers, 
-  Activity, 
-  Database, 
-  Clock, 
-  Send, 
-  Scale, 
-  ArrowRight
+  ArrowRight,
+  Clock,
+  Scale,
+  FileText,
+  Activity,
+  Layers,
+  Database,
+  UserCheck
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -34,13 +34,13 @@ export const Header: React.FC<HeaderProps> = ({
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const primaryNavItems = [
-    { id: 'timeline', label: 'Timeline Chronology' },
-    { id: 'cases', label: 'Court Cases & Dockets' },
-    { id: 'news', label: 'Special Investigations' },
-    { id: 'medical', label: 'Forensic Medical Audit' },
-    { id: 'evidence', label: 'Evidence Vault Archive' },
-    { id: 'network', label: 'Surveillance Network Map' },
-    { id: 'profile', label: 'Investigative Dossier' }
+    { id: 'news', label: 'Investigative Bureau', desc: 'Special Investigations & Reporting', icon: FileText },
+    { id: 'cases', label: 'Legal Systems Audit', desc: 'Court Cases, Dockets & Due Process', icon: Scale },
+    { id: 'timeline', label: 'Urban Forensics & Timeline', desc: '5-Year Chronology (2020–2026)', icon: Clock },
+    { id: 'medical', label: 'Forensic Medical Audit', desc: 'Harborview CSF & Clinical Status', icon: Activity },
+    { id: 'evidence', label: 'Evidence Vault Archive', desc: 'Audio, Discovery & Public Records', icon: Layers },
+    { id: 'network', label: 'Surveillance Network Map', desc: '57 Documented Systemic Entities', icon: Database },
+    { id: 'profile', label: 'Investigative Dossier', desc: 'Subject Profile & Constitutional Defense', icon: UserCheck }
   ];
 
   const handleNavClick = (tabId: string) => {
@@ -50,40 +50,73 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white border-b-2 border-black">
-        {/* Main Masthead Bar - Clean The Intercept Style */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
+      <header className="sticky top-0 z-40 bg-[#f8f7f4] border-b-2 border-[#111111]">
+        {/* Masthead Navigation matching Variation 3 */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
           
-          {/* Left: Hamburger & Brand Logo */}
-          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          {/* Left: Brand Logo & Mobile Menu Toggle */}
+          <div className="flex items-center gap-3 sm:gap-6 min-w-0">
             <button
               onClick={() => setDrawerOpen(true)}
-              className="p-2 -ml-2 text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-center gap-1.5 group shrink-0"
+              className="p-1.5 -ml-1 text-[#111111] hover:text-[#ff3b00] transition-colors cursor-pointer flex items-center gap-1.5 group shrink-0"
               aria-label="Open Navigation Menu"
             >
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] group-hover:scale-105 transition-transform" />
-              <span className="hidden sm:inline font-serif font-black text-xs uppercase tracking-wider">Menu</span>
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2] group-hover:scale-105 transition-transform" />
+              <span className="hidden sm:inline mono text-[0.65rem] font-bold">Index</span>
             </button>
 
             <button 
               onClick={() => handleNavClick('home')}
-              className="font-serif font-black text-xl sm:text-2xl md:text-3xl tracking-tight text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-baseline truncate"
+              className="font-serif italic font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#111111] hover:text-[#ff3b00] transition-colors cursor-pointer tracking-tight truncate"
             >
-              <span className="truncate">DEMOPOCRISY</span>
-              <span className="font-sans font-black text-[#FF3B00] ml-0.5">_</span>
+              Demopocrisy_
+            </button>
+          </div>
+
+          {/* Center: Curated Bureau Links matching Variation 3 HTML */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-10">
+            <button
+              onClick={() => handleNavClick('news')}
+              className={`mono transition-colors cursor-pointer pb-0.5 border-b-2 ${
+                currentTab === 'news' 
+                  ? 'text-[#ff3b00] opacity-100 border-[#ff3b00] font-bold' 
+                  : 'text-[#111111] opacity-70 hover:opacity-100 hover:text-[#ff3b00] border-transparent'
+              }`}
+            >
+              Investigative Bureau
+            </button>
+            <button
+              onClick={() => handleNavClick('cases')}
+              className={`mono transition-colors cursor-pointer pb-0.5 border-b-2 ${
+                currentTab === 'cases' 
+                  ? 'text-[#ff3b00] opacity-100 border-[#ff3b00] font-bold' 
+                  : 'text-[#111111] opacity-70 hover:opacity-100 hover:text-[#ff3b00] border-transparent'
+              }`}
+            >
+              Legal Systems Audit
+            </button>
+            <button
+              onClick={() => handleNavClick('timeline')}
+              className={`mono transition-colors cursor-pointer pb-0.5 border-b-2 ${
+                currentTab === 'timeline' 
+                  ? 'text-[#ff3b00] opacity-100 border-[#ff3b00] font-bold' 
+                  : 'text-[#111111] opacity-70 hover:opacity-100 hover:text-[#ff3b00] border-transparent'
+              }`}
+            >
+              Urban Forensics
             </button>
           </div>
 
           {/* Right: Search, Admin & Primary Action Button */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             {/* Search Icon Button */}
             <button
               onClick={onOpenSearch}
-              className="p-2 text-black hover:text-[#FF3B00] transition cursor-pointer"
+              className="p-2 text-[#111111] hover:text-[#ff3b00] transition cursor-pointer"
               title="Search Archive (⌘K)"
               aria-label="Search Archive"
             >
-              <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
             </button>
 
             {/* Admin Login / CMS Status */}
@@ -91,15 +124,15 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => handleNavClick('admin')}
-                  className="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-serif font-bold uppercase bg-black text-white hover:bg-[#FF3B00] transition cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 mono text-[0.65rem] font-bold bg-[#111111] text-[#f8f7f4] hover:bg-[#ff3b00] transition cursor-pointer"
                   title="Editorial CMS Active"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF3B00]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#ff3b00]" />
                   <span className="hidden sm:inline">CMS</span>
                 </button>
                 <button
                   onClick={logoutAdmin}
-                  className="p-1.5 text-neutral-500 hover:text-black transition cursor-pointer"
+                  className="p-1.5 text-neutral-600 hover:text-[#111111] transition cursor-pointer"
                   title="Logout"
                 >
                   <Unlock className="w-3.5 h-3.5" />
@@ -108,106 +141,121 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <button
                 onClick={onOpenAdminLogin}
-                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-serif font-bold uppercase tracking-wider text-black hover:text-[#FF3B00] transition cursor-pointer"
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 mono text-[0.65rem] text-[#111111] hover:text-[#ff3b00] transition cursor-pointer"
                 title="Admin Authentication"
               >
-                <Lock className="w-3.5 h-3.5 text-[#FF3B00]" />
-                <span>ADMIN</span>
+                <Lock className="w-3 h-3 text-[#ff3b00]" />
+                <span>Admin</span>
               </button>
             )}
 
-            {/* Bright Orange/Red Action Button - The Intercept Style */}
+            {/* Brutalist Editorial CTA Button matching Variation 3 */}
             <button
               onClick={() => handleNavClick('submissions')}
-              className="bg-[#FF3B00] hover:bg-black text-white px-3 sm:px-5 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-serif font-black uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shadow-xs"
+              className="cta-btn text-[0.65rem] sm:text-[0.7rem] px-3.5 sm:px-6 py-2 sm:py-2.5 shadow-none"
             >
-              <span className="hidden sm:inline">SUBMIT EVIDENCE</span>
-              <span className="sm:hidden">SUBMIT</span>
+              <span className="hidden sm:inline">Submit Evidence Drop</span>
+              <span className="sm:hidden">Evidence Drop</span>
             </button>
           </div>
 
         </div>
       </header>
 
-      {/* Slide-out Sidebar Drawer - Clean Pop-out from Left */}
+      {/* Slide-out Sidebar Drawer for All Views */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 flex">
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
             onClick={() => setDrawerOpen(false)}
           />
 
           {/* Drawer Panel */}
-          <div className="relative w-full max-w-sm bg-white h-full shadow-2xl z-50 flex flex-col justify-between overflow-y-auto border-r-4 border-black animate-in slide-in-from-left duration-200">
-            <div className="p-6 space-y-6">
+          <div className="relative w-full max-w-md bg-[#f8f7f4] h-full shadow-2xl z-50 flex flex-col justify-between overflow-y-auto border-r-2 border-[#111111] animate-in slide-in-from-left duration-200">
+            <div className="p-6 sm:p-8 space-y-6">
               
               {/* Drawer Top: Close & Logo */}
-              <div className="flex items-center justify-between border-b-2 border-black pb-4">
+              <div className="flex items-center justify-between border-b-2 border-[#111111] pb-4">
+                <div className="font-serif italic font-semibold text-2xl tracking-tight text-[#111111]">
+                  Demopocrisy_
+                </div>
+
                 <button
                   onClick={() => setDrawerOpen(false)}
-                  className="p-1 text-black hover:text-[#FF3B00] cursor-pointer"
+                  className="p-1 text-[#111111] hover:text-[#ff3b00] cursor-pointer"
                   aria-label="Close navigation"
                 >
-                  <X className="w-7 h-7 stroke-[2.5]" />
+                  <X className="w-6 h-6 stroke-[2.2]" />
                 </button>
-
-                <div className="font-serif font-black text-xl sm:text-2xl tracking-tight text-black flex items-baseline">
-                  <span>DEMOPOCRISY</span>
-                  <span className="font-sans font-black text-[#FF3B00] ml-0.5">_</span>
-                </div>
               </div>
 
               {/* Drawer Search Input */}
               <div className="relative">
-                <Search className="w-4 h-4 text-black absolute left-3 top-3" />
+                <Search className="w-4 h-4 text-[#111111] absolute left-3 top-3.5 opacity-60" />
                 <input
                   type="text"
-                  placeholder="SEARCH REPOSITORY..."
+                  placeholder="SEARCH CASE VAULT & DOSSIER..."
                   onClick={() => {
                     setDrawerOpen(false);
                     onOpenSearch();
                   }}
                   readOnly
-                  className="w-full bg-neutral-100 border-2 border-black py-2 pl-9 pr-3 text-xs font-serif font-bold uppercase placeholder-neutral-500 cursor-pointer"
+                  className="w-full bg-white border border-[#111111]/20 py-2.5 pl-9 pr-3 mono text-[0.7rem] placeholder:text-neutral-500 cursor-pointer focus:border-[#ff3b00] focus:outline-none"
                 />
               </div>
 
               {/* Primary Section Links */}
-              <div className="space-y-1 font-serif font-black text-base sm:text-lg tracking-wide uppercase text-black pt-1">
-                {primaryNavItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className={`w-full text-left py-2.5 px-2 transition-colors cursor-pointer flex items-center justify-between border-b border-neutral-100 hover:bg-neutral-50 ${
-                      currentTab === item.id ? 'text-[#FF3B00] font-black pl-3 border-l-4 border-l-[#FF3B00]' : 'hover:text-[#FF3B00]'
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    <ArrowRight className="w-4 h-4 opacity-40 group-hover:opacity-100" />
-                  </button>
-                ))}
+              <div className="space-y-2 pt-2">
+                <div className="mono text-[0.65rem] text-[#111111] opacity-50 pb-1 border-b border-[#111111]/10">
+                  Forensic Archive Directory
+                </div>
+                {primaryNavItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavClick(item.id)}
+                      className={`w-full text-left p-3 transition-colors cursor-pointer flex items-center justify-between border ${
+                        currentTab === item.id 
+                          ? 'border-[#ff3b00] bg-[#ff3b00]/5 text-[#111111]' 
+                          : 'border-transparent hover:border-[#111111]/15 hover:bg-black/[0.02]'
+                      }`}
+                    >
+                      <div className="space-y-0.5">
+                        <div className="font-serif text-lg font-semibold text-[#111111] flex items-center gap-2">
+                          <Icon className={`w-4 h-4 ${currentTab === item.id ? 'text-[#ff3b00]' : 'text-neutral-500'}`} />
+                          <span>{item.label}</span>
+                        </div>
+                        <div className="mono text-[0.6rem] text-neutral-600 pl-6">
+                          {item.desc}
+                        </div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 opacity-40 text-[#111111]" />
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* Solid Orange/Red Action Button in Drawer */}
+              {/* Solid Action Button in Drawer */}
               <div className="pt-2">
                 <button
                   onClick={() => handleNavClick('submissions')}
-                  className="w-full bg-[#FF3B00] hover:bg-black text-white py-3 px-4 font-serif font-black text-xs sm:text-sm uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-between shadow-sm"
+                  className="cta-btn w-full py-3.5 text-center justify-center"
                 >
-                  <span>SUBMIT EVIDENCE →</span>
+                  <span>Submit Evidence Drop →</span>
                 </button>
               </div>
             </div>
 
             {/* Drawer Bottom Footer */}
-            <div className="p-6 bg-neutral-100 border-t-2 border-black flex items-center justify-between text-xs font-serif">
+            <div className="p-6 bg-[#f1efe9] border-t-2 border-[#111111] flex items-center justify-between text-xs font-serif">
               {isAdmin ? (
                 <button
                   onClick={() => handleNavClick('admin')}
-                  className="text-[#FF3B00] font-bold uppercase hover:underline flex items-center gap-1.5 cursor-pointer"
+                  className="mono text-[0.65rem] text-[#ff3b00] font-bold hover:underline flex items-center gap-1.5 cursor-pointer"
                 >
-                  <ShieldCheck className="w-4 h-4" /> CMS Dashboard
+                  <ShieldCheck className="w-3.5 h-3.5" /> CMS Dashboard Active
                 </button>
               ) : (
                 <button
@@ -215,12 +263,12 @@ export const Header: React.FC<HeaderProps> = ({
                     setDrawerOpen(false);
                     onOpenAdminLogin();
                   }}
-                  className="text-black font-bold uppercase hover:text-[#FF3B00] flex items-center gap-1.5 cursor-pointer"
+                  className="mono text-[0.65rem] text-[#111111] opacity-70 hover:opacity-100 hover:text-[#ff3b00] flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Lock className="w-4 h-4 text-[#FF3B00]" /> Editorial Login
+                  <Lock className="w-3 h-3 text-[#ff3b00]" /> Editorial Login
                 </button>
               )}
-              <span className="text-neutral-500 font-mono text-[10px]">Demopocrisy Archive</span>
+              <span className="mono text-[0.6rem] text-neutral-500">Demopocrisy Forensics</span>
             </div>
           </div>
         </div>
@@ -228,4 +276,3 @@ export const Header: React.FC<HeaderProps> = ({
     </>
   );
 };
-

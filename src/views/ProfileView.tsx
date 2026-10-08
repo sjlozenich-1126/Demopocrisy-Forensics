@@ -23,7 +23,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onSelectCase, setCurre
   const { settings, cases } = useData();
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-10 sm:space-y-12 bg-white overflow-x-hidden">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-10 sm:space-y-12 bg-transparent overflow-x-hidden">
       
       {/* Editorial Header - The Intercept Style */}
       <div className="border-b-4 border-black pb-6 space-y-3">

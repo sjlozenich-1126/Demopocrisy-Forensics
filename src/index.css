@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+:root {
+  --bg: #f8f7f4;
+  --ink: #111111;
+  --accent: #ff3b00;
+  --ink-faint: rgba(17, 17, 17, 0.08);
+}
+
 @layer base {
   html, body {
     overflow-x: hidden;
@@ -8,114 +15,169 @@
   }
 
   body {
-    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-    background-color: #FFFFFF;
-    color: #111111;
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* The Intercept bold editorial serif headlines */
-  h1, h2, h3, h4, h5, h6, .font-serif-headline {
-    font-family: 'Fraunces', 'Newsreader', Georgia, 'Times New Roman', serif;
-    font-feature-settings: "liga" 1, "kern" 1;
-    font-weight: 800;
+  /* Editorial Headers matching Variation 3 */
+  h1, h2, h3, h4, h5, h6, .font-serif, .font-serif-headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.015em;
   }
 
-  .font-serif {
-    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-    font-weight: 400;
-  }
-
-  .font-mono, .font-mono-code {
-    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  .mono, .font-mono, .font-mono-code {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    opacity: 0.75;
   }
 }
 
-/* The Intercept style Kicker horizontal block */
-.intercept-kicker-bar {
-  width: 44px;
-  height: 5px;
-  background-color: #111111;
-  margin-bottom: 0.65rem;
+/* Editorial Headers */
+.editorial-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  line-height: 0.95;
 }
 
-/* The Intercept Kicker Tag in Orange/Red */
-.intercept-kicker {
-  color: #FF3B00;
-  font-family: 'Fraunces', Georgia, serif;
+.mono {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+/* Layout Elements from Variation 3 */
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  line-height: 0.92;
+  margin: 1.25rem 0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.hero-summary {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* Stats Grid - Brutalist Editorial */
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--ink);
+}
+
+.stat-block .value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+  display: block;
+  color: var(--ink);
+}
+
+/* Cards and Lists */
+.investigations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.entry-card {
+  border: 1px solid var(--ink-faint);
+  background: transparent;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.entry-card:hover {
+  border-color: var(--accent);
+  background-color: rgba(255, 59, 0, 0.02);
+}
+
+/* Primary CTA Button */
+.cta-btn {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 0.875rem 2.25rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
   font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-/* The Intercept Editorial Drop Cap */
-.intercept-drop-cap {
-  float: left;
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 4.8rem;
-  line-height: 0.82;
-  font-weight: 900;
-  margin-right: 0.75rem;
-  margin-top: 0.2rem;
-  color: #111111;
-  position: relative;
+.cta-btn:hover {
+  background: var(--accent);
+  color: #fff;
 }
 
-.intercept-drop-cap::before {
-  content: "";
-  position: absolute;
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background-color: #111111;
-}
-
-/* Stark editorial rules */
-.intercept-rule {
-  border-bottom: 1px solid #111111;
-}
-
-.intercept-rule-thick {
-  border-bottom: 3px solid #111111;
-}
-
-/* Editorial prose */
+/* Editorial drop cap & prose */
 .prose-editorial p {
   margin-bottom: 1.5rem;
   line-height: 1.75;
-  font-size: 1.125rem;
-  color: #1a1a1a;
-  font-family: 'Newsreader', Georgia, serif;
-  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
 }
 
 .prose-editorial blockquote {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 1.35rem;
-  line-height: 1.5;
-  border-left: 4px solid #FF3B00;
-  padding-left: 1.25rem;
+  font-size: 1.4rem;
+  line-height: 1.45;
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
   margin: 2rem 0;
-  color: #111111;
-  font-weight: 400;
+  color: var(--ink);
 }
 
-/* Custom scrollbars */
+/* Scroll Bar Styles */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #f4f4f4;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #111111;
+  background: var(--ink-faint);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF3B00;
+  background: var(--accent);
 }
 
+::selection {
+  background: var(--accent);
+  color: #fff;
+}

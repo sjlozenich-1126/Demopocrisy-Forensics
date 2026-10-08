@@ -8,9 +8,8 @@ import {
   ArrowRight, 
   AlertTriangle, 
   ChevronRight, 
-  Send, 
-  Tv, 
-  Volume2 
+  Layers,
+  ArrowUpRight
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -29,423 +28,349 @@ export const HomeView: React.FC<HomeViewProps> = ({
   const { cases, articles, evidence, timelineEvents } = useData();
 
   const featuredArticle = articles.find((a) => a.isFeatured) || articles[0];
-  const sideArticles = articles.filter((a) => a.id !== featuredArticle?.id).slice(0, 3);
-  const investigationList = articles.slice(0, 4);
+  const sideArticles = articles.filter((a) => a.id !== featuredArticle?.id);
 
   return (
-    <div className="space-y-16 pb-20 bg-white">
+    <div className="bg-[#f8f7f4] text-[#111111] min-h-screen">
       
-      {/* Top Stories Section - Matching Screenshot 1 */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black text-black tracking-tight mb-8">
-          Top Stories
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      {/* Primary Viewport Structure matching Variation 3 */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           
-          {/* Left Column: Lead Story with Duotone Tint Box */}
-          <div className="lg:col-span-8 space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
-              
-              {/* Duotone Visual Block - The Intercept Style */}
-              <div 
-                onClick={() => onSelectArticle(featuredArticle.id)}
-                className="sm:col-span-6 bg-gradient-to-br from-neutral-900 via-neutral-800 to-black overflow-hidden relative group cursor-pointer aspect-4/5 flex items-end p-6 border-2 border-black"
-              >
-                <img
-                  src={featuredArticle.featuredImage}
-                  alt={featuredArticle.title}
-                  referrerPolicy="no-referrer"
-                  className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-150 mix-blend-luminosity group-hover:scale-103 transition-transform duration-500 opacity-80"
-                />
-                <div className="absolute inset-0 bg-[#FF3B00]/20 mix-blend-multiply pointer-events-none" />
-                <div className="relative z-10 text-white space-y-1">
-                  <span className="bg-[#FF3B00] text-white text-[10px] font-serif font-black uppercase px-2 py-0.5 tracking-wider">
-                    {featuredArticle.category}
-                  </span>
-                  <p className="text-xs text-neutral-300 font-serif italic pt-1 line-clamp-2">
-                    {featuredArticle.imageCaption}
-                  </p>
-                </div>
-              </div>
-
-              {/* Lead Headline & Description */}
-              <div className="sm:col-span-6 space-y-3.5 flex flex-col justify-between h-full">
-                <div>
-                  {/* Black Kicker Bar - Intercept Signature */}
-                  <div className="w-12 h-1.5 bg-black mb-3"></div>
-
-                  {/* Kicker Category in Bright Orange/Red */}
-                  <div className="text-[#FF3B00] font-serif font-bold text-sm tracking-tight mb-1">
-                    Demopocrisy Special Briefing
-                  </div>
-
-                  <h3 
-                    onClick={() => onSelectArticle(featuredArticle.id)}
-                    className="text-2xl sm:text-3xl font-serif font-black text-black leading-[1.12] uppercase tracking-tight hover:text-[#FF3B00] cursor-pointer transition-colors"
-                  >
-                    {featuredArticle.title}
-                  </h3>
-
-                  <p className="text-base text-neutral-700 font-serif font-normal leading-relaxed mt-3">
-                    {featuredArticle.subtitle}
-                  </p>
-
-                  <p className="text-sm text-neutral-600 font-serif font-normal leading-relaxed mt-2 line-clamp-3">
-                    {featuredArticle.summary}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-neutral-300 flex items-center justify-between text-xs font-serif text-neutral-600">
-                  <span className="text-[#FF3B00] font-bold">{featuredArticle.author}</span>
-                  <span>{featuredArticle.date}</span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Right Column: Stacked Top Stories - Matching Screenshot 1 */}
-          <div className="lg:col-span-4 space-y-8 lg:border-l lg:border-neutral-300 lg:pl-8">
-            {sideArticles.map((art, idx) => (
-              <div key={art.id} className="space-y-3 group cursor-pointer" onClick={() => onSelectArticle(art.id)}>
-                {idx === 0 ? (
-                  /* Top Thumbnail Card */
-                  <div className="space-y-2.5">
-                    <div className="aspect-16/10 overflow-hidden bg-neutral-100 border border-neutral-300">
-                      <img
-                        src={art.featuredImage}
-                        alt={art.title}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-103 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="text-[#FF3B00] font-serif font-bold text-xs uppercase tracking-tight">
-                      {art.category} • {art.date}
-                    </div>
-                    <h4 className="font-serif font-black text-xl text-black leading-snug group-hover:text-[#FF3B00] transition-colors">
-                      {art.title}
-                    </h4>
-                    <div className="text-xs font-serif text-[#FF3B00] font-semibold">
-                      {art.author}
-                    </div>
-                  </div>
-                ) : (
-                  /* Secondary Item with Kicker Bar */
-                  <div className="pt-6 border-t border-neutral-300 space-y-2">
-                    <div className="w-10 h-1 bg-black"></div>
-                    <div className="text-[#FF3B00] font-serif font-bold text-xs">
-                      {art.category}
-                    </div>
-                    <h4 className="font-serif font-black text-lg text-black leading-snug group-hover:text-[#FF3B00] transition-colors">
-                      {art.title}
-                    </h4>
-                    <p className="text-xs text-neutral-600 font-serif font-normal line-clamp-2">
-                      {art.summary}
-                    </p>
-                    <div className="text-xs font-serif text-[#FF3B00] font-semibold pt-1">
-                      {art.author}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* Special Investigations Section - Matching Screenshot 5 */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 border-t-2 border-black">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-black tracking-tight">
-            Special Investigations
-          </h2>
-          <button
-            onClick={() => setCurrentTab('news')}
-            className="text-xs font-serif font-bold uppercase tracking-wider text-[#FF3B00] hover:text-black flex items-center gap-1 cursor-pointer"
-          >
-            All Investigations →
-          </button>
-        </div>
-
-        {/* 3-Column Horizontal Row List Layout (Image | Headline + Author | Excerpt) */}
-        <div className="divide-y divide-neutral-300">
-          {investigationList.map((art) => (
-            <div 
-              key={art.id} 
-              onClick={() => onSelectArticle(art.id)}
-              className="py-8 first:pt-0 grid grid-cols-1 md:grid-cols-12 gap-6 items-center group cursor-pointer"
-            >
-              {/* Col 1: Graphic / Photo */}
-              <div className="md:col-span-4 aspect-16/10 overflow-hidden bg-neutral-900 border border-neutral-300 relative">
-                <img
-                  src={art.featuredImage}
-                  alt={art.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-103 transition-transform duration-500"
-                />
-                {art.mediaType === 'video' && (
-                  <span className="absolute top-2 left-2 bg-[#FF3B00] text-white text-[9px] font-serif font-bold px-2 py-0.5 flex items-center gap-1 uppercase">
-                    <Tv className="w-3 h-3" /> Video Included
-                  </span>
-                )}
-                {art.mediaType === 'audio' && (
-                  <span className="absolute top-2 left-2 bg-black text-white text-[9px] font-serif font-bold px-2 py-0.5 flex items-center gap-1 uppercase">
-                    <Volume2 className="w-3 h-3 text-[#FF3B00]" /> Audio Tape
-                  </span>
-                )}
-              </div>
-
-              {/* Col 2: Headline & Author in Bright Orange/Red */}
-              <div className="md:col-span-4 space-y-2">
-                <h3 className="text-xl sm:text-2xl font-serif font-black text-black leading-snug group-hover:text-[#FF3B00] transition-colors">
-                  {art.title}
-                </h3>
-                <div className="text-xs font-serif text-[#FF3B00] font-bold">
-                  {art.author} <span className="text-neutral-500 font-normal">- {art.date}</span>
-                </div>
-              </div>
-
-              {/* Col 3: Excerpt in Refined Serif */}
-              <div className="md:col-span-4">
-                <p className="text-sm text-neutral-700 font-serif font-normal leading-relaxed line-clamp-4">
-                  {art.summary}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Quantitative Systemic Audit Metrics */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
-        <div className="bg-black text-white p-8 sm:p-10 border-4 border-black">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-800 pb-4 mb-6">
+          {/* Left Column: Primary Focus (1.5fr / 8 cols) */}
+          <div className="lg:col-span-8 lg:pr-8 lg:border-r border-[#111111]/10 flex flex-col justify-between">
             <div>
-              <div className="text-[#FF3B00] font-serif font-bold text-xs uppercase tracking-widest">
-                // QUANTITATIVE SYSTEMIC AUDIT
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-black text-white mt-1">
-                Five-Year Forensic Audit Data (2021–2026)
-              </h3>
-            </div>
-            <button
-              onClick={() => setCurrentTab('network')}
-              className="text-xs font-serif text-[#FF3B00] hover:text-white font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer"
-            >
-              Surveillance Network Map (57 Entities) <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-            <div className="p-4 bg-neutral-900 border border-neutral-800">
-              <div className="text-4xl font-black text-white font-serif">8</div>
-              <div className="text-xs font-serif font-bold text-neutral-300 mt-2 uppercase">Cases Audited</div>
-              <div className="text-[11px] text-neutral-400 font-serif mt-0.5">Municipal & Superior</div>
-            </div>
-
-            <div className="p-4 bg-neutral-900 border border-neutral-800">
-              <div className="text-4xl font-black text-[#FF3B00] font-serif">4</div>
-              <div className="text-xs font-serif font-bold text-neutral-300 mt-2 uppercase">No Complaint Filed</div>
-              <div className="text-[11px] text-neutral-400 font-serif mt-0.5">Dismissed Post-Jail</div>
-            </div>
-
-            <div className="p-4 bg-neutral-900 border border-neutral-800">
-              <div className="text-4xl font-black text-white font-serif">365+</div>
-              <div className="text-xs font-serif font-bold text-neutral-300 mt-2 uppercase">Days Detained</div>
-              <div className="text-[11px] text-neutral-400 font-serif mt-0.5">Pretrial Without Trial</div>
-            </div>
-
-            <div className="p-4 bg-neutral-900 border border-neutral-800">
-              <div className="text-4xl font-black text-white font-serif">2</div>
-              <div className="text-xs font-serif font-bold text-neutral-300 mt-2 uppercase">Involuntary Holds</div>
-              <div className="text-[11px] text-neutral-400 font-serif mt-0.5">Harborview & Western</div>
-            </div>
-
-            <div className="p-4 bg-neutral-900 border border-neutral-800">
-              <div className="text-4xl font-black text-[#FF3B00] font-serif">67%</div>
-              <div className="text-xs font-serif font-bold text-neutral-300 mt-2 uppercase">Warrantless Arrests</div>
-              <div className="text-[11px] text-neutral-400 font-serif mt-0.5">4th Amendment Issue</div>
-            </div>
-
-            <div className="p-4 bg-[#FF3B00] text-white">
-              <div className="text-4xl font-black text-white font-serif">100%</div>
-              <div className="text-xs font-serif font-bold text-white mt-2 uppercase">Restored</div>
-              <div className="text-[11px] text-white/90 font-serif mt-0.5">Dr. Leavey Feb 2026</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Audited Legal Cases Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 border-b-2 border-black pb-4 mb-8">
-          <div>
-            <div className="text-xs font-serif font-bold text-[#FF3B00] uppercase tracking-widest">
-              // LEGAL REPOSITORY
-            </div>
-            <h3 className="text-3xl sm:text-4xl font-black text-black font-serif mt-1">
-              Audited Case Studies (2021–2026)
-            </h3>
-          </div>
-          <button
-            onClick={() => setCurrentTab('cases')}
-            className="text-xs font-serif font-bold uppercase tracking-wider bg-black text-white hover:bg-[#FF3B00] px-4 py-2.5 transition cursor-pointer flex items-center gap-2"
-          >
-            <Scale className="w-4 h-4" /> View All 8 Dockets
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cases.slice(0, 4).map((c) => (
-            <div
-              key={c.id}
-              onClick={() => onSelectCase(c.id)}
-              className="bg-white border-2 border-black hover:border-[#FF3B00] p-6 flex flex-col justify-between cursor-pointer group shadow-sm transition-all"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-serif text-xs font-black bg-black text-white px-2 py-0.5">
-                    #{c.caseNumber}
-                  </span>
-                  <span className="text-[10px] font-serif font-bold uppercase px-2 py-0.5 bg-neutral-100 text-black border border-black">
-                    {c.status}
-                  </span>
-                </div>
-
-                <h4 className="font-serif font-black text-xl text-black group-hover:text-[#FF3B00] transition-colors leading-snug">
-                  {c.title}
-                </h4>
-
-                <p className="text-xs text-neutral-600 font-serif leading-relaxed line-clamp-3">
-                  {c.executiveSummary}
-                </p>
+              {/* Archive Entry Kicker */}
+              <div className="mono text-[#ff3b00] opacity-100 font-bold mb-3">
+                Vol. 01 // Archive Entry
               </div>
 
-              <div className="pt-4 mt-6 border-t border-neutral-300 flex items-center justify-between text-xs font-serif text-black group-hover:text-[#FF3B00]">
-                <span className="font-bold">{c.associatedDocs.length} Primary Documents</span>
-                <span className="flex items-center gap-1 font-bold uppercase">
-                  Dossier <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+              {/* Giant Hero Title */}
+              <h1 
+                onClick={() => onSelectArticle(featuredArticle?.id || 'art-001')}
+                className="hero-title hover:text-[#ff3b00] cursor-pointer transition-colors"
+              >
+                {featuredArticle?.title || 'Seattle Officers Seek Anonymity in Supreme Court While Whistleblowers Face Institutional Shadow'}
+              </h1>
 
-      {/* Two-Column Features: Chronological Timeline & Medical CSF Audit */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* Timeline Feature (7 cols) */}
-          <div className="lg:col-span-7 bg-white border-2 border-black p-6 sm:p-8 flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between border-b-2 border-black pb-3">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-6 h-6 text-[#FF3B00]" />
-                  <h3 className="font-serif font-black text-2xl text-black">
-                    5-Year Chronology (2020–2026)
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setCurrentTab('timeline')}
-                  className="text-xs font-serif text-[#FF3B00] hover:underline font-bold uppercase"
-                >
-                  Full Timeline →
-                </button>
-              </div>
-
-              <p className="text-sm font-serif text-neutral-700">
-                A forensic narrative timeline reconstructing arrests, competency orders, speedy trial tolling, and medicalizations.
+              {/* Hero Summary */}
+              <p className="hero-summary">
+                {featuredArticle?.subtitle || 'An investigative analysis of how the highest courts shielded law enforcement identities after Jan. 6, while citizens documenting systemic cracks faced warrantless arrests.'}
               </p>
 
-              <div className="space-y-3 pt-2">
-                {timelineEvents.slice(0, 3).map((evt) => (
-                  <div 
-                    key={evt.id} 
-                    className="p-4 bg-neutral-50 border-l-4 border-[#FF3B00] border border-neutral-300 hover:bg-neutral-100 transition"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-serif text-xs font-bold text-[#FF3B00]">{evt.date}</span>
-                      {evt.caseRef && (
-                        <span className="text-[10px] font-serif font-bold bg-black text-white px-1.5 py-0.2">
-                          Case #{evt.caseRef}
-                        </span>
-                      )}
-                    </div>
-                    <h5 className="font-serif font-black text-base text-black mt-1">
-                      {evt.title}
-                    </h5>
-                    <p className="text-xs text-neutral-600 mt-1 line-clamp-2 font-serif">
-                      {evt.summary}
-                    </p>
-                  </div>
-                ))}
+              {/* Investigations Grid - 2 Column Brutalist Cards */}
+              <div className="investigations-grid my-8">
+                {/* Entry Card 1: Inslee Threat Case */}
+                <div 
+                  onClick={() => onSelectArticle('art-002')}
+                  className="entry-card cursor-pointer group"
+                >
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors">
+                    #658931 / 2021
+                  </span>
+                  <h3 className="font-serif text-xl sm:text-2xl font-semibold leading-tight text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                    Inslee Threat Case Drifts into Year Four Without Evidence
+                  </h3>
+                  <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                    Prosecution of Shane Lozenich continues for over 1,300 days without production of audio recording in discovery.
+                  </p>
+                </div>
+
+                {/* Entry Card 2: Acoustic Jurisprudence */}
+                <div 
+                  onClick={() => onSelectArticle('art-003')}
+                  className="entry-card cursor-pointer group"
+                >
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors">
+                    Intelligence / Signal
+                  </span>
+                  <h3 className="font-serif text-xl sm:text-2xl font-semibold leading-tight text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                    Acoustic Jurisprudence: The Forensic Record of V2K
+                  </h3>
+                  <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                    Scientific basis of the microwave auditory effect (Frey effect) and the legal requirement for a Digital Bill of Rights.
+                  </p>
+                </div>
+
+                {/* Entry Card 3: Accellion Data Leak */}
+                <div 
+                  onClick={() => onSelectArticle('art-004')}
+                  className="entry-card cursor-pointer group"
+                >
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors">
+                    SAO Breach // 1.6M Victims
+                  </span>
+                  <h3 className="font-serif text-xl sm:text-2xl font-semibold leading-tight text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                    The 2021 Accellion Data Leak & Procedural Inversion
+                  </h3>
+                  <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                    How massive state cyber vulnerabilities exposed whistleblower identities before warrantless bedroom arrests.
+                  </p>
+                </div>
+
+                {/* Entry Card 4: King County Custody Audit */}
+                <div 
+                  onClick={() => onSelectArticle('art-005')}
+                  className="entry-card cursor-pointer group"
+                >
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors">
+                    Pretrial Detention // CrR 3.3
+                  </span>
+                  <h3 className="font-serif text-xl sm:text-2xl font-semibold leading-tight text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                    365+ Days Detained Without Adjudication
+                  </h3>
+                  <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                    Auditing 10 months in King County Jail, physical injury, and continuous competency evaluation tolling.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="pt-4 mt-6 border-t-2 border-black">
-              <button
-                onClick={() => setCurrentTab('timeline')}
-                className="w-full py-3 text-center text-xs font-serif font-black uppercase tracking-wider bg-black hover:bg-[#FF3B00] text-white transition cursor-pointer"
-              >
-                Inspect All Chronological Chapters →
-              </button>
+            {/* Brutalist Editorial Stats Strip */}
+            <div className="stats-strip">
+              <div className="stat-block">
+                <span className="value">67%</span>
+                <span className="mono">Warrantless Arrests</span>
+              </div>
+              <div className="stat-block">
+                <span className="value">365+</span>
+                <span className="mono">Days Pretrial Detention</span>
+              </div>
+              <div className="stat-block">
+                <span className="value text-[#ff3b00]">Restored</span>
+                <span className="mono">Clinical Status 2026</span>
+              </div>
+              <div className="stat-block">
+                <span className="value">8</span>
+                <span className="mono">Cases Audited</span>
+              </div>
+              <div className="stat-block">
+                <span className="value">57</span>
+                <span className="mono">Network Entities</span>
+              </div>
             </div>
           </div>
 
-          {/* Medical CSF Audit Preview (5 cols) */}
-          <div className="lg:col-span-5 bg-white border-2 border-black p-6 sm:p-8 flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between border-b-2 border-black pb-3">
-                <div className="flex items-center gap-2">
-                  <Activity className="w-6 h-6 text-[#FF3B00]" />
-                  <h3 className="font-serif font-black text-2xl text-black">
-                    Harborview Medical Audit
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setCurrentTab('medical')}
-                  className="text-xs font-serif text-[#FF3B00] hover:underline font-bold uppercase"
-                >
-                  Full Audit →
-                </button>
+          {/* Right Column: Case Study Index (1fr / 4 cols) */}
+          <div className="lg:col-span-4 flex flex-col justify-between">
+            <div>
+              {/* Section Header */}
+              <div className="mono text-[0.7rem] font-bold pb-2.5 mb-6 border-b-2 border-[#111111] text-[#111111] flex items-center justify-between">
+                <span>Case Study Index</span>
+                <span className="text-[#ff3b00]">RCW 10.77 // CrR 3.3</span>
               </div>
 
-              <div className="p-4 bg-red-50 border-2 border-[#FF3B00] space-y-2">
-                <div className="flex items-center gap-2 text-xs font-serif font-bold text-[#FF3B00] uppercase">
-                  <AlertTriangle className="w-4 h-4 shrink-0" />
-                  <span>March 2021 Lumbar Puncture Discrepancy</span>
+              {/* Docket 1: Harborview Medical Audit */}
+              <div 
+                onClick={() => setCurrentTab('medical')} 
+                className="mb-8 cursor-pointer group border-b border-[#111111]/10 pb-6"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors font-bold">
+                    Docket #658959
+                  </span>
+                  <span className="mono text-[0.6rem] text-[#ff3b00]">22-Day Hold</span>
                 </div>
-                <p className="text-xs text-neutral-900 font-serif leading-relaxed">
-                  Lab records reveal <strong>95% neutrophils</strong> in CSF (inconsistent with viral/neurosyphilis lymphocytic norm) and zero positive viral panels, yet justified 22 days of involuntary hold and forced Haloperidol.
+                <h4 className="font-serif text-2xl font-semibold my-2 text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                  Harborview Medical Audit
+                </h4>
+                <p className="mono text-xs normal-case tracking-normal opacity-85 line-clamp-3 leading-relaxed text-neutral-700">
+                  Lab records reveal 95% neutrophils in CSF (inconsistent with viral/neurosyphilis lymphocytic norm) yet justified 22 days of involuntary hold and forced meds.
                 </p>
+                <div className="mt-3 flex items-center gap-1.5 mono text-[0.62rem] text-[#111111] group-hover:text-[#ff3b00]">
+                  <span>Inspect Lumbar Puncture Audit</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
 
-              <div className="space-y-2 text-xs font-serif">
-                <div className="p-2.5 bg-neutral-50 border border-neutral-300 flex justify-between items-center">
-                  <span className="text-neutral-700">CSF Neutrophils:</span>
-                  <span className="font-bold text-[#FF3B00]">95% (Bacterial/Trauma)</span>
+              {/* Docket 2: Municipal Database Sync Failure */}
+              <div 
+                onClick={() => onSelectCase('660121')} 
+                className="mb-8 cursor-pointer group border-b border-[#111111]/10 pb-6"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors font-bold">
+                    Docket #660121
+                  </span>
+                  <span className="mono text-[0.6rem] text-neutral-500">May 15, 2021</span>
                 </div>
-                <div className="p-2.5 bg-neutral-50 border border-neutral-300 flex justify-between items-center">
-                  <span className="text-neutral-700">Viral / Syphilis PCR:</span>
-                  <span className="font-bold text-emerald-700">ALL NEGATIVE</span>
+                <h4 className="font-serif text-2xl font-semibold my-2 text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                  Municipal Database Sync Failure
+                </h4>
+                <p className="mono text-xs normal-case tracking-normal opacity-85 line-clamp-3 leading-relaxed text-neutral-700">
+                  Expired protective order erroneously flagged as active produced unlawful custodial actions on May 15, 2021.
+                </p>
+                <div className="mt-3 flex items-center gap-1.5 mono text-[0.62rem] text-[#111111] group-hover:text-[#ff3b00]">
+                  <span>Review Docket File</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
-                <div className="p-2.5 bg-neutral-50 border border-neutral-300 flex justify-between items-center">
-                  <span className="text-neutral-700">2026 Competency:</span>
-                  <span className="font-bold text-emerald-700">Restored (Dr. Leavey)</span>
+              </div>
+
+              {/* Docket 3: Midvale Ave N Deed Scrubbing */}
+              <div 
+                onClick={() => setCurrentTab('timeline')} 
+                className="mb-8 cursor-pointer group border-b border-[#111111]/10 pb-6"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors font-bold">
+                    Forensics: Urban Erasure
+                  </span>
+                  <span className="mono text-[0.6rem] text-neutral-500">Spatial Audit</span>
+                </div>
+                <h4 className="font-serif text-2xl font-semibold my-2 text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                  Midvale Ave N Deed Scrubbing
+                </h4>
+                <p className="mono text-xs normal-case tracking-normal opacity-85 line-clamp-3 leading-relaxed text-neutral-700">
+                  Examination of 911 dispatch spikes across two residential blocks, followed by rapid property sales and alterations.
+                </p>
+                <div className="mt-3 flex items-center gap-1.5 mono text-[0.62rem] text-[#111111] group-hover:text-[#ff3b00]">
+                  <span>Inspect Timeline Record</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+
+              {/* Docket 4: Warrantless Bedroom Seizure */}
+              <div 
+                onClick={() => onSelectCase('658931')} 
+                className="mb-8 cursor-pointer group"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="mono text-[#111111]/60 group-hover:text-[#ff3b00] transition-colors font-bold">
+                    Docket #658931
+                  </span>
+                  <span className="mono text-[0.6rem] text-[#ff3b00]">Dismissed</span>
+                </div>
+                <h4 className="font-serif text-2xl font-semibold my-2 text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                  No Complaint Filed Dismissal
+                </h4>
+                <p className="mono text-xs normal-case tracking-normal opacity-85 line-clamp-3 leading-relaxed text-neutral-700">
+                  Physical bedroom arrest followed by King County Jail overnight hold, dismissed by Judge McDowall when the City failed to produce any complaint.
+                </p>
+                <div className="mt-3 flex items-center gap-1.5 mono text-[0.62rem] text-[#111111] group-hover:text-[#ff3b00]">
+                  <span>Inspect Case Dossier</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 mt-6 border-t-2 border-black">
+            {/* Quick Actions Panel */}
+            <div className="pt-4 space-y-2 border-t-2 border-[#111111]">
               <button
-                onClick={() => setCurrentTab('medical')}
-                className="w-full py-3 text-center text-xs font-serif font-black uppercase tracking-wider bg-[#FF3B00] hover:bg-black text-white transition cursor-pointer"
+                onClick={() => setCurrentTab('cases')}
+                className="w-full text-left p-3 border border-[#111111]/15 hover:border-[#111111] hover:bg-black/[0.03] transition flex items-center justify-between mono text-[0.65rem] font-bold"
               >
-                Inspect Medical Records & Analysis →
+                <span>View All 8 Court Dockets</span>
+                <Scale className="w-3.5 h-3.5 text-[#ff3b00]" />
               </button>
+              <button
+                onClick={() => setCurrentTab('network')}
+                className="w-full text-left p-3 border border-[#111111]/15 hover:border-[#111111] hover:bg-black/[0.03] transition flex items-center justify-between mono text-[0.65rem] font-bold"
+              >
+                <span>Surveillance Network Map (57 Entities)</span>
+                <Database className="w-3.5 h-3.5 text-[#ff3b00]" />
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Secondary Forensic Modules */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-16 border-t-2 border-[#111111] mt-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-4 mb-8">
+          <div>
+            <div className="mono text-[#ff3b00] font-bold text-[0.65rem]">
+              Archive Section // Comprehensive Audits
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#111111] mt-1">
+              Court Dockets & Forensic Chronology
+            </h2>
+          </div>
+          <button
+            onClick={() => setCurrentTab('news')}
+            className="mono text-[0.68rem] text-[#111111] hover:text-[#ff3b00] font-bold flex items-center gap-1.5"
+          >
+            <span>All Special Investigations</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* 3-Column Dossier Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Card 1: 5-Year Chronology */}
+          <div 
+            onClick={() => setCurrentTab('timeline')}
+            className="border border-[#111111]/15 hover:border-[#ff3b00] p-6 flex flex-col justify-between cursor-pointer group bg-transparent transition-colors"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="mono text-[0.65rem] text-[#ff3b00] font-bold">Chronology 2020–2026</span>
+                <Clock className="w-4 h-4 text-[#111111] opacity-40 group-hover:opacity-100 group-hover:text-[#ff3b00]" />
+              </div>
+              <h3 className="font-serif text-2xl font-semibold text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                Systemic Timeline Audit
+              </h3>
+              <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                12 chronological chapters tracking 911 call records, warrantless entries, competency evaluations, and speedy trial tolling across five years.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-[#111111]/10 flex items-center justify-between mono text-[0.65rem]">
+              <span>{timelineEvents.length} Verified Events</span>
+              <span className="text-[#ff3b00] font-bold flex items-center gap-1">
+                Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </div>
+
+          {/* Card 2: Harborview Lumbar Puncture */}
+          <div 
+            onClick={() => setCurrentTab('medical')}
+            className="border border-[#111111]/15 hover:border-[#ff3b00] p-6 flex flex-col justify-between cursor-pointer group bg-transparent transition-colors"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="mono text-[0.65rem] text-[#ff3b00] font-bold">Harborview Medical</span>
+                <Activity className="w-4 h-4 text-[#111111] opacity-40 group-hover:opacity-100 group-hover:text-[#ff3b00]" />
+              </div>
+              <h3 className="font-serif text-2xl font-semibold text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                95% Neutrophils CSF Record
+              </h3>
+              <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                Lab records indicate acute mechanical or bacterial insult rather than viral etiology, contradicting grounds used for involuntary psych holds.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-[#111111]/10 flex items-center justify-between mono text-[0.65rem]">
+              <span className="text-emerald-700 font-bold">Restored Feb 2026</span>
+              <span className="text-[#ff3b00] font-bold flex items-center gap-1">
+                Review Lab Audit <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </div>
+
+          {/* Card 3: Evidence Vault */}
+          <div 
+            onClick={() => setCurrentTab('evidence')}
+            className="border border-[#111111]/15 hover:border-[#ff3b00] p-6 flex flex-col justify-between cursor-pointer group bg-transparent transition-colors"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="mono text-[0.65rem] text-[#ff3b00] font-bold">Evidence Vault</span>
+                <Layers className="w-4 h-4 text-[#111111] opacity-40 group-hover:opacity-100 group-hover:text-[#ff3b00]" />
+              </div>
+              <h3 className="font-serif text-2xl font-semibold text-[#111111] group-hover:text-[#ff3b00] transition-colors">
+                Primary Audio & Records
+              </h3>
+              <p className="mono text-xs normal-case tracking-normal opacity-85 leading-relaxed text-neutral-700">
+                Direct access to King County Superior Court motions, 911 audio recordings, medical charts, and unredacted institutional correspondence.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-[#111111]/10 flex items-center justify-between mono text-[0.65rem]">
+              <span>{evidence.length} Primary Documents</span>
+              <span className="text-[#ff3b00] font-bold flex items-center gap-1">
+                Open Vault <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
             </div>
           </div>
 
