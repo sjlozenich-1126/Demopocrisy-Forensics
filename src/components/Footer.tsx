@@ -11,7 +11,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, onOpenAdminLogin 
   const { settings, isAdmin } = useData();
 
   return (
-    <footer className="bg-neutral-950 text-white border-t-2 border-[#c0262d] mt-16 sm:mt-24">
+    <footer className="bg-neutral-950 text-white border-t-2 border-[#FF3B00] mt-16 sm:mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
         
         {/* Main Footer Row */}

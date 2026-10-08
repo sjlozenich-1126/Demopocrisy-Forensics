@@ -146,7 +146,7 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
                 <button
                   onClick={() => setDrawerOpen(false)}
-                  className="p-1 text-black hover:text-[#c0262d] cursor-pointer"
+                  className="p-1 text-black hover:text-[#FF3B00] cursor-pointer"
                   aria-label="Close navigation"
                 >
                   <X className="w-6 h-6 stroke-[2]" />
@@ -154,7 +154,7 @@ export const Header: React.FC<HeaderProps> = ({
 
                 <div className="font-serif font-black text-xl sm:text-2xl tracking-tight text-neutral-900 flex items-baseline">
                   <span>DEMOPOCRISY</span>
-                  <span className="font-sans font-black text-[#c0262d] ml-0.5">_</span>
+                  <span className="font-sans font-black text-[#FF3B00] ml-0.5">_</span>
                 </div>
               </div>
 
@@ -180,7 +180,7 @@ export const Header: React.FC<HeaderProps> = ({
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
                     className={`w-full text-left py-2.5 px-2 transition-colors cursor-pointer flex items-center justify-between border-b border-neutral-100 hover:bg-neutral-50 ${
-                      currentTab === item.id ? 'text-[#c0262d] font-black pl-3 border-l-2 border-l-[#c0262d]' : 'hover:text-[#c0262d]'
+                      currentTab === item.id ? 'text-[#FF3B00] font-black pl-3 border-l-2 border-l-[#FF3B00]' : 'hover:text-[#FF3B00]'
                     }`}
                   >
                     <span>{item.label}</span>
@@ -193,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="pt-2">
                 <button
                   onClick={() => handleNavClick('submissions')}
-                  className="w-full bg-[#c0262d] hover:bg-neutral-900 text-white py-3 px-4 font-sans font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-between shadow-xs"
+                  className="w-full bg-[#FF3B00] hover:bg-neutral-900 text-white py-3 px-4 font-sans font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-between shadow-xs"
                 >
                   <span>SUBMIT EVIDENCE →</span>
                 </button>

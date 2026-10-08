@@ -99,7 +99,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
       {/* Editorial Header Section - ProPublica Style */}
       <div className="border-b border-neutral-200 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <span className="text-xs font-sans font-bold text-[#c0262d] uppercase tracking-wider block mb-1">
+          <span className="text-xs font-sans font-bold text-[#FF3B00] uppercase tracking-wider block mb-1">
             Investigative Reporting & Public Record Audits
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-neutral-900 tracking-tight leading-[1.12]">
@@ -118,7 +118,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               placeholder="Search investigations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-neutral-50/70 border border-neutral-200 py-2 pl-9 pr-3 text-xs w-full focus:outline-none focus:border-[#c0262d] font-sans font-medium"
+              className="bg-neutral-50/70 border border-neutral-200 py-2 pl-9 pr-3 text-xs w-full focus:outline-none focus:border-[#FF3B00] font-sans font-medium"
             />
           </div>
         </div>
@@ -156,26 +156,26 @@ export const NewsView: React.FC<NewsViewProps> = ({
                 src={art.featuredImage}
                 alt={art.title}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-102 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
               />
               {art.mediaType === 'video' && (
                 <span className="absolute top-2 left-2 bg-neutral-900/90 text-white text-[10px] font-sans font-medium px-2 py-0.5 flex items-center gap-1 uppercase">
-                  <Tv className="w-3 h-3 text-[#c0262d]" /> Video
+                  <Tv className="w-3 h-3 text-[#FF3B00]" /> Video
                 </span>
               )}
               {art.mediaType === 'audio' && (
                 <span className="absolute top-2 left-2 bg-neutral-900/90 text-white text-[10px] font-sans font-medium px-2 py-0.5 flex items-center gap-1 uppercase">
-                  <Volume2 className="w-3 h-3 text-[#c0262d]" /> Audio
+                  <Volume2 className="w-3 h-3 text-[#FF3B00]" /> Audio
                 </span>
               )}
             </div>
 
             {/* Col 2: Headline & Author in Title Case */}
             <div className="md:col-span-4 space-y-2">
-              <span className="text-[11px] font-sans font-bold text-[#c0262d] uppercase tracking-wide">
+              <span className="text-[11px] font-sans font-bold text-[#FF3B00] uppercase tracking-wide">
                 {art.category}
               </span>
-              <h2 className="text-xl sm:text-2xl font-serif font-bold text-neutral-900 leading-snug group-hover:text-[#c0262d] transition-colors">
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-neutral-900 leading-snug group-hover:text-[#FF3B00] transition-colors">
                 {formatTitleCase(art.title)}
               </h2>
               <div className="text-xs font-sans text-neutral-500">
@@ -188,7 +188,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               <p className="text-xs sm:text-sm text-neutral-600 font-serif leading-relaxed line-clamp-4">
                 {art.summary}
               </p>
-              <div className="pt-2 text-xs font-sans text-[#c0262d] font-semibold flex items-center gap-1 group-hover:underline">
+              <div className="pt-2 text-xs font-sans text-[#FF3B00] font-semibold flex items-center gap-1 group-hover:underline">
                 Read Report →
               </div>
             </div>
@@ -206,7 +206,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
             {/* Modal Top Close Bar */}
             <div className="bg-neutral-900 text-white px-6 py-3.5 flex items-center justify-between border-b border-neutral-800">
               <div className="flex items-center gap-2">
-                <span className="bg-[#c0262d] text-white text-[10px] px-2.5 py-0.5 font-sans font-bold uppercase tracking-wider">
+                <span className="bg-[#FF3B00] text-white text-[10px] px-2.5 py-0.5 font-sans font-bold uppercase tracking-wider">
                   {activeArticleModal.category}
                 </span>
                 <span className="text-xs font-sans text-neutral-300">
@@ -228,7 +228,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               {/* Author Row & Meta */}
               <div className="space-y-4">
                 <div>
-                  <div className="text-sm font-sans font-bold text-[#c0262d]">
+                  <div className="text-sm font-sans font-bold text-[#FF3B00]">
                     By {activeArticleModal.author}
                   </div>
                   <div className="text-xs font-sans text-neutral-500">
@@ -252,7 +252,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
                     onClick={handleCopyLink}
                     className="px-3 py-1.5 border border-neutral-300 hover:border-neutral-900 text-xs font-sans font-medium text-neutral-800 flex items-center gap-1.5 cursor-pointer transition"
                   >
-                    <Share2 className="w-3.5 h-3.5 text-[#c0262d]" />
+                    <Share2 className="w-3.5 h-3.5 text-[#FF3B00]" />
                     <span>{copiedLink ? 'Link Copied!' : 'Share'}</span>
                   </button>
 
@@ -273,7 +273,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
                     src={activeArticleModal.featuredImage}
                     alt={activeArticleModal.title}
                     referrerPolicy="no-referrer"
-                    className="w-full h-80 sm:h-[420px] object-cover filter grayscale contrast-125"
+                    className="w-full h-80 sm:h-[420px] object-cover "
                   />
                 </div>
                 <div className="text-xs font-serif text-neutral-500 italic">
@@ -290,7 +290,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               {activeArticleModal.videoUrl && (
                 <div className="border border-neutral-200 bg-neutral-900 p-4 space-y-2 text-white">
                   <div className="aspect-video bg-neutral-950 flex flex-col items-center justify-center text-center p-6 relative border border-white/10">
-                    <div className="w-14 h-14 rounded-full bg-[#c0262d] text-white flex items-center justify-center mb-3 cursor-pointer hover:scale-105 transition-transform shadow-lg">
+                    <div className="w-14 h-14 rounded-full bg-[#FF3B00] text-white flex items-center justify-center mb-3 cursor-pointer hover:scale-105 transition-transform shadow-lg">
                       <Play className="w-6 h-6 ml-0.5" />
                     </div>
                     <p className="text-white text-xs font-sans font-bold uppercase tracking-wider">
@@ -315,7 +315,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
                     const remainingParagraph = cleanParagraph.slice(1);
                     return (
                       <div key={pIdx} className="clearfix">
-                        <div className="w-8 h-1 bg-[#c0262d] mb-2"></div>
+                        <div className="w-8 h-1 bg-[#FF3B00] mb-2"></div>
                         <p className="text-lg leading-relaxed font-serif text-neutral-800">
                           <span className="font-bold text-4xl float-left mr-2 leading-none font-serif text-neutral-900">{firstChar}</span>
                           {remainingParagraph}
@@ -339,7 +339,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
                   }
                   if (paragraph.startsWith('> ')) {
                     return (
-                      <blockquote key={pIdx} className="border-l-2 border-[#c0262d] pl-4 italic font-serif text-xl text-neutral-800 my-6">
+                      <blockquote key={pIdx} className="border-l-2 border-[#FF3B00] pl-4 italic font-serif text-xl text-neutral-800 my-6">
                         {cleanParagraph.replace('> ', '')}
                       </blockquote>
                     );
@@ -351,7 +351,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               {/* Associated Legal Cases */}
               {activeArticleModal.relatedCases.length > 0 && (
                 <div className="p-5 bg-neutral-50 border border-neutral-200 space-y-3">
-                  <div className="text-xs font-sans font-bold uppercase text-[#c0262d] tracking-wider">
+                  <div className="text-xs font-sans font-bold uppercase text-[#FF3B00] tracking-wider">
                     Associated Legal Case Files & Dockets
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -364,7 +364,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
                         }}
                         className="px-4 py-2 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-300 font-sans text-xs font-semibold transition cursor-pointer flex items-center gap-1.5"
                       >
-                        <Scale className="w-3.5 h-3.5 text-[#c0262d]" /> Case Docket #{caseNum} →
+                        <Scale className="w-3.5 h-3.5 text-[#FF3B00]" /> Case Docket #{caseNum} →
                       </button>
                     ))}
                   </div>
@@ -375,7 +375,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               <div className="pt-8 border-t border-neutral-200 space-y-6">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-sans uppercase font-bold tracking-wider text-neutral-900 flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4 text-[#c0262d]" /> Public Analysis & Research Comments ({currentArticleComments.length})
+                    <MessageSquare className="w-4 h-4 text-[#FF3B00]" /> Public Analysis & Research Comments ({currentArticleComments.length})
                   </h4>
                   <span className="text-xs font-sans text-neutral-500">Public Interest Notes</span>
                 </div>
@@ -418,7 +418,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
                       value={commenterName}
                       onChange={(e) => setCommenterName(e.target.value)}
                       required
-                      className="bg-white border border-neutral-200 p-2 text-xs focus:outline-none focus:border-[#c0262d] font-sans"
+                      className="bg-white border border-neutral-200 p-2 text-xs focus:outline-none focus:border-[#FF3B00] font-sans"
                     />
                   </div>
                   <textarea
@@ -427,11 +427,11 @@ export const NewsView: React.FC<NewsViewProps> = ({
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                     required
-                    className="w-full bg-white border border-neutral-200 p-2.5 text-xs focus:outline-none focus:border-[#c0262d] font-sans"
+                    className="w-full bg-white border border-neutral-200 p-2.5 text-xs focus:outline-none focus:border-[#FF3B00] font-sans"
                   />
                   <button
                     type="submit"
-                    className="bg-[#c0262d] hover:bg-neutral-900 text-white px-5 py-2.5 text-xs font-sans font-bold uppercase tracking-wider transition cursor-pointer flex items-center gap-2"
+                    className="bg-[#FF3B00] hover:bg-neutral-900 text-white px-5 py-2.5 text-xs font-sans font-bold uppercase tracking-wider transition cursor-pointer flex items-center gap-2"
                   >
                     <Send className="w-3.5 h-3.5" /> Submit Observation
                   </button>
@@ -445,7 +445,7 @@ export const NewsView: React.FC<NewsViewProps> = ({
               <span className="text-neutral-600">Demopocrisy Investigative Archive</span>
               <button
                 onClick={() => setActiveArticleModal(null)}
-                className="bg-neutral-900 text-white px-4 py-2 font-semibold uppercase cursor-pointer hover:bg-[#c0262d] transition"
+                className="bg-neutral-900 text-white px-4 py-2 font-semibold uppercase cursor-pointer hover:bg-[#FF3B00] transition"
               >
                 Close Report ✕
               </button>

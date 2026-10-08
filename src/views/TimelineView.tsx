@@ -51,7 +51,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
       {/* Editorial Header - ProPublica Style with hairline divider */}
       <div className="border-b border-neutral-200 pb-6 space-y-2.5">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-sans font-bold text-[#c0262d] uppercase tracking-wider">
+          <span className="text-xs font-sans font-bold text-[#FF3B00] uppercase tracking-wider">
             Chronological Audit · Five-Year Reconstruction
           </span>
         </div>
@@ -72,7 +72,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
             placeholder="Search timeline..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50/70 border border-neutral-200 focus:outline-none focus:border-[#c0262d] font-sans font-medium"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50/70 border border-neutral-200 focus:outline-none focus:border-[#FF3B00] font-sans font-medium"
           />
         </div>
 
@@ -95,7 +95,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
 
       {/* Chapters Quick Jump - Light hairline container */}
       <div className="bg-neutral-50/70 border border-neutral-200 p-3 sm:p-4 flex items-center overflow-x-auto text-xs font-sans gap-3">
-        <span className="text-[#c0262d] font-bold uppercase text-[11px] tracking-wider shrink-0">
+        <span className="text-[#FF3B00] font-bold uppercase text-[11px] tracking-wider shrink-0">
           Chapters:
         </span>
         <div className="flex items-center gap-2 sm:gap-3 shrink-0 text-neutral-700 font-medium text-xs">
@@ -122,9 +122,9 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
               {/* Timeline Pin Indicator - Refined 1px outline */}
               <div className={`absolute -left-[35px] sm:-left-[51px] top-3 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full border border-neutral-300 shadow-xs flex items-center justify-center text-[10px] font-sans font-bold ${
                 evt.category === 'arrest'
-                  ? 'bg-[#c0262d] text-white border-[#c0262d]'
+                  ? 'bg-[#FF3B00] text-white border-[#FF3B00]'
                   : evt.category === 'medical'
-                  ? 'bg-neutral-900 text-[#c0262d] border-neutral-800'
+                  ? 'bg-neutral-900 text-[#FF3B00] border-neutral-800'
                   : evt.category === 'court'
                   ? 'bg-neutral-900 text-white border-neutral-900'
                   : evt.category === 'milestone'
@@ -141,7 +141,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
                     <span className="font-sans text-xs font-semibold text-neutral-900 bg-neutral-100 px-2 py-0.5 border border-neutral-200">
                       {evt.date}
                     </span>
-                    <span className="text-[10px] font-sans uppercase font-bold text-[#c0262d] bg-red-50 px-2 py-0.5 border border-red-100">
+                    <span className="text-[10px] font-sans uppercase font-bold text-[#FF3B00] bg-red-50 px-2 py-0.5 border border-red-100">
                       {evt.category}
                     </span>
                     {evt.caseRef && (
@@ -178,7 +178,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
 
                     {evt.anomaly && (
                       <div className="p-3 bg-red-50/50 border border-red-100 text-xs font-serif text-neutral-800">
-                        <strong className="text-[#c0262d] font-sans uppercase text-[10px] block mb-0.5">Procedural Anomaly:</strong>
+                        <strong className="text-[#FF3B00] font-sans uppercase text-[10px] block mb-0.5">Procedural Anomaly:</strong>
                         {evt.anomaly}
                       </div>
                     )}
@@ -187,7 +187,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
                       <div className="pt-2">
                         <button
                           onClick={() => onSelectCase(evt.caseRef!)}
-                          className="px-4 py-2 bg-neutral-900 hover:bg-[#c0262d] text-white text-xs font-sans font-semibold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5"
+                          className="px-4 py-2 bg-neutral-900 hover:bg-[#FF3B00] text-white text-xs font-sans font-semibold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5"
                         >
                           Inspect Case Dossier (#{evt.caseRef}) <ExternalLink className="w-3.5 h-3.5" />
                         </button>
@@ -200,7 +200,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
                 <div className="mt-4 pt-3 border-t border-neutral-100 flex justify-between items-center text-xs font-sans">
                   <button
                     onClick={() => toggleExpand(evt.id)}
-                    className="text-neutral-900 font-semibold hover:text-[#c0262d] flex items-center gap-1 cursor-pointer tracking-wide"
+                    className="text-neutral-900 font-semibold hover:text-[#FF3B00] flex items-center gap-1 cursor-pointer tracking-wide"
                   >
                     {isExpanded ? (
                       <>Collapse Record <ChevronUp className="w-4 h-4" /></>

@@ -75,7 +75,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
       {/* Editorial Header - ProPublica Style with hairline divider */}
       <div className="border-b border-neutral-200 pb-6 space-y-2.5">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-sans font-bold text-[#c0262d] uppercase tracking-wider">
+          <span className="text-xs font-sans font-bold text-[#FF3B00] uppercase tracking-wider">
             Legal Archive · King County Procedural Audit
           </span>
         </div>
@@ -97,7 +97,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
               placeholder="Filter by docket #, judge, cause..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50/70 border border-neutral-200 focus:outline-none focus:border-[#c0262d] font-sans font-medium"
+              className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50/70 border border-neutral-200 focus:outline-none focus:border-[#FF3B00] font-sans font-medium"
             />
           </div>
 
@@ -127,7 +127,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
           <select
             value={activeCase?.id}
             onChange={(e) => onSelectCase(e.target.value)}
-            className="w-full bg-neutral-50 border border-neutral-200 p-2 text-xs font-sans font-semibold text-neutral-900 focus:outline-none focus:border-[#c0262d]"
+            className="w-full bg-neutral-50 border border-neutral-200 p-2 text-xs font-sans font-semibold text-neutral-900 focus:outline-none focus:border-[#FF3B00]"
           >
             {filteredCases.map((c) => (
               <option key={c.id} value={c.id}>
@@ -152,7 +152,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
                 }`}
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className={`text-xs font-mono font-bold ${isSelected ? 'text-[#c0262d]' : 'text-neutral-900'}`}>
+                  <span className={`text-xs font-mono font-bold ${isSelected ? 'text-[#FF3B00]' : 'text-neutral-900'}`}>
                     #{c.caseNumber}
                   </span>
                   <span className={`text-[10px] font-sans font-medium px-1.5 py-0.2 ${
@@ -178,7 +178,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
           <div className="bg-neutral-900 text-white p-6 sm:p-8 md:p-10 border-b border-neutral-800 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 bg-[#c0262d] text-white font-sans text-xs font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-0.5 bg-[#FF3B00] text-white font-sans text-xs font-bold uppercase tracking-wider">
                   Docket #{activeCase.caseNumber}
                 </span>
                 <span className="text-xs font-sans text-neutral-400">
@@ -197,7 +197,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
             </h2>
 
             {activeCase.headlineQuote && (
-              <p className="text-base sm:text-lg font-serif italic text-neutral-300 border-l-2 border-[#c0262d] pl-4">
+              <p className="text-base sm:text-lg font-serif italic text-neutral-300 border-l-2 border-[#FF3B00] pl-4">
                 "{activeCase.headlineQuote}"
               </p>
             )}
@@ -214,7 +214,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
               </div>
               <div>
                 <span className="text-neutral-400 block text-[11px] uppercase font-semibold">Custody Window</span>
-                <span className="font-semibold text-[#c0262d] text-xs sm:text-sm truncate block mt-0.5">{activeCase.incarcerationDates || 'N/A'}</span>
+                <span className="font-semibold text-[#FF3B00] text-xs sm:text-sm truncate block mt-0.5">{activeCase.incarcerationDates || 'N/A'}</span>
               </div>
               <div>
                 <span className="text-neutral-400 block text-[11px] uppercase font-semibold">Representation</span>
@@ -239,7 +239,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
                 onClick={() => setActiveTab(t.id as any)}
                 className={`py-3 px-3 sm:px-4 border-b-2 transition cursor-pointer whitespace-nowrap font-medium ${
                   activeTab === t.id
-                    ? 'border-[#c0262d] text-neutral-900 bg-white font-bold'
+                    ? 'border-[#FF3B00] text-neutral-900 bg-white font-bold'
                     : 'border-transparent text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
                 }`}
               >
@@ -255,7 +255,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'overview' && (
               <div className="space-y-8 max-w-4xl">
                 <div>
-                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF3B00] mb-1.5 flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5" /> Executive Summary
                   </span>
                   <p className="font-serif text-lg sm:text-xl leading-relaxed text-neutral-900 font-normal">
@@ -294,7 +294,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
 
                 {/* Systemic Variables Matrix Preview */}
                 <div className="pt-6 border-t border-neutral-200">
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#c0262d] mb-3">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#FF3B00] mb-3">
                     Systemic Variables Mapping
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-sans">
@@ -315,7 +315,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'collapse' && (
               <div className="space-y-8 max-w-4xl">
                 <div>
-                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF3B00] mb-1.5 flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5" /> Structural Procedural Collapse
                   </span>
                   <p className="font-serif text-lg sm:text-xl leading-relaxed text-neutral-900">
@@ -329,8 +329,8 @@ export const CasesView: React.FC<CasesViewProps> = ({
                   </h3>
                   <div className="space-y-2.5">
                     {activeCase.proceduralBreach.map((breach, idx) => (
-                      <div key={idx} className="p-4 bg-red-50/50 border-l-2 border-[#c0262d] border-t border-r border-b border-red-100 text-xs sm:text-sm text-neutral-900 font-serif flex items-start gap-3">
-                        <span className="font-mono font-bold text-[#c0262d] shrink-0">{idx + 1}.</span>
+                      <div key={idx} className="p-4 bg-red-50/50 border-l-2 border-[#FF3B00] border-t border-r border-b border-red-100 text-xs sm:text-sm text-neutral-900 font-serif flex items-start gap-3">
+                        <span className="font-mono font-bold text-[#FF3B00] shrink-0">{idx + 1}.</span>
                         <span>{breach}</span>
                       </div>
                     ))}
@@ -338,7 +338,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
                 </div>
 
                 <div className="p-5 sm:p-6 bg-neutral-900 text-white space-y-2 border border-neutral-800">
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#c0262d]">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#FF3B00]">
                     Interaction Model Analysis
                   </h3>
                   <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-serif">
@@ -352,7 +352,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'violations' && (
               <div className="space-y-6 max-w-4xl">
                 <div>
-                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF3B00] mb-1.5 flex items-center gap-1.5">
                     <ShieldAlert className="w-3.5 h-3.5" /> Constitutional Violations in Docket
                   </span>
                   <p className="text-xs sm:text-sm text-neutral-600 font-serif">
@@ -367,7 +367,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
                         <span className="font-sans text-xs font-bold px-2 py-0.5 bg-neutral-100 text-neutral-900 border border-neutral-200">
                           {v.amendment}
                         </span>
-                        <span className="text-xs font-sans text-[#c0262d] font-semibold uppercase">Direct Breach</span>
+                        <span className="text-xs font-sans text-[#FF3B00] font-semibold uppercase">Direct Breach</span>
                       </div>
                       <h4 className="font-serif font-bold text-base sm:text-lg text-neutral-900 pt-1">
                         {v.violation}
@@ -412,7 +412,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'evidence' && (
               <div className="space-y-6 max-w-4xl">
                 <div>
-                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF3B00] mb-1.5 flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5" /> Evidentiary Landscape & Asymmetry
                   </span>
                   <p className="text-xs sm:text-sm text-neutral-700 font-serif leading-relaxed">
@@ -470,7 +470,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
               <div className="space-y-6 max-w-4xl">
                 <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
                   <span className="text-xs font-sans font-bold uppercase tracking-wider text-neutral-900 flex items-center gap-1.5">
-                    <FileText className="w-3.5 h-3.5 text-[#c0262d]" /> Associated Primary Court Filings
+                    <FileText className="w-3.5 h-3.5 text-[#FF3B00]" /> Associated Primary Court Filings
                   </span>
                   <span className="text-xs font-sans text-neutral-500 font-medium">
                     {activeCase.associatedDocs.length} Records Cataloged
@@ -485,15 +485,15 @@ export const CasesView: React.FC<CasesViewProps> = ({
                       className="p-4 bg-white hover:bg-neutral-50/80 border border-neutral-200 cursor-pointer transition flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 group shadow-[0_1px_3px_rgba(0,0,0,0.02)]"
                     >
                       <div>
-                        <span className="text-[10px] font-sans font-bold text-[#c0262d] uppercase block">
+                        <span className="text-[10px] font-sans font-bold text-[#FF3B00] uppercase block">
                           {doc.type}
                         </span>
-                        <h4 className="font-serif font-bold text-base text-neutral-900 group-hover:text-[#c0262d] transition-colors">
+                        <h4 className="font-serif font-bold text-base text-neutral-900 group-hover:text-[#FF3B00] transition-colors">
                           {formatTitleCase(doc.title)}
                         </h4>
                         <p className="text-xs text-neutral-600 font-serif mt-0.5">{doc.summary}</p>
                       </div>
-                      <span className="text-xs font-sans font-semibold text-neutral-700 group-hover:text-[#c0262d] flex items-center gap-1 uppercase tracking-wider shrink-0">
+                      <span className="text-xs font-sans font-semibold text-neutral-700 group-hover:text-[#FF3B00] flex items-center gap-1 uppercase tracking-wider shrink-0">
                         View in Vault <ExternalLink className="w-3 h-3" />
                       </span>
                     </div>
@@ -516,7 +516,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
 
                 {/* Comment Form */}
                 <form onSubmit={handleAddComment} className="p-5 bg-neutral-50/70 border border-neutral-200 space-y-4">
-                  <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-[#c0262d]">
+                  <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-[#FF3B00]">
                     Submit Case Note / Annotation
                   </h4>
                   {commentSubmitted && (
@@ -530,7 +530,7 @@ export const CasesView: React.FC<CasesViewProps> = ({
                       placeholder="Researcher Name / Organization"
                       value={commentName}
                       onChange={(e) => setCommentName(e.target.value)}
-                      className="w-full p-2.5 bg-white border border-neutral-200 focus:outline-none focus:border-[#c0262d]"
+                      className="w-full p-2.5 bg-white border border-neutral-200 focus:outline-none focus:border-[#FF3B00]"
                       required
                     />
                     <textarea
@@ -538,12 +538,12 @@ export const CasesView: React.FC<CasesViewProps> = ({
                       value={commentContent}
                       onChange={(e) => setCommentContent(e.target.value)}
                       rows={3}
-                      className="w-full p-2.5 bg-white border border-neutral-200 focus:outline-none focus:border-[#c0262d]"
+                      className="w-full p-2.5 bg-white border border-neutral-200 focus:outline-none focus:border-[#FF3B00]"
                       required
                     />
                     <button
                       type="submit"
-                      className="px-5 py-2.5 bg-neutral-900 hover:bg-[#c0262d] text-white font-sans font-bold uppercase text-xs tracking-wider transition cursor-pointer flex items-center gap-2"
+                      className="px-5 py-2.5 bg-neutral-900 hover:bg-[#FF3B00] text-white font-sans font-bold uppercase text-xs tracking-wider transition cursor-pointer flex items-center gap-2"
                     >
                       <Send className="w-3.5 h-3.5" /> Submit Case Annotation
                     </button>
