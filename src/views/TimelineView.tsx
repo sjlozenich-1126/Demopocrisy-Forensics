@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
+import { formatTitleCase } from '../lib/formatters';
 import { 
   Search, 
   ChevronDown, 
-  ChevronUp 
+  ChevronUp,
+  Clock,
+  MapPin,
+  ExternalLink
 } from 'lucide-react';
 
 interface TimelineViewProps {
@@ -42,44 +46,45 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12 bg-white overflow-x-hidden">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 bg-white">
       
-      {/* Page Header */}
-      <div className="border-b-4 border-black pb-6 space-y-2">
-        <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
-        <div className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
-          // CHRONOLOGICAL AUDIT • FIVE-YEAR RECONSTRUCTION
+      {/* Editorial Header - ProPublica Style with hairline divider */}
+      <div className="border-b border-neutral-200 pb-6 space-y-2.5">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-sans font-bold text-[#c0262d] uppercase tracking-wider">
+            Chronological Audit · Five-Year Reconstruction
+          </span>
         </div>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-black font-serif leading-[1.08] tracking-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-neutral-900 tracking-tight leading-[1.12]">
           Narrative Timeline (2020–2026)
         </h1>
-        <p className="text-base sm:text-lg text-neutral-700 font-serif italic max-w-3xl leading-relaxed">
+        <p className="text-base sm:text-lg text-neutral-700 font-serif max-w-3xl leading-relaxed">
           A forensic chronological reconstruction of legal and institutional encounters compiled from case dockets, jail intake logs, spinal fluid panels, and competency delays.
         </p>
       </div>
 
-      {/* Filter and Search Bar */}
-      <div className="bg-white border-2 border-black p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xs">
+      {/* Filter and Search Bar - Thin 1px borders */}
+      <div className="bg-white border border-neutral-200 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-[#FF3B00] absolute left-3 top-3" />
+          <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-3" />
           <input
             type="text"
             placeholder="Search timeline..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50 border-2 border-black focus:outline-none focus:border-[#FF3B00] font-mono font-bold"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50/70 border border-neutral-200 focus:outline-none focus:border-[#c0262d] font-sans font-medium"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto text-xs font-mono pb-1 md:pb-0">
+        <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto text-xs font-sans pb-1 md:pb-0">
           {categories.map((c) => (
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
-              className={`px-3 py-1.5 uppercase text-[11px] font-bold transition cursor-pointer border whitespace-nowrap ${
+              className={`px-3 py-1.5 text-xs font-medium transition cursor-pointer border whitespace-nowrap ${
                 selectedCategory === c.id
-                  ? 'bg-black text-white border-black'
-                  : 'bg-white text-black hover:bg-neutral-100 border-neutral-300'
+                  ? 'bg-neutral-900 text-white border-neutral-900'
+                  : 'bg-white text-neutral-700 hover:bg-neutral-100 border-neutral-200'
               }`}
             >
               {c.label}
@@ -88,65 +93,73 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
         </div>
       </div>
 
-      {/* Chapters Quick Jump */}
-      <div className="bg-neutral-50 border-2 border-black p-3 sm:p-4 flex items-center overflow-x-auto text-xs font-serif gap-3">
-        <span className="text-[#FF3B00] font-mono font-black uppercase text-[11px] tracking-wider shrink-0">// CHAPTERS:</span>
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0 text-neutral-800 font-bold text-xs">
+      {/* Chapters Quick Jump - Light hairline container */}
+      <div className="bg-neutral-50/70 border border-neutral-200 p-3 sm:p-4 flex items-center overflow-x-auto text-xs font-sans gap-3">
+        <span className="text-[#c0262d] font-bold uppercase text-[11px] tracking-wider shrink-0">
+          Chapters:
+        </span>
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0 text-neutral-700 font-medium text-xs">
           <span>Ch. 1: Origins (2020)</span>
-          <span className="text-neutral-400">•</span>
+          <span className="text-neutral-300">•</span>
           <span>Ch. 2: First Arrests (2021)</span>
-          <span className="text-neutral-400">•</span>
+          <span className="text-neutral-300">•</span>
           <span>Ch. 3: Felony Case (2021–2022)</span>
-          <span className="text-neutral-400">•</span>
+          <span className="text-neutral-300">•</span>
           <span>Ch. 4: Gov Case (2022–2023)</span>
-          <span className="text-neutral-400">•</span>
+          <span className="text-neutral-300">•</span>
           <span>Ch. 5: Housing (2023–2025)</span>
-          <span className="text-neutral-400">•</span>
+          <span className="text-neutral-300">•</span>
           <span>Ch. 6: Restored (2026)</span>
         </div>
       </div>
 
-      {/* Timeline Stream with Safe Mobile Margins */}
-      <div className="relative pl-6 sm:pl-10 border-l-4 border-black space-y-6 sm:space-y-8 my-6 sm:my-8 ml-4 sm:ml-8">
+      {/* Timeline Stream with 2px hairline spine and spacious padding */}
+      <div className="relative pl-6 sm:pl-10 border-l-2 border-neutral-200 space-y-6 sm:space-y-8 my-6 sm:my-8 ml-4 sm:ml-8">
         {filteredEvents.map((evt, index) => {
           const isExpanded = expandedId === evt.id;
           return (
             <div key={evt.id} className="relative group">
-              {/* Timeline Pin Indicator */}
-              <div className={`absolute -left-[38px] sm:-left-[54px] top-2 w-6 h-6 sm:w-7 sm:h-7 border-2 border-black shadow-xs flex items-center justify-center text-[10px] sm:text-xs font-mono font-black ${
+              {/* Timeline Pin Indicator - Refined 1px outline */}
+              <div className={`absolute -left-[35px] sm:-left-[51px] top-3 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full border border-neutral-300 shadow-xs flex items-center justify-center text-[10px] font-sans font-bold ${
                 evt.category === 'arrest'
-                  ? 'bg-[#FF3B00] text-white'
+                  ? 'bg-[#c0262d] text-white border-[#c0262d]'
                   : evt.category === 'medical'
-                  ? 'bg-black text-[#FF3B00]'
+                  ? 'bg-neutral-900 text-[#c0262d] border-neutral-800'
                   : evt.category === 'court'
-                  ? 'bg-black text-white'
+                  ? 'bg-neutral-900 text-white border-neutral-900'
                   : evt.category === 'milestone'
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-neutral-800 text-white'
+                  ? 'bg-emerald-600 text-white border-emerald-600'
+                  : 'bg-neutral-700 text-white border-neutral-700'
               }`}>
                 {index + 1}
               </div>
 
-              {/* Event Card */}
-              <div className="bg-white border-2 border-black hover:border-[#FF3B00] p-4 sm:p-6 shadow-xs transition-all">
+              {/* Event Card with thin 1px hairline border and comfortable padding */}
+              <div className="bg-white border border-neutral-200 hover:border-neutral-400 p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-md transition-all">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-black text-white bg-black px-2.5 py-0.5">
+                    <span className="font-sans text-xs font-semibold text-neutral-900 bg-neutral-100 px-2 py-0.5 border border-neutral-200">
                       {evt.date}
                     </span>
-                    <span className="text-[10px] font-mono uppercase bg-[#FF3B00] text-white px-2 py-0.5 font-bold">
+                    <span className="text-[10px] font-sans uppercase font-bold text-[#c0262d] bg-red-50 px-2 py-0.5 border border-red-100">
                       {evt.category}
                     </span>
+                    {evt.caseRef && (
+                      <span className="text-[10px] font-mono font-medium text-neutral-600 bg-neutral-50 px-1.5 py-0.5 border border-neutral-200">
+                        Case #{evt.caseRef}
+                      </span>
+                    )}
                   </div>
                   {evt.location && (
-                    <span className="text-xs font-mono text-neutral-600 font-bold">
-                      {evt.location}
+                    <span className="text-xs font-sans text-neutral-500 flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-neutral-400" /> {evt.location}
                     </span>
                   )}
                 </div>
 
-                <h3 className="font-serif font-black text-xl sm:text-2xl text-black leading-tight mt-2">
-                  {evt.title}
+                {/* Title Cased Event Title */}
+                <h3 className="font-serif font-bold text-xl sm:text-2xl text-neutral-900 leading-snug mt-2">
+                  {formatTitleCase(evt.title)}
                 </h3>
 
                 <p className="text-xs sm:text-sm text-neutral-700 font-serif leading-relaxed mt-2">
@@ -155,36 +168,28 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
 
                 {/* Expanded Details */}
                 {isExpanded && (
-                  <div className="mt-4 pt-4 border-t-2 border-neutral-200 space-y-4 animate-in fade-in">
-                    <div className="p-4 bg-neutral-50 border border-neutral-300 font-serif text-xs text-neutral-800 leading-relaxed space-y-2">
-                      <div className="font-mono text-[10px] uppercase font-bold text-neutral-500">
+                  <div className="mt-4 pt-4 border-t border-neutral-100 space-y-4 animate-in fade-in">
+                    <div className="p-4 bg-neutral-50/70 border border-neutral-200 font-serif text-xs text-neutral-800 leading-relaxed space-y-2">
+                      <div className="font-sans text-[11px] uppercase font-bold text-neutral-500">
                         Detailed Narrative & Docket Analysis
                       </div>
                       <p>{evt.details}</p>
                     </div>
 
-                    {evt.keyEntities && evt.keyEntities.length > 0 && (
-                      <div>
-                        <div className="text-[10px] font-mono uppercase font-bold text-[#FF3B00] mb-1">
-                          Key Institutional Entities
-                        </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {evt.keyEntities.map((ent, idx) => (
-                            <span key={idx} className="px-2 py-0.5 text-[11px] font-mono bg-neutral-100 text-black border border-neutral-300 font-bold">
-                              {ent}
-                            </span>
-                          ))}
-                        </div>
+                    {evt.anomaly && (
+                      <div className="p-3 bg-red-50/50 border border-red-100 text-xs font-serif text-neutral-800">
+                        <strong className="text-[#c0262d] font-sans uppercase text-[10px] block mb-0.5">Procedural Anomaly:</strong>
+                        {evt.anomaly}
                       </div>
                     )}
 
-                    {evt.relatedCaseId && (
+                    {evt.caseRef && (
                       <div className="pt-2">
                         <button
-                          onClick={() => onSelectCase(evt.relatedCaseId!)}
-                          className="px-4 py-2 bg-black hover:bg-[#FF3B00] text-white text-xs font-mono font-bold uppercase transition cursor-pointer"
+                          onClick={() => onSelectCase(evt.caseRef!)}
+                          className="px-4 py-2 bg-neutral-900 hover:bg-[#c0262d] text-white text-xs font-sans font-semibold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5"
                         >
-                          Inspect Case Dossier ({evt.relatedCaseId}) →
+                          Inspect Case Dossier (#{evt.caseRef}) <ExternalLink className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     )}
@@ -192,10 +197,10 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
                 )}
 
                 {/* Toggle Button */}
-                <div className="mt-4 pt-3 border-t border-neutral-200 flex justify-between items-center text-xs font-mono">
+                <div className="mt-4 pt-3 border-t border-neutral-100 flex justify-between items-center text-xs font-sans">
                   <button
                     onClick={() => toggleExpand(evt.id)}
-                    className="text-black font-black hover:text-[#FF3B00] flex items-center gap-1 cursor-pointer uppercase tracking-wider"
+                    className="text-neutral-900 font-semibold hover:text-[#c0262d] flex items-center gap-1 cursor-pointer tracking-wide"
                   >
                     {isExpanded ? (
                       <>Collapse Record <ChevronUp className="w-4 h-4" /></>
@@ -203,7 +208,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onSelectCase, select
                       <>Examine Chronology Details <ChevronDown className="w-4 h-4" /></>
                     )}
                   </button>
-                  <span className="text-neutral-400 text-[10px]">
+                  <span className="text-neutral-400 text-[11px]">
                     Event #{index + 1}
                   </span>
                 </div>

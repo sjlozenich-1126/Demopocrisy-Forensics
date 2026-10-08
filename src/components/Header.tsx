@@ -50,8 +50,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white border-b-2 border-black">
-        {/* Main Masthead Bar - Clean The Intercept Style */}
+      <header className="sticky top-0 z-40 bg-white border-b border-neutral-200">
+        {/* Main Masthead Bar - Clean Editorial Style */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Left: Hamburger & Brand Logo */}
@@ -139,28 +139,28 @@ export const Header: React.FC<HeaderProps> = ({
           />
 
           {/* Drawer Panel */}
-          <div className="relative w-full max-w-sm bg-white h-full shadow-2xl z-50 flex flex-col justify-between overflow-y-auto border-r-4 border-black animate-in slide-in-from-left duration-200">
+          <div className="relative w-full max-w-sm bg-white h-full shadow-2xl z-50 flex flex-col justify-between overflow-y-auto border-r border-neutral-300 animate-in slide-in-from-left duration-200">
             <div className="p-6 space-y-6">
               
               {/* Drawer Top: Close & Logo */}
-              <div className="flex items-center justify-between border-b-2 border-black pb-4">
+              <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
                 <button
                   onClick={() => setDrawerOpen(false)}
-                  className="p-1 text-black hover:text-[#FF3B00] cursor-pointer"
+                  className="p-1 text-black hover:text-[#c0262d] cursor-pointer"
                   aria-label="Close navigation"
                 >
-                  <X className="w-7 h-7 stroke-[2.5]" />
+                  <X className="w-6 h-6 stroke-[2]" />
                 </button>
 
-                <div className="font-serif font-black text-xl sm:text-2xl tracking-tight text-black flex items-baseline">
+                <div className="font-serif font-black text-xl sm:text-2xl tracking-tight text-neutral-900 flex items-baseline">
                   <span>DEMOPOCRISY</span>
-                  <span className="font-sans font-black text-[#FF3B00] ml-0.5">_</span>
+                  <span className="font-sans font-black text-[#c0262d] ml-0.5">_</span>
                 </div>
               </div>
 
               {/* Drawer Search Input */}
               <div className="relative">
-                <Search className="w-4 h-4 text-black absolute left-3 top-3" />
+                <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-3" />
                 <input
                   type="text"
                   placeholder="SEARCH REPOSITORY..."
@@ -169,18 +169,18 @@ export const Header: React.FC<HeaderProps> = ({
                     onOpenSearch();
                   }}
                   readOnly
-                  className="w-full bg-neutral-100 border-2 border-black py-2 pl-9 pr-3 text-xs font-serif font-bold uppercase placeholder-neutral-500 cursor-pointer"
+                  className="w-full bg-neutral-50 border border-neutral-200 py-2 pl-9 pr-3 text-xs font-sans font-medium uppercase placeholder-neutral-500 cursor-pointer"
                 />
               </div>
 
               {/* Primary Section Links */}
-              <div className="space-y-1 font-serif font-black text-base sm:text-lg tracking-wide uppercase text-black pt-1">
+              <div className="space-y-1 font-sans font-bold text-sm tracking-wide uppercase text-neutral-900 pt-1">
                 {primaryNavItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
                     className={`w-full text-left py-2.5 px-2 transition-colors cursor-pointer flex items-center justify-between border-b border-neutral-100 hover:bg-neutral-50 ${
-                      currentTab === item.id ? 'text-[#FF3B00] font-black pl-3 border-l-4 border-l-[#FF3B00]' : 'hover:text-[#FF3B00]'
+                      currentTab === item.id ? 'text-[#c0262d] font-black pl-3 border-l-2 border-l-[#c0262d]' : 'hover:text-[#c0262d]'
                     }`}
                   >
                     <span>{item.label}</span>
@@ -189,11 +189,11 @@ export const Header: React.FC<HeaderProps> = ({
                 ))}
               </div>
 
-              {/* Solid Orange/Red Action Button in Drawer */}
+              {/* Solid Action Button in Drawer */}
               <div className="pt-2">
                 <button
                   onClick={() => handleNavClick('submissions')}
-                  className="w-full bg-[#FF3B00] hover:bg-black text-white py-3 px-4 font-serif font-black text-xs sm:text-sm uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-between shadow-sm"
+                  className="w-full bg-[#c0262d] hover:bg-neutral-900 text-white py-3 px-4 font-sans font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-between shadow-xs"
                 >
                   <span>SUBMIT EVIDENCE →</span>
                 </button>
@@ -201,7 +201,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             {/* Drawer Bottom Footer */}
-            <div className="p-6 bg-neutral-100 border-t-2 border-black flex items-center justify-between text-xs font-serif">
+            <div className="p-6 bg-neutral-50 border-t border-neutral-200 flex items-center justify-between text-xs font-sans">
               {isAdmin ? (
                 <button
                   onClick={() => handleNavClick('admin')}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { CaseStudy } from '../types';
+import { formatTitleCase } from '../lib/formatters';
 import { 
   FileText, 
   ShieldAlert, 
@@ -8,7 +9,11 @@ import {
   CheckCircle2, 
   Search, 
   Check, 
-  Send
+  Send,
+  Scale,
+  Calendar,
+  User,
+  ExternalLink
 } from 'lucide-react';
 
 interface CasesViewProps {
@@ -65,48 +70,47 @@ export const CasesView: React.FC<CasesViewProps> = ({
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12 bg-white overflow-x-hidden">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 bg-white">
       
-      {/* Header - Intercept Style */}
-      <div className="border-b-4 border-black pb-6 space-y-2">
-        <div className="w-12 h-1.5 bg-[#FF3B00] mb-2"></div>
+      {/* Editorial Header - ProPublica Style with hairline divider */}
+      <div className="border-b border-neutral-200 pb-6 space-y-2.5">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono font-black text-[#FF3B00] uppercase tracking-widest">
-            // LEGAL ARCHIVE • KING COUNTY PROCEDURAL AUDIT
+          <span className="text-xs font-sans font-bold text-[#c0262d] uppercase tracking-wider">
+            Legal Archive · King County Procedural Audit
           </span>
         </div>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-black leading-[1.08] tracking-tight">
-          The State of WA vs. Shane Lozenich
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-neutral-900 tracking-tight leading-[1.12]">
+          The State of Washington vs. Shane Lozenich
         </h1>
-        <p className="text-base sm:text-lg text-neutral-700 font-serif italic max-w-3xl leading-relaxed">
+        <p className="text-base sm:text-lg text-neutral-700 font-serif max-w-3xl leading-relaxed">
           Eight interconnected municipal, superior court, and civil matters (2021–2026) documenting systemic due process failures, administrative substitution, and suppressed records.
         </p>
       </div>
 
-      {/* Case Selector Filter Bar */}
-      <div className="bg-white border-2 border-black p-4 sm:p-5 space-y-4 shadow-xs">
+      {/* Case Selector Filter Bar - Refined 1px borders */}
+      <div className="bg-white border border-neutral-200 p-4 sm:p-5 space-y-4 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 text-[#FF3B00] absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-3" />
             <input
               type="text"
               placeholder="Filter by docket #, judge, cause..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50 border-2 border-black focus:outline-none focus:border-[#FF3B00] font-mono font-bold"
+              className="w-full pl-9 pr-3 py-2 text-xs bg-neutral-50/70 border border-neutral-200 focus:outline-none focus:border-[#c0262d] font-sans font-medium"
             />
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-            <span className="text-black font-black text-[11px] uppercase whitespace-nowrap">// STATUS:</span>
+          <div className="flex items-center gap-1.5 text-xs font-sans overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+            <span className="text-neutral-500 font-semibold text-[11px] uppercase whitespace-nowrap">Status:</span>
             {['all', 'Dismissed', 'Dismissed w/o Prejudice', 'Case Pending', 'Judgement Satisfied'].map((st) => (
               <button
                 key={st}
                 onClick={() => setStatusFilter(st)}
-                className={`px-3 py-1 uppercase text-[11px] font-black transition cursor-pointer border whitespace-nowrap ${
+                className={`px-3 py-1.5 text-xs font-medium transition cursor-pointer border whitespace-nowrap ${
                   statusFilter === st
-                    ? 'bg-black text-white border-black'
-                    : 'bg-white text-black hover:bg-neutral-100 border-neutral-300'
+                    ? 'bg-neutral-900 text-white border-neutral-900'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100 border-neutral-200'
                 }`}
               >
                 {st === 'all' ? 'All' : st}
@@ -116,48 +120,48 @@ export const CasesView: React.FC<CasesViewProps> = ({
         </div>
 
         {/* Mobile Case Dropdown Select */}
-        <div className="block sm:hidden pt-2 border-t border-neutral-200">
-          <label className="block text-[10px] font-mono font-black uppercase text-[#FF3B00] mb-1">
+        <div className="block sm:hidden pt-2 border-t border-neutral-100">
+          <label className="block text-[11px] font-sans font-semibold uppercase text-neutral-600 mb-1">
             Select Active Docket ({filteredCases.length})
           </label>
           <select
             value={activeCase?.id}
             onChange={(e) => onSelectCase(e.target.value)}
-            className="w-full bg-neutral-50 border-2 border-black p-2.5 text-xs font-mono font-black text-black focus:outline-none focus:border-[#FF3B00]"
+            className="w-full bg-neutral-50 border border-neutral-200 p-2 text-xs font-sans font-semibold text-neutral-900 focus:outline-none focus:border-[#c0262d]"
           >
             {filteredCases.map((c) => (
               <option key={c.id} value={c.id}>
-                #{c.caseNumber} ({c.year}) - {c.cause}
+                #{c.caseNumber} ({c.year}) - {formatTitleCase(c.title)}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Desktop Case Grid Tabs */}
-        <div className="hidden sm:grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 pt-3 border-t-2 border-black">
+        {/* Desktop Case Grid Selector - Thin 1px borders */}
+        <div className="hidden sm:grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 pt-3 border-t border-neutral-100">
           {filteredCases.map((c) => {
             const isSelected = activeCase?.id === c.id;
             return (
               <button
                 key={c.id}
                 onClick={() => onSelectCase(c.id)}
-                className={`p-3 text-left transition border-2 cursor-pointer flex flex-col justify-between ${
+                className={`p-3 text-left transition border cursor-pointer flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-black text-white border-black ring-2 ring-[#FF3B00]'
-                    : 'bg-neutral-50 hover:bg-neutral-100 text-black border-neutral-300 hover:border-black'
+                    ? 'bg-neutral-900 text-white border-neutral-900 shadow-sm'
+                    : 'bg-white hover:bg-neutral-50 text-neutral-900 border-neutral-200 hover:border-neutral-300'
                 }`}
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className={`text-xs font-mono font-black ${isSelected ? 'text-[#FF3B00]' : 'text-black'}`}>
+                  <span className={`text-xs font-mono font-bold ${isSelected ? 'text-[#c0262d]' : 'text-neutral-900'}`}>
                     #{c.caseNumber}
                   </span>
-                  <span className={`text-[9px] font-mono font-bold px-1 ${
-                    isSelected ? 'bg-[#FF3B00] text-white' : 'bg-neutral-200 text-black'
+                  <span className={`text-[10px] font-sans font-medium px-1.5 py-0.2 ${
+                    isSelected ? 'bg-neutral-800 text-neutral-200' : 'bg-neutral-100 text-neutral-600'
                   }`}>
                     {c.year}
                   </span>
                 </div>
-                <div className="text-[11px] font-serif font-bold truncate mt-2 text-neutral-400">
+                <div className={`text-[11px] font-serif truncate mt-2 ${isSelected ? 'text-neutral-300 font-medium' : 'text-neutral-500'}`}>
                   {c.cause}
                 </div>
               </button>
@@ -166,60 +170,61 @@ export const CasesView: React.FC<CasesViewProps> = ({
         </div>
       </div>
 
-      {/* Main Selected Case Dossier */}
+      {/* Main Selected Case Dossier Container */}
       {activeCase && (
-        <div className="bg-white border-4 border-black shadow-lg overflow-hidden">
+        <div className="bg-white border border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.03)] overflow-hidden">
           
-          {/* Case Header Hero */}
-          <div className="bg-black text-white p-5 sm:p-8 md:p-10 border-b-4 border-[#FF3B00]">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          {/* Case Header Hero - Clean, High-Contrast Editorial Styling */}
+          <div className="bg-neutral-900 text-white p-6 sm:p-8 md:p-10 border-b border-neutral-800 space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1 bg-[#FF3B00] text-white font-mono text-xs font-black uppercase tracking-wider">
-                  CASE DOSSIER #{activeCase.caseNumber}
+                <span className="px-2.5 py-0.5 bg-[#c0262d] text-white font-sans text-xs font-bold uppercase tracking-wider">
+                  Docket #{activeCase.caseNumber}
                 </span>
-                <span className="text-xs font-mono text-neutral-300">
+                <span className="text-xs font-sans text-neutral-400">
                   {activeCase.court}
                 </span>
               </div>
 
-              <span className="px-2.5 py-1 text-xs font-mono font-black uppercase bg-neutral-900 text-[#FF3B00] border-2 border-[#FF3B00]">
-                DISPOSITION: {activeCase.disposition}
+              <span className="px-2.5 py-0.5 text-xs font-sans font-semibold uppercase bg-neutral-800 text-neutral-200 border border-neutral-700">
+                Disposition: {activeCase.disposition}
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black font-serif text-white leading-tight">
-              {activeCase.title}
+            {/* Title Cased Docket Headline */}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-white leading-tight">
+              {formatTitleCase(activeCase.title)}
             </h2>
 
             {activeCase.headlineQuote && (
-              <p className="text-base sm:text-xl font-serif italic text-neutral-300 mt-3 border-l-4 border-[#FF3B00] pl-4">
+              <p className="text-base sm:text-lg font-serif italic text-neutral-300 border-l-2 border-[#c0262d] pl-4">
                 "{activeCase.headlineQuote}"
               </p>
             )}
 
-            {/* Quick Spec Ribbon - 100% Mobile Responsive */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8 pt-6 border-t-2 border-neutral-800 text-xs font-mono">
+            {/* Spec Ribbon */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-neutral-800 text-xs font-sans">
               <div>
-                <span className="text-neutral-400 block text-[10px] uppercase font-bold">Cause of Action</span>
-                <span className="font-black text-white text-xs sm:text-sm truncate block">{activeCase.cause}</span>
+                <span className="text-neutral-400 block text-[11px] uppercase font-semibold">Cause of Action</span>
+                <span className="font-semibold text-white text-xs sm:text-sm truncate block mt-0.5">{activeCase.cause}</span>
               </div>
               <div>
-                <span className="text-neutral-400 block text-[10px] uppercase font-bold">Presiding Judge</span>
-                <span className="font-black text-white text-xs sm:text-sm truncate block">{activeCase.judge}</span>
+                <span className="text-neutral-400 block text-[11px] uppercase font-semibold">Presiding Judge</span>
+                <span className="font-semibold text-white text-xs sm:text-sm truncate block mt-0.5">{activeCase.judge}</span>
               </div>
               <div>
-                <span className="text-neutral-400 block text-[10px] uppercase font-bold">Custody Window</span>
-                <span className="font-black text-[#FF3B00] text-xs sm:text-sm truncate block">{activeCase.incarcerationDates || 'N/A'}</span>
+                <span className="text-neutral-400 block text-[11px] uppercase font-semibold">Custody Window</span>
+                <span className="font-semibold text-[#c0262d] text-xs sm:text-sm truncate block mt-0.5">{activeCase.incarcerationDates || 'N/A'}</span>
               </div>
               <div>
-                <span className="text-neutral-400 block text-[10px] uppercase font-bold">Representation</span>
-                <span className="font-black text-white text-xs sm:text-sm truncate block">{activeCase.attorney || 'Pro Se / Unappointed'}</span>
+                <span className="text-neutral-400 block text-[11px] uppercase font-semibold">Representation</span>
+                <span className="font-semibold text-white text-xs sm:text-sm truncate block mt-0.5">{activeCase.attorney || 'Pro Se / Unappointed'}</span>
               </div>
             </div>
           </div>
 
-          {/* Dossier Navigation Tabs */}
-          <div className="bg-neutral-100 border-b-2 border-black px-3 sm:px-6 flex items-center gap-1 overflow-x-auto text-xs font-mono font-bold">
+          {/* Dossier Navigation Tabs with 1px border and 2px active indicator */}
+          <div className="bg-neutral-50/80 border-b border-neutral-200 px-4 sm:px-6 flex items-center gap-1 overflow-x-auto text-xs font-sans">
             {[
               { id: 'overview', label: '1. Executive Summary' },
               { id: 'collapse', label: '2. Procedural Collapse' },
@@ -232,10 +237,10 @@ export const CasesView: React.FC<CasesViewProps> = ({
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id as any)}
-                className={`py-3 px-3 sm:px-4 border-b-4 transition cursor-pointer whitespace-nowrap uppercase tracking-wider ${
+                className={`py-3 px-3 sm:px-4 border-b-2 transition cursor-pointer whitespace-nowrap font-medium ${
                   activeTab === t.id
-                    ? 'border-[#FF3B00] text-black bg-white font-black'
-                    : 'border-transparent text-neutral-600 hover:text-black hover:bg-neutral-200'
+                    ? 'border-[#c0262d] text-neutral-900 bg-white font-bold'
+                    : 'border-transparent text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
                 }`}
               >
                 {t.label}
@@ -243,61 +248,62 @@ export const CasesView: React.FC<CasesViewProps> = ({
             ))}
           </div>
 
-          {/* Tab Content Body */}
-          <div className="p-4 sm:p-8 md:p-10">
-            {/* Tab 1: Executive Overview & Context */}
+          {/* Tab Content Body - Airy, Spacious & Breathable */}
+          <div className="p-6 sm:p-8 md:p-10">
+            
+            {/* Tab 1: Executive Overview */}
             {activeTab === 'overview' && (
-              <div className="space-y-6 sm:space-y-8 max-w-4xl">
+              <div className="space-y-8 max-w-4xl">
                 <div>
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-[#FF3B00] mb-2 flex items-center gap-2">
-                    <FileText className="w-4 h-4" /> EXECUTIVE SUMMARY
-                  </h3>
-                  <p className="font-serif text-lg sm:text-xl leading-relaxed text-black font-normal">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5" /> Executive Summary
+                  </span>
+                  <p className="font-serif text-lg sm:text-xl leading-relaxed text-neutral-900 font-normal">
                     {activeCase.executiveSummary}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-6 border-t-2 border-neutral-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-neutral-200">
                   <div className="space-y-2">
-                    <h4 className="font-mono text-xs font-black uppercase text-black">
+                    <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Contextual Origins
-                    </h4>
-                    <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-sans">
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-serif">
                       {activeCase.contextualOrigins}
                     </p>
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-mono text-xs font-black uppercase text-black">
+                    <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Background Summary
-                    </h4>
-                    <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-sans">
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-serif">
                       {activeCase.backgroundSummary}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-neutral-50 border-2 border-black space-y-2">
-                  <h4 className="font-mono text-xs font-black uppercase text-black">
+                <div className="p-5 bg-neutral-50 border border-neutral-200 space-y-2">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-900">
                     Narrative Summary
-                  </h4>
-                  <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed font-sans">
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed font-serif">
                     {activeCase.narrativeSummary}
                   </p>
                 </div>
 
                 {/* Systemic Variables Matrix Preview */}
-                <div className="pt-6 border-t-2 border-neutral-200">
-                  <h4 className="font-mono text-xs font-black uppercase text-[#FF3B00] mb-3">
+                <div className="pt-6 border-t border-neutral-200">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#c0262d] mb-3">
                     Systemic Variables Mapping
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono">
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-sans">
                     {Object.entries(activeCase.systemicVariables).map(([k, v]) => (
-                      <div key={k} className="p-3 bg-neutral-50 border-2 border-black">
-                        <span className="text-neutral-500 uppercase text-[10px] block font-bold">
+                      <div key={k} className="p-3.5 bg-white border border-neutral-200">
+                        <span className="text-neutral-500 uppercase text-[10px] block font-semibold">
                           {k.replace(/([A-Z])/g, ' $1')}
                         </span>
-                        <span className="font-black text-black mt-1 block">{v}</span>
+                        <span className="font-medium text-neutral-900 mt-1 block">{v}</span>
                       </div>
                     ))}
                   </div>
@@ -307,35 +313,35 @@ export const CasesView: React.FC<CasesViewProps> = ({
 
             {/* Tab 2: Procedural Collapse & Breaches */}
             {activeTab === 'collapse' && (
-              <div className="space-y-6 sm:space-y-8 max-w-4xl">
+              <div className="space-y-8 max-w-4xl">
                 <div>
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-[#FF3B00] mb-2 flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-[#FF3B00]" /> STRUCTURAL PROCEDURAL COLLAPSE
-                  </h3>
-                  <p className="font-serif text-lg sm:text-xl leading-relaxed text-black">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5" /> Structural Procedural Collapse
+                  </span>
+                  <p className="font-serif text-lg sm:text-xl leading-relaxed text-neutral-900">
                     {activeCase.proceduralCollapse}
                   </p>
                 </div>
 
-                <div className="space-y-3 pt-6 border-t-2 border-neutral-200">
-                  <h4 className="font-mono text-xs font-black uppercase text-black">
+                <div className="space-y-3 pt-6 border-t border-neutral-200">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-900">
                     Specific Procedural Breaches Identified in Docket
-                  </h4>
+                  </h3>
                   <div className="space-y-2.5">
                     {activeCase.proceduralBreach.map((breach, idx) => (
-                      <div key={idx} className="p-3.5 sm:p-4 bg-red-50 border-l-4 border-[#FF3B00] border border-red-200 text-xs sm:text-sm text-neutral-900 font-sans flex items-start gap-3">
-                        <span className="font-mono font-black text-[#FF3B00] shrink-0">{idx + 1}.</span>
+                      <div key={idx} className="p-4 bg-red-50/50 border-l-2 border-[#c0262d] border-t border-r border-b border-red-100 text-xs sm:text-sm text-neutral-900 font-serif flex items-start gap-3">
+                        <span className="font-mono font-bold text-[#c0262d] shrink-0">{idx + 1}.</span>
                         <span>{breach}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="p-4 sm:p-6 bg-black text-white space-y-2 border-2 border-black">
-                  <h4 className="font-mono text-xs font-black uppercase text-[#FF3B00]">
+                <div className="p-5 sm:p-6 bg-neutral-900 text-white space-y-2 border border-neutral-800">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#c0262d]">
                     Interaction Model Analysis
-                  </h4>
-                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-serif">
                     {activeCase.interactionModel}
                   </p>
                 </div>
@@ -346,28 +352,28 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'violations' && (
               <div className="space-y-6 max-w-4xl">
                 <div>
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-[#FF3B00] mb-2 flex items-center gap-2">
-                    <ShieldAlert className="w-4 h-4 text-[#FF3B00]" /> CONSTITUTIONAL VIOLATIONS IN DOCKET
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 font-sans">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5" /> Constitutional Violations in Docket
+                  </span>
+                  <p className="text-xs sm:text-sm text-neutral-600 font-serif">
                     Documented violations under federal and Washington state constitutional standards.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
                   {activeCase.constitutionalViolations.map((v, i) => (
-                    <div key={i} className="p-4 sm:p-5 bg-white border-2 border-black space-y-2">
+                    <div key={i} className="p-5 bg-white border border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="font-mono text-xs font-black px-2 py-0.5 bg-black text-white uppercase">
+                        <span className="font-sans text-xs font-bold px-2 py-0.5 bg-neutral-100 text-neutral-900 border border-neutral-200">
                           {v.amendment}
                         </span>
-                        <span className="text-xs font-mono text-[#FF3B00] font-black uppercase">Direct Breach</span>
+                        <span className="text-xs font-sans text-[#c0262d] font-semibold uppercase">Direct Breach</span>
                       </div>
-                      <p className="font-serif font-black text-base sm:text-lg text-black pt-1">
+                      <h4 className="font-serif font-bold text-base sm:text-lg text-neutral-900 pt-1">
                         {v.violation}
-                      </p>
+                      </h4>
                       {v.details && (
-                        <p className="text-xs sm:text-sm text-neutral-700 font-sans leading-relaxed pt-1">
+                        <p className="text-xs sm:text-sm text-neutral-700 font-serif leading-relaxed pt-1">
                           {v.details}
                         </p>
                       )}
@@ -375,24 +381,24 @@ export const CasesView: React.FC<CasesViewProps> = ({
                   ))}
                 </div>
 
-                {/* Systemic Vulnerabilities vector table */}
-                <div className="pt-6 border-t-2 border-neutral-200">
-                  <h4 className="font-mono text-xs font-black uppercase text-black mb-3">
+                {/* Systemic Vulnerabilities vector table with light hairline borders */}
+                <div className="pt-6 border-t border-neutral-200">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
                     Systemic Vulnerability Vectors
-                  </h4>
-                  <div className="overflow-x-auto border-2 border-black">
+                  </h3>
+                  <div className="overflow-x-auto border border-neutral-200">
                     <table className="w-full text-xs font-sans text-left min-w-[480px]">
-                      <thead className="bg-black text-white font-mono uppercase text-[10px]">
+                      <thead className="bg-neutral-100 text-neutral-800 font-medium uppercase text-[11px] border-b border-neutral-200">
                         <tr>
                           <th className="p-3">Vulnerability Vector</th>
                           <th className="p-3">Operational Manifestation in Docket</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-neutral-300 bg-white">
+                      <tbody className="divide-y divide-neutral-200 bg-white">
                         {activeCase.systemicVulnerabilities.map((sv, idx) => (
-                          <tr key={idx} className="hover:bg-neutral-50">
-                            <td className="p-3.5 font-mono font-bold text-black whitespace-nowrap">{sv.vector}</td>
-                            <td className="p-3.5 text-neutral-800 leading-relaxed">{sv.manifestation}</td>
+                          <tr key={idx} className="hover:bg-neutral-50/70">
+                            <td className="p-3.5 font-semibold text-neutral-900 whitespace-nowrap">{sv.vector}</td>
+                            <td className="p-3.5 text-neutral-700 font-serif leading-relaxed">{sv.manifestation}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -406,21 +412,21 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'evidence' && (
               <div className="space-y-6 max-w-4xl">
                 <div>
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-[#FF3B00] mb-2 flex items-center gap-2">
-                    <FileText className="w-4 h-4" /> EVIDENTIARY LANDSCAPE & ASYMMETRY
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-700 font-sans leading-relaxed">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#c0262d] mb-1.5 flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5" /> Evidentiary Landscape & Asymmetry
+                  </span>
+                  <p className="text-xs sm:text-sm text-neutral-700 font-serif leading-relaxed">
                     The evidence record is defined by institutional non-documentation, unproduced audio records, and total disparity between claims and proof.
                   </p>
                 </div>
 
                 <div className="space-y-3">
                   {activeCase.evidenceAndInfo.map((item, idx) => (
-                    <div key={idx} className="p-4 bg-neutral-50 border-2 border-black flex items-start gap-3">
-                      <div className="w-6 h-6 bg-black text-white font-mono text-xs flex items-center justify-center font-black shrink-0 mt-0.5">
+                    <div key={idx} className="p-4 bg-neutral-50/70 border border-neutral-200 flex items-start gap-3">
+                      <div className="w-5 h-5 bg-neutral-900 text-white font-sans text-[11px] flex items-center justify-center font-bold shrink-0 mt-0.5">
                         {idx + 1}
                       </div>
-                      <p className="text-xs sm:text-sm text-neutral-800 font-sans leading-relaxed">
+                      <p className="text-xs sm:text-sm text-neutral-800 font-serif leading-relaxed">
                         {item}
                       </p>
                     </div>
@@ -433,23 +439,23 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'reforms' && (
               <div className="space-y-6 max-w-4xl">
                 <div>
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-[#FF3B00] mb-2 flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" /> PRESCRIBED SYSTEMIC REFORMS
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-700 font-sans leading-relaxed">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-emerald-700 mb-1.5 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Prescribed Systemic Reforms
+                  </span>
+                  <p className="text-xs sm:text-sm text-neutral-700 font-serif leading-relaxed">
                     Concrete legislative and procedural remedies required to close the structural due process gaps exposed in this case.
                   </p>
                 </div>
 
                 <div className="space-y-3">
                   {activeCase.proposedReforms.map((reform, idx) => (
-                    <div key={idx} className="p-4 bg-emerald-50 border-2 border-emerald-600 flex items-start gap-3">
-                      <Check className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
+                    <div key={idx} className="p-4 bg-emerald-50/50 border border-emerald-200 flex items-start gap-3">
+                      <Check className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-mono text-[10px] uppercase font-black text-emerald-900 block mb-0.5">
+                        <span className="font-sans text-[11px] uppercase font-bold text-emerald-800 block mb-0.5">
                           Remedial Action #{idx + 1}
                         </span>
-                        <p className="text-xs sm:text-sm text-emerald-950 font-sans leading-relaxed">
+                        <p className="text-xs sm:text-sm text-emerald-950 font-serif leading-relaxed">
                           {reform}
                         </p>
                       </div>
@@ -462,11 +468,11 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {/* Tab 6: Case Documents */}
             {activeTab === 'docs' && (
               <div className="space-y-6 max-w-4xl">
-                <div className="flex items-center justify-between border-b-2 border-black pb-3">
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-black flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-[#FF3B00]" /> ASSOCIATED PRIMARY COURT FILINGS
-                  </h3>
-                  <span className="text-xs font-mono text-neutral-500 font-bold">
+                <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider text-neutral-900 flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-[#c0262d]" /> Associated Primary Court Filings
+                  </span>
+                  <span className="text-xs font-sans text-neutral-500 font-medium">
                     {activeCase.associatedDocs.length} Records Cataloged
                   </span>
                 </div>
@@ -476,19 +482,19 @@ export const CasesView: React.FC<CasesViewProps> = ({
                     <div
                       key={idx}
                       onClick={() => onSelectEvidence(doc.title)}
-                      className="p-4 bg-neutral-50 hover:bg-neutral-100 border-2 border-black cursor-pointer transition flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 group"
+                      className="p-4 bg-white hover:bg-neutral-50/80 border border-neutral-200 cursor-pointer transition flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 group shadow-[0_1px_3px_rgba(0,0,0,0.02)]"
                     >
                       <div>
-                        <span className="text-[10px] font-mono font-bold text-[#FF3B00] uppercase block">
+                        <span className="text-[10px] font-sans font-bold text-[#c0262d] uppercase block">
                           {doc.type}
                         </span>
-                        <h4 className="font-serif font-black text-base text-black group-hover:text-[#FF3B00] transition-colors">
-                          {doc.title}
+                        <h4 className="font-serif font-bold text-base text-neutral-900 group-hover:text-[#c0262d] transition-colors">
+                          {formatTitleCase(doc.title)}
                         </h4>
-                        <p className="text-xs text-neutral-600 font-sans mt-0.5">{doc.summary}</p>
+                        <p className="text-xs text-neutral-600 font-serif mt-0.5">{doc.summary}</p>
                       </div>
-                      <span className="text-xs font-mono font-bold text-black group-hover:text-[#FF3B00] flex items-center gap-1 uppercase tracking-wider shrink-0">
-                        View in Vault →
+                      <span className="text-xs font-sans font-semibold text-neutral-700 group-hover:text-[#c0262d] flex items-center gap-1 uppercase tracking-wider shrink-0">
+                        View in Vault <ExternalLink className="w-3 h-3" />
                       </span>
                     </div>
                   ))}
@@ -500,31 +506,31 @@ export const CasesView: React.FC<CasesViewProps> = ({
             {activeTab === 'comments' && (
               <div className="space-y-8 max-w-3xl">
                 <div>
-                  <h3 className="font-mono text-xs font-black uppercase tracking-widest text-black mb-1">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1">
                     Editorial Notes & Researcher Annotations ({caseComments.length})
                   </h3>
-                  <p className="text-xs text-neutral-600 font-sans">
+                  <p className="text-xs text-neutral-600 font-serif">
                     Public record annotations, timeline correlations, and cross-references submitted by investigators.
                   </p>
                 </div>
 
                 {/* Comment Form */}
-                <form onSubmit={handleAddComment} className="p-5 bg-neutral-50 border-2 border-black space-y-4">
-                  <h4 className="font-mono text-xs font-black uppercase text-[#FF3B00]">
+                <form onSubmit={handleAddComment} className="p-5 bg-neutral-50/70 border border-neutral-200 space-y-4">
+                  <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-[#c0262d]">
                     Submit Case Note / Annotation
                   </h4>
                   {commentSubmitted && (
-                    <div className="p-3 bg-emerald-50 border-2 border-emerald-600 text-xs font-mono text-emerald-900 font-bold">
+                    <div className="p-3 bg-emerald-50 border border-emerald-300 text-xs font-sans text-emerald-900 font-semibold">
                       Annotation recorded successfully.
                     </div>
                   )}
-                  <div className="space-y-3 text-xs font-mono">
+                  <div className="space-y-3 text-xs font-sans">
                     <input
                       type="text"
                       placeholder="Researcher Name / Organization"
                       value={commentName}
                       onChange={(e) => setCommentName(e.target.value)}
-                      className="w-full p-2.5 bg-white border-2 border-black focus:outline-none focus:border-[#FF3B00]"
+                      className="w-full p-2.5 bg-white border border-neutral-200 focus:outline-none focus:border-[#c0262d]"
                       required
                     />
                     <textarea
@@ -532,12 +538,12 @@ export const CasesView: React.FC<CasesViewProps> = ({
                       value={commentContent}
                       onChange={(e) => setCommentContent(e.target.value)}
                       rows={3}
-                      className="w-full p-2.5 bg-white border-2 border-black focus:outline-none focus:border-[#FF3B00]"
+                      className="w-full p-2.5 bg-white border border-neutral-200 focus:outline-none focus:border-[#c0262d]"
                       required
                     />
                     <button
                       type="submit"
-                      className="px-5 py-2.5 bg-black hover:bg-[#FF3B00] text-white font-mono font-black uppercase text-xs transition cursor-pointer flex items-center gap-2"
+                      className="px-5 py-2.5 bg-neutral-900 hover:bg-[#c0262d] text-white font-sans font-bold uppercase text-xs tracking-wider transition cursor-pointer flex items-center gap-2"
                     >
                       <Send className="w-3.5 h-3.5" /> Submit Case Annotation
                     </button>
@@ -547,12 +553,12 @@ export const CasesView: React.FC<CasesViewProps> = ({
                 {/* Comments List */}
                 <div className="space-y-3">
                   {caseComments.map((com) => (
-                    <div key={com.id} className="p-4 bg-white border-2 border-black space-y-1.5">
-                      <div className="flex justify-between items-center text-xs font-mono">
-                        <span className="font-black text-black">{com.authorName}</span>
+                    <div key={com.id} className="p-4 bg-white border border-neutral-200 space-y-1.5">
+                      <div className="flex justify-between items-center text-xs font-sans">
+                        <span className="font-bold text-neutral-900">{com.authorName}</span>
                         <span className="text-neutral-500">{com.date}</span>
                       </div>
-                      <p className="text-xs sm:text-sm text-neutral-800 font-sans leading-relaxed">
+                      <p className="text-xs sm:text-sm text-neutral-800 font-serif leading-relaxed">
                         {com.content}
                       </p>
                     </div>
