@@ -52,46 +52,49 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       <header className="sticky top-0 z-40 bg-white border-b border-neutral-200">
         {/* Main Masthead Bar - Clean Editorial Style */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 md:h-28 flex items-center justify-between gap-3 sm:gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           
-          {/* Left: Hamburger & Brand Logo */}
-          <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+          {/* Left: Hamburger, Brand Logo & Sub-tagline */}
+          <div className="flex items-start gap-3 sm:gap-5 min-w-0">
             <button
               onClick={() => setDrawerOpen(true)}
-              className="p-2 -ml-2 text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-center gap-1.5 group shrink-0"
+              className="p-1 sm:p-2 -ml-1 sm:-ml-2 text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-center gap-1.5 group shrink-0 mt-1"
               aria-label="Open Navigation Menu"
             >
               <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] group-hover:scale-105 transition-transform" />
               <span className="hidden sm:inline font-serif font-black text-xs uppercase tracking-wider">Menu</span>
             </button>
 
-            <button 
-              onClick={() => handleNavClick('home')}
-              className="font-serif font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-baseline shrink-0"
-            >
-              <span>DEMOPOCRISY</span>
-              <span className="font-sans font-black text-[#FF3B00] ml-0.5 sm:ml-1">_</span>
-            </button>
+            <div className="flex flex-col min-w-0">
+              <button 
+                onClick={() => handleNavClick('home')}
+                className="font-serif font-black text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] tracking-tight text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-baseline text-left leading-none"
+              >
+                <span>DEMOPOCRISY</span>
+                <span className="font-sans font-black text-[#FF3B00] ml-0.5 sm:ml-1">_</span>
+              </button>
+
+              {/* Forensic Public Interest Audit Sub-title */}
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-serif text-neutral-600 mt-2">
+                <span className="font-bold text-[#FF3B00] uppercase tracking-wider text-[11px]">
+                  Forensic Public Interest Audit
+                </span>
+                <span className="text-neutral-300 hidden sm:inline">|</span>
+                <span className="text-neutral-700 leading-snug">
+                  Examining due process, CrR 3.3 speedy trial tolling, and administrative substitutions in Washington State.
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* Right: Search, Admin & Primary Action Button */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-            {/* Search Icon Button */}
-            <button
-              onClick={onOpenSearch}
-              className="p-2 text-black hover:text-[#FF3B00] transition cursor-pointer"
-              title="Search Archive (⌘K)"
-              aria-label="Search Archive"
-            >
-              <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
-            </button>
-
+          {/* Right: Admin & Primary Action Button */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-end md:self-center">
             {/* Admin Login / CMS Status */}
             {isAdmin ? (
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => handleNavClick('admin')}
-                  className="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-serif font-bold uppercase bg-black text-white hover:bg-[#FF3B00] transition cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-serif font-bold uppercase bg-black text-white hover:bg-[#FF3B00] transition cursor-pointer"
                   title="Editorial CMS Active"
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-[#FF3B00]" />
@@ -119,13 +122,42 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Bright Orange/Red Action Button - The Intercept Style */}
             <button
               onClick={() => handleNavClick('submissions')}
-              className="bg-[#FF3B00] hover:bg-black text-white px-3 sm:px-5 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-serif font-black uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shadow-xs"
+              className="bg-[#FF3B00] hover:bg-black text-white px-3 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-serif font-black uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shadow-xs"
             >
               <span className="hidden sm:inline">SUBMIT EVIDENCE</span>
               <span className="sm:hidden">SUBMIT</span>
             </button>
           </div>
 
+        </div>
+
+        {/* Sub-Header Row: Just below the line, right-aligned search bar aligned under CMS / Submit buttons */}
+        <div className="border-t border-neutral-200 bg-neutral-50/50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-4">
+            {/* Left label / section breadcrumb */}
+            <div className="hidden md:flex items-center gap-2 text-[11px] font-sans text-neutral-500 tracking-wider uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF3B00]" />
+              <span className="font-semibold text-neutral-700">Official Dossier & Evidence Record</span>
+            </div>
+
+            {/* Right: Search bar sized to balance with buttons above */}
+            <div className="w-full md:w-auto flex items-center justify-end">
+              <button
+                onClick={onOpenSearch}
+                className="w-full sm:w-80 group flex items-center justify-between bg-white hover:bg-neutral-50 border border-neutral-300 hover:border-neutral-400 py-1.5 px-3 transition-colors text-left shadow-2xs cursor-pointer"
+                title="Search Archive (⌘K)"
+                aria-label="Search Archive"
+              >
+                <div className="flex items-center gap-2 text-neutral-500">
+                  <Search className="w-3.5 h-3.5 text-neutral-400 group-hover:text-[#FF3B00] transition-colors" />
+                  <span className="text-xs font-sans text-neutral-600">Search cases, dockets, evidence...</span>
+                </div>
+                <kbd className="hidden sm:inline text-[10px] font-mono bg-neutral-100 border border-neutral-200 px-1.5 py-0.5 text-neutral-500">
+                  ⌘K
+                </kbd>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 

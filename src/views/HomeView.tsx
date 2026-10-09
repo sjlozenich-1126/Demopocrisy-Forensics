@@ -42,23 +42,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   return (
     <div className="bg-white min-h-screen">
-      
-      {/* ProPublica-Style Public Interest Topic Bar */}
-      <div className="bg-neutral-50/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-end text-xs font-serif text-neutral-600">
-          <div className="flex flex-wrap items-center justify-end gap-2 text-right">
-            <span className="font-bold text-[#FF3B00] uppercase tracking-wider text-[11px]">
-              Forensic Public Interest Audit
-            </span>
-            <span className="text-neutral-300 hidden sm:inline">|</span>
-            <span className="hidden sm:inline text-neutral-700">
-              Examining due process, CrR 3.3 speedy trial tolling, and administrative substitutions in Washington State.
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-16">
         
         {/* ========================================================= */}
         {/* SECTION 1: PROPUBLICA LEAD INVESTIGATIVE PACKAGE          */}
@@ -131,13 +115,30 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 {featuredArticle.summary}
               </p>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap items-center gap-3">
                 <button
                   onClick={() => onSelectArticle(featuredArticle.id)}
-                  className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#FF3B00] hover:text-neutral-900 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-neutral-900 hover:bg-[#FF3B00] text-white text-xs font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
                 >
-                  Read Full Investigation <ArrowRight className="w-3.5 h-3.5" />
+                  Read Full Story <ArrowRight className="w-3.5 h-3.5" />
                 </button>
+                {featuredArticle.relatedCases && featuredArticle.relatedCases.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-sans font-semibold text-neutral-500 uppercase tracking-wider hidden sm:inline">
+                      Related Dossiers:
+                    </span>
+                    {featuredArticle.relatedCases.slice(0, 3).map((caseId) => (
+                      <button
+                        key={caseId}
+                        onClick={() => onSelectCase(caseId)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 hover:text-[#FF3B00] text-xs font-sans font-medium border border-neutral-300 transition-colors cursor-pointer"
+                      >
+                        <Scale className="w-3 h-3 text-[#FF3B00]" />
+                        <span>Case #{caseId}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
             </article>

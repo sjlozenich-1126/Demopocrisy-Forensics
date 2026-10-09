@@ -132,8 +132,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (saved) {
       try {
         const parsed: Article[] = JSON.parse(saved);
-        // Ensure initial 5 articles use the latest updated images
-        return parsed.map((art) => {
+        // Ensure initial articles use latest definitions & new articles are merged
+        const merged = parsed.map((art) => {
           const match = initialArticles.find((ia) => ia.id === art.id);
           const cleanContent = art.content ? art.content.replace(/\*\*(.*?)\*\*/g, '$1') : art.content;
           if (match) {
@@ -146,11 +146,21 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             return {
               ...art,
               content: cleanContent,
+              isFeatured: match.isFeatured,
               featuredImage: hasOldDefaultImage ? match.featuredImage : art.featuredImage
             };
           }
           return { ...art, content: cleanContent };
         });
+
+        // Add any new initial articles that don't exist in saved
+        for (const initArt of initialArticles) {
+          if (!merged.some((a) => a.id === initArt.id)) {
+            merged.unshift(initArt);
+          }
+        }
+
+        return merged;
       } catch (e) {
         console.error('Error parsing saved articles:', e);
       }

@@ -1207,6 +1207,47 @@ Contrast Analysis: Contrasted with Case 22-1-04242-3 SEA, where an individual fa
 
 export const initialArticles: Article[] = [
   {
+    id: 'art-006',
+    title: 'The Competency Loophole: How King County Processed an Accused Litigant Through 283 Days of Confinement Without a Trial',
+    subtitle: 'An exhaustive forensic examination of eight interconnected proceedings reveals how administrative compression, unverified police CAD databases, and recursive RCW 10.77 restoration orders systematically displaced adversarial trials in Seattle courts.',
+    author: 'Forensic Public Interest Desk',
+    date: 'May 16, 2026',
+    readTime: '12 min read',
+    category: 'Legal Audit',
+    featuredImage: 'https://images.unsplash.com/photo-1580182795676-184080b5dc63?w=1200&auto=format&fit=crop&q=80',
+    imageCaption: 'King County Superior Courthouse, where recursive RCW 10.77 competency restoration orders and administrative dockets systematically displaced constitutional adversarial jury trials.',
+    summary: 'An exhaustive forensic examination of eight interconnected proceedings reveals how administrative compression, unverified police CAD databases, and recursive RCW 10.77 restoration orders systematically displaced adversarial trials in Seattle courts.',
+    content: `An exhaustive forensic examination of eight interconnected proceedings reveals how administrative compression, unverified police CAD databases, and recursive RCW 10.77 restoration orders systematically displaced adversarial trials in Seattle courts.
+
+### What the 5-Year Forensic Audit Found
+
+1. **283 Days Incarceration Without Trial**: In Cause No. 22-1-05705-7, consecutive RCW 10.77 restoration orders reset the CrR 3.3 speedy trial clock, resulting in nearly ten months in King County Jail before the charge was dismissed without prejudice.
+
+2. **Harborview Lumbar Puncture Discordance**: Spinal fluid analysis showed 87 white blood cells with 95% neutrophils—a cellular differential incompatible with neurosyphilis—yet cited in clinical notes to justify a 22-day involuntary psychotropic hold.
+
+3. **The 'Extraction Bridge'**: Unfiled municipal bookings and dismissed dockets were systematically imported across jurisdictions into subsequent Superior Court arraignments to justify elevated bail schedules and pretrial restrictions.
+
+4. **Pre-Signed Judicial Restoration Orders**: Discovered court records reveal template restoration orders prepared and executed prior to evidentiary competency hearings, bypassing substantive judicial inquiry.
+
+### The Five-Year Custodial Sequence
+
+Between February 2021 and February 2026, Shane Lozenich was arrested six times, subjected to two involuntary psychiatric detentions, and held for more than 365 cumulative days in custodial facilities across King County, Washington. Yet across all eight interconnected proceedings, not a single charge was resolved through an adversarial jury trial.
+
+Instead, court transcripts, jail records, and hospital files obtained through public records and direct litigation show how the Washington criminal justice system deployed administrative alternatives—pre-charge booking holds, unverified law enforcement computer-aided dispatch (CAD) alerts, and consecutive 45-day competency evaluations under RCW 10.77—that effectively superseded substantive due process.
+
+> *"The electronic database became the unimpeachable reality; the physical exculpatory evidence in our hands was treated by the court as a hallucination."*
+> 
+> — Demopocrisy Monograph, Chapter IV: Epistemic Inversion
+
+### The Stratigraphic Model of Procedural Analysis
+
+The case study introduces the Stratigraphic Model of procedural analysis: treating legal proceedings as layered geological strata where flawed initial entries (such as a clerical miscoding of an expired civil order) harden into administrative dogma that subsequent judges, prosecutors, and public defenders treat as verified fact.`,
+    mediaType: 'gallery',
+    relatedCases: ['22-1-05705-7', '658959', '21-1-04347-2', '22-1-04242-3'],
+    tags: ['Competency Loophole', 'RCW 10.77', 'CrR 3.3 Speedy Trial', 'Stratigraphic Model', 'King County Jail', 'Harborview LP'],
+    isFeatured: true
+  },
+  {
     id: 'art-001',
     title: 'Seattle Officers Seek Anonymity in Supreme Court While Whistleblowers Face Institutional Shadow',
     subtitle: 'An investigative analysis of how the highest courts shielded law enforcement identities after Jan. 6, while citizens documenting systemic cracks faced warrantless arrests.',
@@ -1240,7 +1281,7 @@ By February 2026, Dr. Jamie Leavey of the Office of Forensic Mental Health Servi
     mediaType: 'gallery',
     relatedCases: ['21-1-04347-2', '660121', '22-1-04242-3'],
     tags: ['Jan 6 Officers', 'SPOG', 'Anonymity Privilege', 'Competency Bypass', 'Due Process'],
-    isFeatured: true
+    isFeatured: false
   },
   {
     id: 'art-002',
