@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       <header className="sticky top-0 z-40 bg-white border-b border-neutral-200">
         {/* Main Masthead Bar - Clean Editorial Style */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-22 md:h-24 flex items-center justify-between gap-3 sm:gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 md:h-28 flex items-center justify-between gap-3 sm:gap-6">
           
           {/* Left: Hamburger & Brand Logo */}
           <div className="flex items-center gap-3 sm:gap-5 min-w-0">
@@ -67,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button 
               onClick={() => handleNavClick('home')}
-              className="font-serif font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-baseline shrink-0"
+              className="font-serif font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-black hover:text-[#FF3B00] transition-colors cursor-pointer flex items-baseline shrink-0"
             >
               <span>DEMOPOCRISY</span>
               <span className="font-sans font-black text-[#FF3B00] ml-0.5 sm:ml-1">_</span>

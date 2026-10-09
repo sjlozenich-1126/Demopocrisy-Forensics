@@ -45,8 +45,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
       
       {/* ProPublica-Style Public Interest Topic Bar */}
       <div className="bg-neutral-50/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs font-serif text-neutral-600">
-          <div className="flex items-center gap-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-end text-xs font-serif text-neutral-600">
+          <div className="flex flex-wrap items-center justify-end gap-2 text-right">
             <span className="font-bold text-[#FF3B00] uppercase tracking-wider text-[11px]">
               Forensic Public Interest Audit
             </span>
@@ -54,37 +54,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <span className="hidden sm:inline text-neutral-700">
               Examining due process, CrR 3.3 speedy trial tolling, and administrative substitutions in Washington State.
             </span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-sans text-neutral-500">
-            <span className="font-semibold text-neutral-800">Inquiries:</span>
-            <button 
-              onClick={() => onSelectArticle('art-001')} 
-              className="hover:text-[#FF3B00] hover:underline cursor-pointer"
-            >
-              Jan. 6 Officer Anonymity
-            </button>
-            <span>·</span>
-            <button 
-              onClick={() => onSelectArticle('art-002')} 
-              className="hover:text-[#FF3B00] hover:underline cursor-pointer"
-            >
-              Inslee Threat Discovery Void
-            </button>
-            <span>·</span>
-            <button 
-              onClick={() => setCurrentTab('medical')} 
-              className="hover:text-[#FF3B00] hover:underline cursor-pointer"
-            >
-              Harborview CSF Records
-            </button>
-            <span>·</span>
-            <button 
-              onClick={() => setCurrentTab('timeline')} 
-              className="hover:text-[#FF3B00] hover:underline cursor-pointer"
-            >
-              5-Year Chronology
-            </button>
           </div>
         </div>
       </div>
